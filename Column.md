@@ -14,7 +14,6 @@ All vertical members may not be termed as **columns**.
 
 | S. No. | Item                        | Short Column | Long Column               |
 |--------|-----------------------------|--------------|---------------------------|
-| 1      | Effective length of column  | ≤ 12         | > 12                      |
-| 2      | Least lateral dimension     | —            | —                         |
-| 3      | Tendency to buckle          | Less         | More                      |
-| 4      | Strength                    | More         | Less than short column    |
+| 1      | Effective length of column/Least lateral dimension  | ≤ 12         | > 12                      |
+| 2      | Tendency to buckle          | Less         | More                      |
+| 3      | Strength                    | More         | Less than short column    |
