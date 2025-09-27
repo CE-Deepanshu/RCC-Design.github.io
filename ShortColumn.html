@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IS 456:2000 — Column Design Guidelines</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 40px;
+    }
+    h1, h2, h3, h4 {
+      color: #005a9c;
+      margin-top: 1.5em;
+    }
+    .section {
+      background-color: #ffffff;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .table-container {
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #e9f1f7;
+    }
+    img {
+      max-width: 100px;
+      height: auto;
+    }
+    .info-box, .formula-box, .special-case, .definitions, .guidelines, .guidelines-category, .comparison {
+      margin-top: 20px;
+      background-color: #f0f8ff;
+      padding: 15px;
+      border-left: 5px solid #2196F3;
+      border-radius: 5px;
+    }
+    .formula {
+      font-family: 'Courier New', monospace;
+      background-color: #fff;
+      padding: 8px;
+      border: 1px dashed #aaa;
+      margin: 8px 0;
+      display: inline-block;
+    }
+    .note {
+      font-style: italic;
+      color: #555;
+      margin-top: 5px;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .reference {
+      font-size: 0.95em;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>IS 456:2000 — Column Design Guidelines</h1>
+
+  <!-- Section: Table 28 -->
+  <section class="section">
+    <h3>Table 28 – Effective Length of Columns (IS 456:2000)</h3>
+    <p>This table shows how the end conditions of a column affect its effective length (used in buckling calculations).<br>
+    <strong>Effective length (lₑ) = K × actual length (l)</strong></p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Column End Condition</th>
+            <th>Effective Length (lₑ)</th>
+            <th>Picture</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Both ends hinged</td><td>1.0 × l</td><td><img src="both-hinged.png" alt="Both Hinged"></td></tr>
+          <tr><td>2</td><td>Both ends fixed</td><td>0.65 × l</td><td><img src="both-fixed.png" alt="Both Fixed"></td></tr>
+          <tr><td>3</td><td>One end fixed, other end hinged</td><td>0.80 × l</td><td><img src="fixed-hinged.png" alt="Fixed-Hinged"></td></tr>
+          <tr><td>4</td><td>One end fixed, other end free</td><td>2.0 × l</td><td><img src="fixed-free.png" alt="Fixed-Free"></td></tr>
+          <tr><td>5</td><td>Both ends stop rotation but allow movement</td><td>1.0 × l</td><td><img src="restrained-rotation.png" alt="Restrained-Rotation"></td></tr>
+          <tr><td>6</td><td>One end stops movement and rotation, other end is free</td><td>2.0 × l</td><td><img src="restrained-free.png" alt="Restrained-Free"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section: Minimum Eccentricity -->
+  <section class="section">
+    <h2>Check for Minimum Eccentricity</h2>
+    <p>In practice, a truly axially loaded column is rare, if not non-existent.<br>
+    Therefore, every column should be designed for a certain <strong>minimum eccentricity</strong>.</p>
+
+    <div class="info-box">
+      <h4>Reasons for Eccentric Loading:</h4>
+      <ul>
+        <li>Inaccuracies in construction</li>
+        <li>Inaccuracies in alignment</li>
+        <li>Lateral deflection in column</li>
+      </ul>
+    </div>
+
+    <div class="formula-box">
+      <h4>As per Clause 25.4 of IS 456:2000:</h4>
+      <p>The minimum eccentricity should be calculated using the formula:</p>
+      <div class="formula">eₓ,min = (L / 500) + (D / 30) ≥ 20 mm</div>
+      <p class="note">Take whichever is greater.</p>
+      <p><strong>Where:</strong><br>
+      - <strong>L</strong> = unsupported length of the column (in mm)<br>
+      - <strong>D</strong> = lateral dimension of the column (in mm)</p>
+    </div>
+  </section>
+
+  <!-- Section: Short Column -->
+  <section class="section">
+    <h2>Short Column Section Subjected to Axial Load</h2>
+    <p>Short columns are defined as those where both slenderness ratios are <strong>less than or equal to 12</strong>.</p>
+
+    <div class="formula-box">
+      <h4>Conditions for Short Column:</h4>
+      <div class="formula">lₓ/D ≤ 12</div>
+      <div class="formula">lᵧ/b ≤ 12</div>
+      <p><strong>Where:</strong><br>
+      - lₓ = effective length in x-direction<br>
+      - lᵧ = effective length in y-direction<br>
+      - D = depth of column section<br>
+      - b = width of column section</p>
+    </div>
+
+    <div class="formula-box">
+      <h4>Minimum Eccentricities:</h4>
+      <div class="formula">eₓ,min = lₓ/500 + D/30 ≥ 20 mm</div>
+      <div class="formula">eᵧ,min = lᵧ/500 + b/30 ≥ 20 mm</div>
+      <p class="note">Take whichever is greater in each case.</p>
+    </div>
+
+    <div class="special-case">
+      <h4>Special Case:</h4>
+      <p>If<br>
+      - 0.05D > eₓ,min<br>
+      - 0.05b > eᵧ,min<br><br>
+      Then the column may be designed using the <strong>axially loaded short column formula</strong> as per IS code.</p>
+    </div>
+  </section>
+
+  <!-- Section: Ultimate Axial Load -->
+  <section class="section">
+    <h2>Ultimate Axial Load on Column</h2>
+    <p>To calculate the <strong>factored axial load</strong> on a reinforced concrete column, use the following formula:</p>
+
+    <div class="formula-box">
+      <h4>Formula:</h4>
+      <div class="formula">Pᵤ = 0.4 f꜀ₖ A꜀ + 0.67 fᵧ Aₛ꜀</div>
+      <p><strong>Where:</strong><br>
+      - Pᵤ = Ultimate axial load<br>
+      - A꜀ = Area of concrete (A₉ - Aₛ꜀)<br>
+      - Aₛ꜀ = Area of longitudinal reinforcement<br>
+      - f꜀ₖ = Characteristic compressive strength of concrete<br>
+      - fᵧ = Characteristic strength of steel</p>
+      <p class="note">Used when column is short and subjected to axial load only, with minimum eccentricity satisfied.</p>
+    </div>
+  </section>
+
+  <!-- Section: Helical Reinforcement -->
+  <section class="section">
+    <h2>Short Column with Helical Reinforcement</h2>
+    <p>When a short column is reinforced with a helix, the ultimate axial load is increased
