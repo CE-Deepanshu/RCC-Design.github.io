@@ -1,3 +1,5 @@
+DESIGN OF COLUMNS
+ 
  **Comparison Between Short and Long Columns**
 
 | S. No. | Item                        | Short Column | Long Column               |
