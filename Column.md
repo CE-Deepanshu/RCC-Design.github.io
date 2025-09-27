@@ -21,3 +21,5 @@ All vertical members may not be termed as **columns**.
 | 1      | Effective length of column/Least lateral dimension  | ≤ 12         | > 12                      |
 | 2      | Tendency to buckle          | Less         | More                      |
 | 3      | Strength                    | More         | Less than short column    |
+
+[Axially loaded short column](ShortColumn.html)
