@@ -22,7 +22,7 @@ This repository covers the essential design workflows for the following RCC comp
 
 ## 📖 Standards Referenced
 
-- **IS 456:2000** – Code of practice for plain and reinforced concrete.
+- **[IS 456:2000](IS456_11zon.pdf)** – Code of practice for plain and reinforced concrete.
 - **IS 875 (Part 1–5)** – Guidelines for structural loading: dead, live, wind, snow, and seismic.
 - **IS 1893** – Criteria for earthquake-resistant design of structures.
 - **IS 3370** – Design of water-retaining structures.
