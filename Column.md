@@ -1,4 +1,14 @@
 DESIGN OF COLUMNS
+
+## Classification of Vertical Members in Structures
+
+All vertical members may not be termed as **columns**.
+
+- **Columns**:  
+  *Only those vertical members whose effective length is more than three times the least lateral dimension are called columns.*
+
+- **Pedestals**:  
+  *Those vertical members whose effective length is less than three times the least lateral dimension are called pedestals.*
  
  **Comparison Between Short and Long Columns**
 
