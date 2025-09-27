@@ -10,7 +10,7 @@ All vertical members may not be termed as **columns**.
 - **Pedestals**:  
   *Those vertical members whose effective length is less than three times the least lateral dimension are called pedestals.*
 
-  Types of Columns(Acc. to the cross section)
+  Types of Columns(Acc. to the construction method)
 
   ![Types Of Columns Used In Construction](https://github.com/user-attachments/assets/e388c3c0-7443-4373-8ac1-517eb89d6806)
 
