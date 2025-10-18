@@ -44,7 +44,7 @@ This repository covers essential design workflows for major RCC components, foll
 
 ---
 
-> 📘 All designs follow Indian Standards such as IS 456, IS 875, IS 3370, and relevant clauses for structural safety and serviceability.
+> 📘 All designs follow Indian Standards such as IS 456, IS 875, IS 3370, SP 16 and relevant clauses for structural safety and serviceability.
 
 ---
 
