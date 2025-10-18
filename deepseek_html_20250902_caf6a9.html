@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IS 456: Code of Practice for Plain and Reinforced Concrete</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #3498db;
+            font-size: 22px;
+            margin: 25px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+        
+        h4 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin: 15px 0 8px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .subsection {
+            margin-left: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .figure {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .figure-caption {
+            font-style: italic;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            .subsection {
+                margin-left: 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Indian Standard IS 456 (Fourth Revision)</h1>
+            <p>Code of Practice for Plain and Reinforced Concrete</p>
+        </header>
+        
+        <section class="section">
+            <h2>FOREWORD</h2>
+            <p>This Indian Standard (Fourth Revision) was adopted by the Bureau of Indian Standards, after the draft finalized by the Cement and Concrete Sectional Committee had been approved by the Civil Engineering Division Council.</p>
+            
+            <p>This standard was first published in 1953 under the title 'Code of practice for plain and reinforced concrete for general building construction' and subsequently revised in 1957. The code was further revised in 1964 and published under modified title 'Code of practice for plain and reinforced concrete', thus enlarging the scope of use of this code to structures other than general building construction also. The third revision was published in 1978, and it included limit state approach to design. This is the fourth revision of the standard.</p>
+            
+            <p>This revision was taken up with a view to keeping abreast with the rapid development in the field of concrete technology and to bring in further modifications/improvements in the light of experience gained while using the earlier version of the standard.</p>
+            
+            <h3>Major Changes in This Revision</h3>
+            
+            <div class="note">
+                <h4>Durability Enhancements</h4>
+                <p>In recent years, durability of concrete structures has become the cause of concern to all concrete technologists. This has led to the need to codify the durability requirements world over. In this revision of the code, in order to introduce in-built protection from factors affecting a structure, earlier clause on durability has been elaborated and a detailed clause covering different aspects of design of durable structure has been incorporated.</p>
+            </div>
+            
+            <div class="note">
+                <h4>Sampling and Acceptance Criteria</h4>
+                <p>Sampling and acceptance criteria for concrete have been revised. With this revision acceptance criteria has been simplified in line with the provisions given in BS 5328 (Part 4): 1990 'Concrete: Part 4 Specification for the procedures to be used in sampling, testing and assessing compliance of concrete'.</p>
+            </div>
+            
+            <h3>Significant Changes in Section 2</h3>
+            <ul>
+                <li>All the three grades of ordinary Portland cement namely 33 grade, 43 grade and 53 grade and sulphate resisting Portland cement have been included in the list of types of cement used (in addition to other types of cement).</li>
+                <li>The permissible limits for solids in water have been modified keeping in view the durability requirements.</li>
+                <li>The clause on admixtures has been modified in view of the availability of new types of admixtures including superplasticizers.</li>
+                <li>In Table 2 'Grades of Concrete', grades higher than M 40 have been included.</li>
+                <li>It has been recommended that minimum grade of concrete shall be not less than M 20 in reinforced concrete work.</li>
+                <li>The formula for estimation of modulus of elasticity of concrete has been revised.</li>
+                <li>Workability has now been specified only in terms of slump in line with the provisions in BS 5328 (Parts 1 to 4).</li>
+                <li>Durability clause has been enlarged to include detailed guidance concerning the factors affecting durability.</li>
+                <li>The table on 'Environmental Exposure Conditions' has been modified to include 'very severe' and 'extreme' exposure conditions.</li>
+                <li>A clause on 'Quality Assurance Measures' has been incorporated to give due emphasis to good practices of concreting.</li>
+                <li>Proper limits have been introduced on the accuracy of measuring equipments to ensure accurate batching of concrete.</li>
+                <li>The clause on 'Construction Joints' has been modified.</li>
+                <li>The clause on 'Inspection' has been modified to give more emphasis on quality assurance.</li>
+            </ul>
+            
+            <h3>Significant Changes in Section 3</h3>
+            <ul>
+                <li>Requirements for 'Fire Resistance' have been further detailed.</li>
+                <li>The figure for estimation of modification factor for tension reinforcement used in calculation of basic values of span to effective depth to control the deflection of flexural member has been modified.</li>
+                <li>Recommendations regarding effective length of cantilever have been added.</li>
+                <li>Recommendations regarding deflection due to lateral loads have been added.</li>
+                <li>Recommendations for adjustments of support moments in restrained slabs have been included.</li>
+                <li>In the determination of effective length of compression members, stability index has been introduced to determine sway or no sway conditions.</li>
+                <li>Recommendations have been made for lap length of hooks for bars in direct tension and flexural tension.</li>
+                <li>Recommendations regarding strength of welds have been modified.</li>
+                <li>Recommendations regarding cover to reinforcement have been modified. Cover has been specified based on durability requirements for different exposure conditions. The term 'nominal cover' has been introduced. The cover has now been specified based on durability requirement as well as for fire requirements.</li>
+            </ul>
+            
+            <h3>Changes in Other Sections</h3>
+            <p>The significant change incorporated in Section 4 is the modification of the clause on Walls. The modified clause includes design of walls against horizontal shear.</p>
+            
+            <p>In Section 5 on limit state method a new clause has been added for calculation of enhanced shear strength of sections close to supports. Some modifications have also been made in the clause on Torsion. Formula for calculation of crack width has been added (separately given in Annex F).</p>
+            
+            <p>Working stress method has now been given in Annex B so as to give greater emphasis to limit state design. In this Annex, modifications regarding torsion and enhanced shear strength on the same lines as in Sections have been made.</p>
+            
+            <div class="note">
+                <h4>General Provisions</h4>
+                <p>Whilst the common methods of design and construction have been covered in this code, special systems of design and construction of any plain or reinforced concrete structure not covered by this code may be permitted on production of satisfactory evidence regarding their adequacy and safety by analysis or test or both.</p>
+                
+                <p>In this code it has been assumed that the design of plain and reinforced cement concrete work is entrusted to a qualified engineer and that the execution of cement concrete work is carried out under the direction of a qualified and experienced supervisor.</p>
+            </div>
+            
+            <h3>References</h3>
+            <p>In the formulation of this standard, assistance has been derived from the following publications:</p>
+            <ul>
+                <li>BS 5328: Part 1: 1991 'Concrete: Part 1 Guide to specifying concrete', British Standards Institution</li>
+                <li>BS 5328: Part 2: 1991 'Concrete: Part 2 Methods for specifying concrete mixes', British Standards Institution</li>
+                <li>BS 5328: Part 3: 1990 'Concrete: Part 3 Specification for the procedures to be used in producing and transporting concrete', British Standards Institution</li>
+                <li>BS 5328: Part 4: 1990 'Concrete: Part 4 Specification for the procedures to be used in sampling, testing and assessing compliance of concrete', British Standards Institution</li>
+                <li>BS 8110: Part 1: 1985 'Structural use of concrete: Part 1 Code of practice for design and construction', British Standards Institution</li>
+                <li>BS 8110: Part 2: 1985 'Structural use of concrete: Part 2 Code of practice for special circumstances', British Standards Institution</li>
+                <li>ACI 318: 1989 'Building code requirements for reinforced concrete', American Concrete Institute</li>
+                <li>AS 3600: 1988 'Concrete structures', Standards Association of Australia</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>SYMBOLS</h2>
+            <p>For the purpose of this standard, the following letter symbols shall have the meaning indicated against each; where other symbols are used, they are explained at the appropriate place:</p>
+            
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Meaning</th>
+                    </tr>
+                    <tr>
+                        <td>l, l'</td>
+                        <td>Length of a column or beam between adequate lateral restraints or the unsupported length of a column</td>
+                    </tr>
+                    <tr>
+                        <td>l<sub>eff</sub></td>
+                        <td>Effective span of beam or slab or effective length of column</td>
+                    </tr>
+                    <tr>
+                        <td>l<sub>ex</sub></td>
+                        <td>Effective length about x-x axis</td>
+                    </tr>
+                    <tr>
+                        <td>l<sub>ey</sub></td>
+                        <td>Effective length about y-y axis</td>
+                    </tr>
+                    <tr>
+                        <td>l<sub>c</sub></td>
+                        <td>Clear span, face-to-face of supports</td>
+                    </tr>
+                    <tr>
+                        <td>l<sub>x</sub></td>
+                        <td>Length of shorter side of slab</td>
+                    </tr>
+                    <tr>
+                        <td>l<sub>y</sub></td>
+                        <td>Length of longer side of slab</td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>Area</td>
+                    </tr>
+                    <tr>
+                        <td>b</td>
+                        <td>Breadth of beam, or shorter dimension of a rectangular column</td>
+                    </tr>
+                    <tr>
+                        <td>b<sub>eff</sub></td>
+                        <td>Effective width of slab</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>Overall depth of beam or slab or diameter of column</td>
+                    </tr>
+                    <tr>
+                        <td>d</td>
+                        <td>Effective depth of beam or slab</td>
+                    </tr>
+                    <tr>
+                        <td>f<sub>ck</sub></td>
+                        <td>Characteristic cube compressive strength of concrete</td>
+                    </tr>
+                    <tr>
+                        <td>f<sub>y</sub></td>
+                        <td>Characteristic strength of steel</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>Bending moment</td>
+                    </tr>
+                    <tr>
+                        <td>V</td>
+                        <td>Shear force</td>
+                    </tr>
+                    <tr>
+                        <td>W</td>
+                        <td>Total load</td>
+                    </tr>
+                    <tr>
+                        <td>DL</td>
+                        <td>Dead load</td>
+                    </tr>
+                    <tr>
+                        <td>LL</td>
+                        <td>Live load or imposed load</td>
+                    </tr>
+                    <tr>
+                        <td>WL</td>
+                        <td>Wind load</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>5 MATERIALS</h2>
+            
+            <div class="subsection">
+                <h3>5.1 Cement</h3>
+                <p>The cement used shall be any of the following and the type selected should be appropriate for the intended use:</p>
+                <ul>
+                    <li>33 Grade ordinary Portland cement conforming to IS 269</li>
+                    <li>43 Grade ordinary Portland cement conforming to IS 8112</li>
+                    <li>53 Grade ordinary Portland cement conforming to IS 12269</li>
+                    <li>Rapid hardening Portland cement conforming to IS 8041</li>
+                    <li>Portland slag cement conforming to IS 455</li>
+                    <li>Portland pozzolana cement (fly ash based) conforming to IS 1489 (Part 1)</li>
+                    <li>Portland pozzolana cement (calcined clay based) conforming to IS 1489 (Part 2)</li>
+                    <li>Hydrophobic cement conforming to IS 8043</li>
+                    <li>Low heat Portland cement conforming to IS 12600</li>
+                    <li>Sulphate resisting Portland cement conforming to IS 12330</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <h3>5.4 Water</h3>
+                <p>Water used for mixing and curing shall be clean and free from injurious amounts of oils, acids, alkalis, salts, sugar, organic materials or other substances that may be deleterious to concrete or steel.</p>
+                
+                <div class="table-container">
+                    <table>
+                        <caption>Table 1: Permissible Limits for Solids in Water</caption>
+                        <tr>
+                            <th>SI No.</th>
+                            <th>Tested as per</th>
+                            <th>Permissible Limit Max</th>
+                        </tr>
+                        <tr>
+                            <td>i)</td>
+                            <td>Organic (IS 3025 Part 18)</td>
+                            <td>200 mg/L</td>
+                        </tr>
+                        <tr>
+                            <td>ii)</td>
+                            <td>Inorganic (IS 3025 Part 18)</td>
+                            <td>3000 mg/L</td>
+                        </tr>
+                        <tr>
+                            <td>iii)</td>
+                            <td>Sulphates as SO₄ (IS 3025 Part 24)</td>
+                            <td>400 mg/L</td>
+                        </tr>
+                        <tr>
+                            <td>iv)</td>
+                            <td>Chlorides as Cl (IS 3025 Part 32)</td>
+                            <td>2000 mg/L for concrete without embedded steel<br>500 mg/L for reinforced concrete</td>
+                        </tr>
+                        <tr>
+                            <td>v)</td>
+                            <td>Suspended matter (IS 3025 Part 17)</td>
+                            <td>2000 mg/L</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© Bureau of Indian Standards</p>
+            <p>This document is a representation of IS 456 requirements for educational purposes.</p>
+        </footer>
+    </div>
+</body>
+</html>
