@@ -2,7 +2,7 @@
 
 **IS 875 (Part 1 to 5)** – Code of Practice for Design Loads (Other than Earthquake) for Buildings and Structures  
 🔹 **[Part 1](IS_875_PART1.pdf)** – Dead Loads  
-🔹 **Part 2** – Imposed Loads  
+🔹 **[Part 2](IS_875_2_1987_Reaff2023.pdf)** – Imposed Loads  
 🔹 **Part 3** – Wind Loads  
 🔹 **Part 4** – Snow Loads  
 🔹 **Part 5** – Special Loads and Load Combinations
