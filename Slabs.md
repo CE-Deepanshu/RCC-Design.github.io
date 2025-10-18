@@ -4,6 +4,7 @@ RCC-Design.github.io
 
 <img width="984" height="561" alt="image" src="https://github.com/user-attachments/assets/e0ace2a8-e16e-441e-8f8e-23f212e69858" />
 .
+
 ## ✅ Aspect Ratio (Definition & Formula)
 
 The **aspect ratio (AR)** is calculated using:
@@ -29,4 +30,4 @@ If **Ly / Lx < 2**, the slab is classified as a **two-way slab**.
 - Load is distributed **in both directions**
 
 
-Two way slabs
+[Two way slabs](Two_way_slab.html)
