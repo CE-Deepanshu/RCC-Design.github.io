@@ -1,354 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Slab Design Procedure — Light Theme</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Times New Roman', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin: 25px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-        }
-
-        .step {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid #3498db;
-        }
-
-        .step-number {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        th {
-            background-color: #2c3e50;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-        }
-
-        td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f5f5f5;
-        }
-
-        tr:hover {
-            background-color: #eef5ff;
-        }
-
-        .formula {
-            font-family: 'Courier New', monospace;
-            background-color: #f1f1f1;
-            padding: 8px 12px;
-            border-radius: 4px;
-            display: inline-block;
-            margin: 5px 0;
-            border-left: 3px solid #3498db;
-        }
-
-        .formula-block {
-            display: block;
-            padding: 12px 15px;
-            margin: 10px 0;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            border-left: 4px solid #e74c3c;
-            font-family: 'Courier New', monospace;
-        }
-
-        ul, ol {
-            padding-left: 25px;
-            margin: 10px 0;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .note {
-            background-color: #fff9e6;
-            border-left: 4px solid #f1c40f;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-
-        .important {
-            background-color: #ffeaea;
-            border-left: 4px solid #e74c3c;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
-        .toc {
-            display:flex;
-            flex-wrap:wrap;
-            gap:8px;
-            margin: 12px 0 20px;
-        }
-
-        .chip {
-            background:#eef6ff;
-            color:#2c3e50;
-            padding:8px 12px;
-            border-radius:999px;
-            border:1px solid #d6eaff;
-            font-weight:600;
-            font-size:13px;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .step {
-                padding: 15px;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 8px 10px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Slab Design Steps</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 40px;
+    }
+    h2 {
+      color: #005a9c;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    h3 {
+      color: #007acc;
+      margin-top: 30px;
+    }
+    p, li {
+      font-size: 16px;
+    }
+    ul {
+      margin-top: 0;
+    }
+    .formula {
+      background-color: #e8f0fe;
+      padding: 10px;
+      border-left: 4px solid #007acc;
+      font-family: 'Courier New', monospace;
+      margin: 10px 0;
+    }
+    .note {
+      background-color: #fff8dc;
+      padding: 10px;
+      border-left: 4px solid #f4a460;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Slab Design — Step-by-step Procedure</h1>
-        <p>Compact guide for two-way slab design: aspect ratio, depth, effective span, loads, moments and reinforcement sizing.</p>
-    </header>
 
-    <div class="toc" aria-label="Table of contents">
-        <div class="chip">Step 1: Aspect ratio</div>
-        <div class="chip">Step 2: Depth (A/B)</div>
-        <div class="chip">Step 3: Effective span</div>
-        <div class="chip">Step 4: Loads</div>
-        <div class="chip">Step 5: Moments</div>
-        <div class="chip">Step 6: Main reinforcement</div>
-        <div class="chip">Step 7: Torsion</div>
-    </div>
+  <h2>Step 1: Aspect Ratio</h2>
+  <div class="formula">Aspect Ratio = ly / lx &lt; 2</div>
 
-    <!-- Step 1 -->
-    <section class="step" id="step-1">
-        <h2><span class="step-number">1</span> Step 1 — Aspect ratio</h2>
-        <p>Compute aspect ratio:</p>
-        <div class="formula">AR = l<sub>y</sub> / l<sub>x</sub></div>
-        <ul>
-            <li>For two-way slab behaviour the usual requirement is <strong>AR &lt; 2</strong> (i.e., l<sub>y</sub> / l<sub>x</sub> &lt; 2).</li>
-            <li>If <strong>AR ≈ 2</strong> confirm panel type from the relevant code or clause — panels near the limit may need special verification.</li>
-        </ul>
-    </section>
+  <h2>Step 2: Depth of Slab</h2>
+  <ul>
+    <li>Assume overall depth of slab = D</li>
+    <li>Assume clear cover for both side spans</li>
+    <li>Assume diameter of main bars φ (8, 10, 12 mm)</li>
+    <li>Effective cover = clear cover + φ / 2</li>
+  </ul>
+  <div class="formula">Effective depth d = D - C.C - φ / 2</div>
 
-    <!-- Step 2 -->
-    <section class="step" id="step-2">
-        <h2><span class="step-number">2</span> Step 2 — Overall and effective depth</h2>
+  <h3>Alternate Method:</h3>
+  <div class="formula">d = Span / (Base Value × Modification Factor)</div>
+  <ul>
+    <li>Base Value: Refer Clause 23.2.1, Pg. 37</li>
+    <li>Modification Factor: Typically between 1–2 (Generally 1.5)</li>
+  </ul>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-            <div>
-                <h3 style="margin:0 0 8px 0; font-size:16px;">Method A — Start from assumed overall depth</h3>
-                <ul>
-                    <li>Assume overall slab depth <strong>D</strong> (mm).</li>
-                    <li>Assume clear cover <strong>c</strong> (mm) and choose main bar diameter <strong>φ</strong> (mm). Typical φ: 8, 10, 12, 16 mm.</li>
-                    <li><strong>Effective cover:</strong> <span class="formula">cover_eff = c + φ / 2</span></li>
-                    <li><strong>Effective depth:</strong> <span class="formula">d = D − cover_eff = D − c − φ/2</span></li>
-                    <li>All lengths are in mm unless stated otherwise.</li>
-                </ul>
-            </div>
+  <h2>Step 3: Effective Span of Slab</h2>
+  <ul>
+    <li>Leff = clear span + effective depth = l + d</li>
+    <li>Leff = clear span + (support width + support width) / 2</li>
+  </ul>
 
-            <div>
-                <h3 style="margin:0 0 8px 0; font-size:16px;">Method B — Empirical starting depth</h3>
-                <ul>
-                    <li>Use empirical relation: <span class="formula">d = Span / (B.V × M.F)</span></li>
-                    <li><strong>B.V</strong> = base value (from code clause or table — e.g., code clause 23.2.1 or your reference table).</li>
-                    <li><strong>M.F</strong> = modification factor (typical range 1.0–2.0; commonly 1.5).</li>
-                    <li>Round/adjust d to the nearest practical bar arrangement and verify with Method A if needed.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+  <h2>Step 4: Design Load Calculation</h2>
+  <h3>Dead Load (DL)</h3>
+  <ul>
+    <li>Self-weight = 25 × thickness of slab (kN/m²)</li>
+    <li>+ Superimposed dead load</li>
+    <li>Total DL = sum of above</li>
+  </ul>
 
-    <!-- Step 3 -->
-    <section class="step" id="step-3">
-        <h2><span class="step-number">3</span> Step 3 — Effective span (L<sub>eff</sub>)</h2>
-        <p>Choose effective span definition based on boundary conditions and code guidance:</p>
-        <ul>
-            <li><strong>Simply supported panels:</strong> <span class="formula">L_eff ≈ clear span + d</span> (use l + d).</li>
-            <li><strong>Continuous panels / supports bearing both sides:</strong> <span class="formula">L_eff = clear span + (sum of bearing widths) / 2</span>, where sum of bearing widths = support_width1 + support_width2.</li>
-            <li>Always use the effective span definition specified by your design code for the panel type in question.</li>
-        </ul>
-    </section>
+  <h3>Live Load (LL)</h3>
+  <ul>
+    <li>Imposed live load</li>
+    <li>+ Other live loads</li>
+    <li>Total LL = sum of above</li>
+  </ul>
 
-    <!-- Step 4 -->
-    <section class="step" id="step-4">
-        <h2><span class="step-number">4</span> Step 4 — Design loads (per unit area)</h2>
-        <div class="note">Use consistent units: w in <strong>kN/m²</strong> for panel loads; convert to N/mm² or N/mm for sectional checks when needed.</div>
+  <h2>Step 5: Design Moment Calculation</h2>
+  <div class="formula">Aspect Ratio = ly / lx</div>
+  <div class="formula">Mx = αx × w × lx²</div>
+  <div class="formula">My = αy × w × ly²</div>
+  <p>Refer Table 26, Page 91 for αx and αy (bending moment coefficients).</p>
 
-        <h3 style="margin-top:12px; font-size:15px;">Dead load (DL)</h3>
-        <ul>
-            <li>Self-weight of slab = γ<sub>concrete</sub> × thickness.</li>
-            <li>Typical γ<sub>concrete</sub> = <strong>25 kN/m³</strong>. So self-weight = <span class="formula">25 × (thickness in m)</span> kN/m².</li>
-            <li>Add superimposed dead loads (finishes, screeds, fixed equipment) to get <strong>Total DL</strong> (kN/m²).</li>
-        </ul>
+  <div class="note">
+    <strong>Note:</strong>
+    <ul>
+      <li>Check panel type based on slab location</li>
+      <li>Consider negative moment at continuous edges for top reinforcement</li>
+      <li>Consider positive moment at mid-span for main steel</li>
+    </ul>
+  </div>
 
-        <h3 style="margin-top:12px; font-size:15px;">Live load (LL)</h3>
-        <ul>
-            <li>Include imposed occupancy loads and other variable loads.</li>
-            <li>Total live load = <strong>LL</strong> (kN/m²).</li>
-        </ul>
+  <h2>Step 6: Main Reinforcement Calculation</h2>
+  <h3>Along x-direction</h3>
+  <div class="formula">Astx = (0.5 fck / fy) × [1 - √(1 - (4.6 Mx / fck bd²))] × bd</div>
 
-        <h3 style="margin-top:12px; font-size:15px;">Design (factored) load</h3>
-        <p>Combine DL and LL using the appropriate factors from your code to obtain <strong>w</strong> (kN/m²) for ULS (ultimate limit state).</p>
-    </section>
+  <h3>Along y-direction</h3>
+  <div class="formula">Asty = (0.5 fck / fy) × [1 - √(1 - (4.6 My / fck bd²))] × bd</div>
 
-    <!-- Step 5 -->
-    <section class="step" id="step-5">
-        <h2><span class="step-number">5</span> Step 5 — Design moments for the panel</h2>
-        <p>Use bending coefficients (α<sub>x</sub>, α<sub>y</sub>) for a rectangular panel supported on four sides from code tables (e.g., Table 26 or equivalent).</p>
-        <div class="formula-block">
-            M<sub>x</sub> = α<sub>x</sub> × w × l<sub>x</sub><sup>2</sup><br/>
-            M<sub>y</sub> = α<sub>y</sub> × w × l<sub>y</sub><sup>2</sup>
-        </div>
-        <ul>
-            <li>Units: w in kN/m² and l in m → M in kN·m per meter width. Convert to N·mm if using working formulas.</li>
-            <li>Negative moments at continuous supports → design top reinforcement.</li>
-            <li>Positive moments at mid-span → design bottom (main) reinforcement.</li>
-        </ul>
-    </section>
+  <ul>
+    <li>Assume bar diameter φ = 8, 10, 12, 16 mm</li>
+    <li>Area of 1 φ bar = (π / 4) × φ² (mm²)</li>
+    <li>Spacing = (Area of 1 φ bar × 1000) / Ast (required)</li>
+  </ul>
 
-    <!-- Step 6 -->
-    <section class="step" id="step-6">
-        <h2><span class="step-number">6</span> Step 6 — Main reinforcement design (per meter width)</h2>
+  <div class="note">
+    <strong>Note:</strong> Max spacing between main bars in two-way slabs should not exceed 3 × effective depth or 300 mm (whichever is smaller) as per Clause 26.3.3(b)(1). Refer Amendment 3.
+  </div>
 
-        <p>Use the limit-state bending equation in consistent units. A commonly used working formula:</p>
-        <div class="formula-block">
-            A<sub>st</sub> = (0.5 × f<sub>ck</sub> / f<sub>y</sub>) × [1 − √(1 − (4.6 × M) / (f<sub>ck</sub> × b × d²))] × b × d
-        </div>
+  <h2>Step 7: Torsion Reinforcement</h2>
+  <p>Refer Clause D-1.8 to D-1.11, Page 90</p>
+  <div class="formula">Ast, torsion = (3 / 4) × Ast (maximum)</div>
+  <ul>
+    <li>Assume torsion bar diameter = 8–10 mm</li>
+    <li>Area of 1 φ bar = (π × φ²) / 4</li>
+    <li>Spacing = (Area of 1 φ bar × 1000) / Ast, torsion (required)</li>
+  </ul>
 
-        <p>Where:</p>
-        <ul>
-            <li><strong>A<sub>st</sub></strong> = required steel area (mm²) per width b (use b = 1000 mm for per-meter design).</li>
-            <li><strong>M</strong> = bending moment (N·mm) per meter width (convert kN·m/m → N·mm by ×10<sup>6</sup>).</li>
-            <li><strong>f<sub>ck</sub></strong> = characteristic compressive strength of concrete (N/mm²).</li>
-            <li><strong>f<sub>y</sub></strong> = yield strength of steel (N/mm²).</li>
-            <li><strong>b</strong> = width considered (mm) (use 1000 mm for per-meter). </li>
-            <li><strong>d</strong> = effective depth (mm).</li>
-        </ul>
+  <div class="note">
+    <strong>Note:</strong> Torsion reinforcement is provided at extreme corners (not at continuous edges), within 1 m from the corner and extending up to 1 m in both directions.
+  </div>
 
-        <h3 style="margin-top:10px;">Bar selection and spacing</h3>
-        <div class="formula-block">
-            A<sub>bar</sub> = (π / 4) × φ²  &nbsp; (mm²)<br/>
-            no. bars per m = A<sub>st</sub> / A<sub>bar</sub><br/>
-            spacing s (mm) = 1000 / (no. bars per m) = (A<sub>bar</sub> × 1000) / A<sub>st</sub>
-        </div>
-
-        <p><strong>Spacing limit:</strong> maximum spacing between main bars shall not exceed <span class="formula">min(3 × d, 300 mm)</span> according to typical code clause (e.g., cl. 26.3.3(b)(1)). Verify clause numbers and local amendments.</p>
-    </section>
-
-    <!-- Step 7 -->
-    <section class="step" id="step-7">
-        <h2><span class="step-number">7</span> Step 7 — Torsion / corner reinforcement</h2>
-
-        <ul>
-            <li>If torsion reinforcement is required by code (corner panels with torsion), follow the relevant code clauses (for example D-1.8 to D-1.11 or your code references).</li>
-            <li>Working rule (approximate): <span class="formula">A<sub>st_torsion</sub> ≈ (3/4) × A<sub>st_max</sub></span> where A<sub>st_max</sub> is the maximum main steel required.</li>
-            <li>Provide torsion reinforcement at extreme corners (not along continuous edges), typically within 1 m from the corner and up to 1 m length.</li>
-            <li>Choose torsion bar diameter (e.g., 8–10 mm) and compute A<sub>bar</sub> and spacing as done for main bars.</li>
-        </ul>
-    </section>
-
-    <!-- Quick reference formulas -->
-    <section class="step" id="quick-ref">
-        <h2><span class="step-number">⇥</span> Quick reference & conversions</h2>
-
-        <table>
-            <thead>
-                <tr><th>Quantity</th><th>Formula / Note</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Self weight (kN/m²)</td><td><span class="formula">25 × thickness (m)</span> (γ<sub>concrete</sub> ≈ 25 kN/m³)</td></tr>
-                <tr><td>M (N·mm)</td><td>Convert from kN·m: <span class="formula">M(N·mm) = M(kN·m) × 10⁶</span></td></tr>
-                <tr><td>Area of bar φ</td><td><span class="formula">A_bar = (π/4) × φ² (mm²)</span></td></tr>
-                <tr><td>Spacing s</td><td><span class="formula">s = (A_bar × 1000) / A_st</span> (mm)</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <footer>
-        <div style="margin-bottom:6px;">Use code clauses and local amendments as final authority. This page is a compact procedural guide — check your national code for exact coefficients, factors and clause numbers.</div>
-        <div>Created for quick reference • Save as HTML and view offline</div>
-    </footer>
 </body>
 </html>
