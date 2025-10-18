@@ -22,4 +22,4 @@ All vertical members may not be termed as **columns**.
 | 2      | Tendency to buckle          | Less         | More                      |
 | 3      | Strength                    | More         | Less than short column    |
 
-[Axially loaded short column](ShortColumn.html)
+## [Axially loaded short column](ShortColumn.html)
