@@ -46,7 +46,3 @@ This repository covers the essential design workflows for the following RCC comp
 **Location:** Ludhiana, Punjab, India  
 
 **Academic Profile:** B.Tech Civil Engineering, GNDEC Ludhiana (2022–2026)
-
-<p align="center">
-  <img src="https://hits.seeyoufarm.com/api/count/incr?url=[https://github.com/](https://ce-deepanshu.github.io/RCC-Design.github.io/)OWNER/REPO&count_bg=%2379C83D&title_bg=%23555555&title=views&icon=&icon_color=%23FFFFFF" alt="view counter"/>
-</p>
