@@ -6,5 +6,6 @@
 🔹 **[Part 3](IS_875_3_2015_AMD2_Reff2020.pdf)** – Wind Loads  
 🔹 **[Part 4](IS_875_4_2021.pdf)** – Snow Loads  
 🔹 **[Part 5](IS_875_5_1987_Reaff2023.pdf)** – Special Loads and Load Combinations
+🔹 **[IS 1893: 2016]** – Criteria for Design of Earthquake Resistant Buildings
 
 > 📎 Refer to IS 875 for load calculations and combinations as per Indian Standards.
