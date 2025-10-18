@@ -17,4 +17,4 @@
 | **Seismic Suitability**          | Less flexible under seismic loads                           | More flexible and preferred in **earthquake-prone areas**      |
 | **Economy**                      | Economical for basic applications                           | More economical for **complex or constrained designs**         |
 
-[Singly Reinforced Beams](deepseek_html_20250925_391524.html)
+## [Singly Reinforced Beams](deepseek_html_20250925_391524.html)
