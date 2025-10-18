@@ -30,4 +30,4 @@ If **Ly / Lx < 2**, the slab is classified as a **two-way slab**.
 - Load is distributed **in both directions**
 
 
-[Two way slabs](Two_way_slab.html)
+## [Two way slabs](Two_way_slab.html)
