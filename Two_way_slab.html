@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Two-Way Slab Design Steps</title>
+  <title>Two-Way Slab Design Procedure</title>
   <style>
     body {
       font-family: 'Times New Roman', sans-serif;
-      background-color: #f4f7fa;
+      background-color: #f5f9fc;
       color: #333;
-      line-height: 1.6;
       padding: 40px;
+      line-height: 1.6;
     }
-    h2 {
+    h1 {
       color: #005a9c;
       border-bottom: 2px solid #ccc;
       padding-bottom: 5px;
     }
-    h3 {
+    h2 {
       color: #007acc;
       margin-top: 30px;
     }
@@ -25,6 +25,7 @@
     }
     ul {
       margin-top: 0;
+      margin-bottom: 20px;
     }
     .formula {
       background-color: #e8f0fe;
@@ -37,11 +38,13 @@
       background-color: #fff8dc;
       padding: 10px;
       border-left: 4px solid #f4a460;
-      margin: 10px 0;
+      margin: 20px 0;
     }
   </style>
 </head>
 <body>
+
+  <h1>Two-Way Slab Design Procedure</h1>
 
   <h2>Step 1: Aspect Ratio</h2>
   <div class="formula">Aspect Ratio = ly / lx &lt; 2</div>
@@ -50,7 +53,7 @@
   <ul>
     <li>Assume overall depth of slab = D</li>
     <li>Assume clear cover for both side spans</li>
-    <li>Assume diameter of main bars φ (8, 10, 12 mm)</li>
+    <li>Assume diameter of main bars φ = 8, 10, 12 mm</li>
     <li>Effective cover = clear cover + φ / 2</li>
   </ul>
   <div class="formula">Effective depth d = D - C.C - φ / 2</div>
@@ -58,7 +61,7 @@
   <h3>Alternate Method:</h3>
   <div class="formula">d = Span / (Base Value × Modification Factor)</div>
   <ul>
-    <li>Base Value: Refer Clause 23.2.1, Pg. 37</li>
+    <li>Base Value: Refer Clause 23.2.1, Page 37</li>
     <li>Modification Factor: Typically between 1–2 (Generally 1.5)</li>
   </ul>
 
@@ -84,10 +87,9 @@
   </ul>
 
   <h2>Step 5: Design Moment Calculation</h2>
-  <div class="formula">Aspect Ratio = ly / lx</div>
   <div class="formula">Mx = αx × w × lx²</div>
   <div class="formula">My = αy × w × ly²</div>
-  <p>Refer Table 26, Page 91 for αx and αy (bending moment coefficients).</p>
+  <p>Refer Table 26, Page 91 for αx and αy (bending moment coefficients for rectangular panels supported on four sides with torsion at corners).</p>
 
   <div class="note">
     <strong>Note:</strong>
