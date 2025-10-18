@@ -9,14 +9,42 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 ---
 
-## 📚 What You'll Find Inside
+## 📦 What You'll Find Inside
 
-This repository covers the essential design workflows for the following RCC components:
+This repository covers essential design workflows for major RCC components, following IS code provisions and practical detailing standards:
 
-- **[Beams](Beams.md)** – Design steps as per IS 456:2000 including assumptions, bending moment, shear, and reinforcement detailing.
-- **[Columns](Column.md)** – Axially loaded and eccentrically loaded column design procedures with reference to IS 456:2000 and IS 875.
-- **[Slabs](Slabs.md)** – One-way and two-way slab design steps, including effective depth, reinforcement, and load considerations.
-- **Footings** – Isolated footing design based on bearing capacity, load transfer, and IS code compliance.
+### 🧱 [Beams](Beams.md)
+- Design steps as per **IS 456:2000**
+- Includes assumptions, bending moment, shear force, and reinforcement detailing
+
+### 🏛️ [Columns](Column.md)
+- Axially and eccentrically loaded column design
+- Based on **IS 456:2000** and **IS 875** for load combinations
+
+### 🔩 [Slabs](Slabs.md)
+- One-way and two-way slab design procedures
+- Covers effective depth, reinforcement layout, and load considerations
+
+### 🧱 Footings
+- Isolated footing design
+- Based on bearing capacity, load transfer, and IS code compliance
+
+### 🧗 Staircases
+- Design of dog-legged and open-well staircases
+- Includes effective span, load calculation, reinforcement detailing
+
+### 🧱 Retaining Walls
+- Design of cantilever and counterfort retaining walls
+- Covers earth pressure theory, stability checks, and reinforcement zones
+
+### 💧 Liquid Retaining Structures
+- Design of water tanks, reservoirs, and sumps
+- Based on **IS 3370** series for hydrostatic pressure and crack control
+- Includes wall and base slab design with water-tight detailing
+
+---
+
+> 📘 All designs follow Indian Standards such as IS 456, IS 875, IS 3370, and relevant clauses for structural safety and serviceability.
 
 ---
 
