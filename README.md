@@ -40,8 +40,11 @@ This repository covers the essential design workflows for the following RCC comp
 ## 📬 Contact
 
 **Created by:** Deepanshu  
+
 **Email:** deepanshurathore634@gmail.com
+
 **Location:** Ludhiana, Punjab, India  
+
 **Academic Profile:** B.Tech Civil Engineering, GNDEC Ludhiana (2022–2026)
 
 <p align="center">
