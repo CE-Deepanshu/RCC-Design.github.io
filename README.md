@@ -15,7 +15,7 @@ This repository covers the essential design workflows for the following RCC comp
 
 - **[Beams](Beams.md)** – Design steps as per IS 456:2000 including assumptions, bending moment, shear, and reinforcement detailing.
 - **[Columns](Column.md)** – Axially loaded and eccentrically loaded column design procedures with reference to IS 456:2000 and IS 875.
-- **Slabs** – One-way and two-way slab design steps, including effective depth, reinforcement, and load considerations.
+- **[Slabs](Slabs.md)** – One-way and two-way slab design steps, including effective depth, reinforcement, and load considerations.
 - **Footings** – Isolated footing design based on bearing capacity, load transfer, and IS code compliance.
 
 ---
