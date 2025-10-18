@@ -4,7 +4,7 @@
 🔹 **[Part 1](IS_875_PART1.pdf)** – Dead Loads  
 🔹 **[Part 2](IS_875_2_1987_Reaff2023.pdf)** – Imposed Loads  
 🔹 **[Part 3](IS_875_3_2015_AMD2_Reff2020.pdf)** – Wind Loads  
-🔹 **Part 4** – Snow Loads  
+🔹 **[Part 4](IS_875_4_2021.pdf)** – Snow Loads  
 🔹 **Part 5** – Special Loads and Load Combinations
 
 > 📎 Refer to IS 875 for load calculations and combinations as per Indian Standards.
