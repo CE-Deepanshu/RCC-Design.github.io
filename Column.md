@@ -1,5 +1,3 @@
-RCC-Design.github.io
-
 # DESIGN OF COLUMNS
 
 ## Classification of Vertical Members in Structures
