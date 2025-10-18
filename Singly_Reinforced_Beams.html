@@ -9,10 +9,10 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: "Times New Roman", serif !important;
         }
-        
+
         body {
-            font-family: 'Times New Roman';
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
@@ -20,7 +20,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -30,19 +30,19 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
+
         h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
         }
-        
+
         h2 {
             color: #2c3e50;
             margin: 25px 0 15px;
             padding-bottom: 8px;
             border-bottom: 2px solid #3498db;
         }
-        
+
         .step {
             background-color: white;
             border-radius: 8px;
@@ -51,7 +51,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             border-left: 5px solid #3498db;
         }
-        
+
         .step-number {
             display: inline-block;
             background-color: #3498db;
@@ -64,36 +64,36 @@
             margin-right: 10px;
             font-weight: bold;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        
+
         th {
             background-color: #2c3e50;
             color: white;
             padding: 12px 15px;
             text-align: left;
         }
-        
+
         td {
             padding: 10px 15px;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+
         tr:nth-child(even) {
             background-color: #f5f5f5;
         }
-        
+
         tr:hover {
             background-color: #eef5ff;
         }
-        
+
         .formula {
-            font-family: 'Courier New', monospace;
+            font-family: "Times New Roman", serif !important;
             background-color: #f1f1f1;
             padding: 8px 12px;
             border-radius: 4px;
@@ -101,7 +101,7 @@
             margin: 5px 0;
             border-left: 3px solid #3498db;
         }
-        
+
         .formula-block {
             display: block;
             padding: 12px 15px;
@@ -110,16 +110,16 @@
             border-radius: 4px;
             border-left: 4px solid #e74c3c;
         }
-        
+
         ul, ol {
             padding-left: 25px;
             margin: 10px 0;
         }
-        
+
         li {
             margin-bottom: 8px;
         }
-        
+
         .note {
             background-color: #fff9e6;
             border-left: 4px solid #f1c40f;
@@ -127,7 +127,7 @@
             margin: 15px 0;
             border-radius: 4px;
         }
-        
+
         .important {
             background-color: #ffeaea;
             border-left: 4px solid #e74c3c;
@@ -135,7 +135,7 @@
             margin: 15px 0;
             border-radius: 4px;
         }
-        
+
         footer {
             text-align: center;
             margin-top: 40px;
@@ -143,24 +143,20 @@
             color: #7f8c8d;
             font-size: 0.9rem;
         }
-        
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
-            
             h1 {
                 font-size: 1.8rem;
             }
-            
             .step {
                 padding: 15px;
             }
-            
             table {
                 font-size: 0.9rem;
             }
-            
             th, td {
                 padding: 8px 10px;
             }
@@ -168,310 +164,3 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Beam Design Procedure</h1>
-        <p>As per IS 456:2000 Code of Practice for Plain and Reinforced Concrete</p>
-    </header>
-    
-    <div class="step">
-        <h2><span class="step-number">1</span> Assume Dimensions of Beam</h2>
-        <ul>
-            <li>Effective depth: <span class="formula">d = Span/10 to Span/8</span></li>
-            <li>Effective cover: 40 mm to 50 mm</li>
-            <li>Width: <span class="formula">b = D/2 to 2/3 D</span> (where D is the overall depth)</li>
-        </ul>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">2</span> Calculate Effective Span (l)</h2>
-        <p>(Assume width of support if not given)</p>
-        <P>Take the value whichever is less</P>
-        <div class="formula-block">
-            Leff = l + effective depth<br>
-            Leff = l + support width/2 + support width/2
-        </div>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">3</span> Calculate Self Weight and Design Load</h2>
-        <p>Calculate the self weight (dead load) of the beam. Using values of dead load and superimposed loads (from IS 875), determine the factored design load - i.e., factored design UDL per metre length of beam (w<sub>u</sub>).</p>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">4</span> Calculate Factored Design Moment</h2>
-        <p>Calculate factored maximum bending moment (M<sub>u</sub>):</p>
-        <div class="formula-block">M<sub>u</sub> = w<sub>u</sub> l<sup>2</sup> / 8</div>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">5</span> Design as Balanced Section</h2>
-        <p>The beam section is designed as a balanced section. Equate M<sub>u</sub> to M<sub>u,lim</sub> and find the effective depth of beam.</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Steel Grade</th>
-                    <th>Limiting Moment Formula</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Fe 250</td>
-                    <td><span class="formula">M<sub>u,lim</sub> = 0.148 f<sub>ck</sub> b d<sup>2</sup></span></td>
-                </tr>
-                <tr>
-                    <td>Fe 415</td>
-                    <td><span class="formula">M<sub>u,lim</sub> = 0.138 f<sub>ck</sub> b d<sup>2</sup></span></td>
-                </tr>
-                <tr>
-                    <td>Fe 500</td>
-                    <td><span class="formula">M<sub>u,lim</sub> = 0.133 f<sub>ck</sub> b d<sup>2</sup></span></td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <p>Compute depth (d) with the assumed depth:</p>
-        <ul>
-            <li>If calculated depth ≤ assumed depth, proceed with design</li>
-            <li>If calculated depth > assumed depth, increase beam depth and recalculate</li>
-        </ul>
-        <p>Recalculate self weight and factored moment based on revised depth.</p>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">6</span> Calculate Area of Tension Steel (A<sub>st</sub>)</h2>
-        <div class="formula-block">A<sub>st</sub> = (0.36 f<sub>ck</sub> b x<sub>u,max</sub>) / (0.87 f<sub>y</sub>)</div>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Steel Grade</th>
-                    <th>x<sub>u,max</sub> Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Fe 250</td>
-                    <td><span class="formula">x<sub>u,max</sub> = 0.53 d</span></td>
-                </tr>
-                <tr>
-                    <td>Fe 415</td>
-                    <td><span class="formula">x<sub>u,max</sub> = 0.48 d</span></td>
-                </tr>
-                <tr>
-                    <td>Fe 500</td>
-                    <td><span class="formula">x<sub>u,max</sub> = 0.46 d</span></td>
-                </tr>
-            </tbody>
-        </table>
-        <p>Ast can also be found out by following formula<p>
-            <title>Ast Calculation Formula</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f9f9f9;
-    }
-    .formula-box {
-      background-color: #fff;
-      padding: 20px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      max-width: 700px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-  </style>
-</head>
-<body>
-  <div class="formula-box">
-    <h2>Ast Calculation Formula</h2>
-    <p>
-      $$Ast = 0.5 \cdot \frac{f_{ck}}{f_y} \left[1 - \sqrt{1 - \left(\frac{4.6 \cdot M_u}{f_{ck} \cdot b \cdot d^2}\right)}\right] \cdot b \cdot d$$
-    </p>
-  </div>
-</body>
-        <p>Select suitable bar diameter and determine number of bars required.</p>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">7</span> Check Steel Area Requirements</h2>
-        <p>Calculate minimum area of steel:</p>
-        <div class="formula-block">A<sub>s,min</sub> = (0.85 b d) / f<sub>y</sub></div>
-        
-        <p>Calculate maximum area of steel:</p>
-        <div class="formula-block">A<sub>s,max</sub> = 0.04 b d</div>
-        
-        <p>Verify that provided steel area is between minimum and maximum requirements.</p>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">8</span> Check for Shear and Design Shear Reinforcement</h2>
-        <p>Calculate nominal shear stress:</p>
-        <div class="formula-block">τ<sub>v</sub> = V<sub>u</sub> / (b d)</div>
-        <p>Where:</p>
-        <ul>
-            <li>τ<sub>v</sub> = nominal shear stress</li>
-            <li>V<sub>u</sub> = shear force</li>
-            <li>b = width of section</li>
-            <li>d = effective depth</li>
-        </ul>
-        
-        <p>If τ<sub>v</sub> < τ<sub>c</sub> < τ<sub>c,max</sub>, the beam is safe in shear. Otherwise, design according to B-5.4.</p>
-        
-        <h3>Permissible Shear Stress in Concrete (τ<sub>c</sub>, N/mm²)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Concrete Grade</th>
-                    <th>τ<sub>c</sub> for 100A<sub>s</sub>/bd ≤ 0.15</th>
-                    <th>τ<sub>c</sub> for 100A<sub>s</sub>/bd ≥ 3.00</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>M15</td>
-                    <td>0.28</td>
-                    <td>0.48</td>
-                </tr>
-                <tr>
-                    <td>M20</td>
-                    <td>0.36</td>
-                    <td>0.64</td>
-                </tr>
-                <tr>
-                    <td>M25</td>
-                    <td>0.40</td>
-                    <td>0.70</td>
-                </tr>
-                <tr>
-                    <td>M30</td>
-                    <td>0.45</td>
-                    <td>0.75</td>
-                </tr>
-                <tr>
-                    <td>M35</td>
-                    <td>0.50</td>
-                    <td>0.80</td>
-                </tr>
-                <tr>
-                    <td>M40+</td>
-                    <td>0.50</td>
-                    <td>0.85</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <div class="note">
-            <p><strong>Note:</strong> A<sub>s</sub> is the area of longitudinal tension reinforcement that continues at least one effective depth beyond the section being considered, except at supports where full area may be used if detailing conforms to clauses 26.2.2 and 26.2.3 of IS:456-2000.</p>
-        </div>
-        
-        <h3>Maximum Shear Stress (τ<sub>c,max</sub>, N/mm²)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Concrete Grade</th>
-                    <th>τ<sub>c,max</sub></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>M15</td><td>1.6</td></tr>
-                <tr><td>M20</td><td>1.8</td></tr>
-                <tr><td>M25</td><td>1.9</td></tr>
-                <tr><td>M30</td><td>2.0</td></tr>
-                <tr><td>M35</td><td>2.3</td></tr>
-                <tr><td>M40+</td><td>2.5</td></tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">9</span> Check Development Length</h2>
-        <p>Development length L<sub>d</sub> is given by:</p>
-        <div class="formula-block">L<sub>d</sub> = (φ σ<sub>s</sub>) / (4 τ<sub>bd</sub>)</div>
-        <p>Where:</p>
-        <ul>
-            <li>φ = nominal diameter of bar</li>
-            <li>σ<sub>s</sub> = stress in bar at design load</li>
-            <li>τ<sub>bd</sub> = design bond stress</li>
-        </ul>
-        
-        <h3>Design Bond Stress (τ<sub>bd</sub>, N/mm²)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Concrete Grade</th>
-                    <th>τ<sub>bd</sub></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>M20</td><td>1.2</td></tr>
-                <tr><td>M25</td><td>1.4</td></tr>
-                <tr><td>M30</td><td>1.5</td></tr>
-                <tr><td>M35</td><td>1.7</td></tr>
-                <tr><td>M40+</td><td>1.9</td></tr>
-            </tbody>
-        </table>
-        
-        <div class="important">
-            <p><strong>Notes:</strong></p>
-            <ul>
-                <li>Development length includes anchorage values of hooks in tension reinforcement</li>
-                <li>For bars of non-circular sections, development length should be sufficient to develop stress by bond</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">10</span> Check for Deflection</h2>
-        <p>Follow these steps to check depth from deflection consideration:</p>
-        <ol>
-            <li>Calculate percentage of steel:
-                <div class="formula">p<sub>t</sub> = (100 A<sub>s</sub>) / (b d)</div>
-            </li>
-            <li>Calculate f<sub>s</sub>:
-                <div class="formula">f<sub>s</sub> = 0.58 f<sub>y</sub> × [Area of steel required / Area of steel provided]</div>
-            </li>
-            <li>Determine modification factor for compression reinforcement (K<sub>1</sub>) from Fig. 12.1 based on p<sub>t</sub> and f<sub>s</sub>
-                <ul>
-                    <li>K<sub>1</sub> = 1 if no compression reinforcement</li>
-                    <li>For flanged sections, use modification factor from Fig. 12.3</li>
-                    <li>K<sub>1</sub> = 1 for rectangular sections</li>
-                </ul>
-            </li>
-            <li>Calculate:
-                <div class="formula">(l/d<sub>provided</sub>) = 20K<sub>1</sub> × K<sub>2</sub> × K<sub>3</sub> × f<sub>s</sub></div>
-            </li>
-            <li>Verify calculated ratio</li>
-        </ol>
-        
-        <div class="note">
-            <p>Short-term and long-term deflection (due to shrinkage and creep) can be computed as per Annexure C of IS:456-2000.</p>
-        </div>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">11</span> Face Reinforcement (for deep beams)</h2>
-        <p>If beam depth > 750 mm, provide face reinforcement along both faces:</p>
-        <div class="formula-block">A<sub>f</sub> = 0.1% of web area = (0.1 × bD) / 100</div>
-        <p>Distribute equally on both faces with spacing ≤ 300 mm or as per IS:456-2000 requirements.</p>
-    </div>
-    
-    <div class="step">
-        <h2><span class="step-number">12</span> Documentation</h2>
-        <p>Document the design steps and prepare a neat sketch showing all reinforcement details.</p>
-    </div>
-    
-    <footer>
-        <p>Beam Design Procedure based on IS 456:2000 Code of Practice for Plain and Reinforced Concrete</p>
-        <p>Note: Always refer to the latest version of the code and consult with a qualified structural engineer for actual designs.</p>
-    </footer>
-</body>
-</html>
