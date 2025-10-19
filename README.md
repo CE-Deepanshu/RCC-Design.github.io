@@ -25,7 +25,7 @@ This repository covers essential design workflows for major RCC components, foll
 - One-way and two-way slab design procedures
 - Covers effective depth, reinforcement layout, and load considerations
 
-### 🧱 Footings
+### 🧱 [Footings](Footing.md)
 - Isolated footing design
 - Based on bearing capacity, load transfer, and IS code compliance
 
