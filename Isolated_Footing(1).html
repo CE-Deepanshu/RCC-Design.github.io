@@ -1,172 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singly Reinforced Beam Design Procedure</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Times New Roman", serif !important;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Isolated Footing — Steps 1 to 8</title>
+  <style>
+    /* Use Times New Roman everywhere */
+    :root{--accent:#2b6cb0;--muted:#f3f6fb}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family: "Times New Roman", Times, serif !important;
+      margin:0;
+      background:#fafafa;
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+    }
 
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .wrapper{
+      max-width:1100px;
+      margin:0 auto;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+    header{
+      text-align:center;
+      margin-bottom:22px;
+    }
 
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
+    h1{font-size:28px;margin:6px 0}
+    p.lead{margin:0;color:#444}
 
-        h2 {
-            color: #2c3e50;
-            margin: 25px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #3498db;
-        }
+    /* Grid for step boxes */
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+      margin-top:20px;
+    }
 
-        .step {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid #3498db;
-        }
+    @media (max-width:720px){
+      .steps{grid-template-columns:1fr}
+    }
 
-        .step-number {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
+    .step-box{
+      background:#fff;
+      border:1px solid #e6e9ef;
+      padding:18px;
+      border-radius:10px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      box-shadow:0 4px 10px rgba(34,34,34,0.04);
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+    .step-number{
+      min-width:56px;
+      height:56px;
+      border-radius:8px;
+      background:linear-gradient(180deg,var(--accent),#1f4f7a);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:18px;
+      flex-shrink:0;
+      box-shadow:0 3px 8px rgba(43,108,176,0.18);
+    }
 
-        th {
-            background-color: #2c3e50;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-        }
+    .step-content h3{
+      margin:0 0 6px 0;
+      font-size:18px;
+    }
 
-        td {
-            padding: 10px 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
+    .step-content p{margin:0;color:#333;line-height:1.45}
 
-        tr:nth-child(even) {
-            background-color: #f5f5f5;
-        }
+    /* Numbered small caption under main heading */
+    .notes{
+      margin-top:14px;
+      background:var(--muted);
+      padding:10px 12px;
+      border-radius:8px;
+      color:#333;
+      font-size:14px;
+    }
 
-        tr:hover {
-            background-color: #eef5ff;
-        }
+    footer{margin-top:20px;text-align:center;color:#666;font-size:13px}
 
-        .formula {
-            font-family: "Times New Roman", serif !important;
-            background-color: #f1f1f1;
-            padding: 8px 12px;
-            border-radius: 4px;
-            display: inline-block;
-            margin: 5px 0;
-            border-left: 3px solid #3498db;
-        }
-
-        .formula-block {
-            display: block;
-            padding: 12px 15px;
-            margin: 10px 0;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            border-left: 4px solid #e74c3c;
-        }
-
-        ul, ol {
-            padding-left: 25px;
-            margin: 10px 0;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .note {
-            background-color: #fff9e6;
-            border-left: 4px solid #f1c40f;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-
-        .important {
-            background-color: #ffeaea;
-            border-left: 4px solid #e74c3c;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-            .step {
-                padding: 15px;
-            }
-            table {
-                font-size: 0.9rem;
-            }
-            th, td {
-                padding: 8px 10px;
-            }
-        }
-    </style>
+    /* Printable adjustments */
+    @media print{
+      body{padding:10px}
+      .step-box{page-break-inside:avoid}
+    }
+  </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Thumb Rules & Design of Square Isolated Footing</h1>
+            <h1>Design of Square Isolated Footing</h1>
             <p class="subtitle">A comprehensive guide to RCC isolated footing design as per IS codes</p>
         </header>
         
