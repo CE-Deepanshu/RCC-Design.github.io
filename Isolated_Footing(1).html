@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumb Rules & Design of Isolated Footing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a3a5f, #2c5282);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #2d3748;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background-color: #2c5282;
+            color: white;
+            text-align: left;
+            padding: 15px;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        
+        .step-card {
+            background-color: #f7fafc;
+            border-left: 4px solid #2c5282;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .formula {
+            background-color: #edf2f7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            border-left: 3px solid #2c5282;
+        }
+        
+        .note {
+            background-color: #fffaf0;
+            border-left: 4px solid #ecc94b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .variables {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .variable-item {
+            background-color: #edf2f7;
+            padding: 12px;
+            border-radius: 5px;
+            border-left: 3px solid #2c5282;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a202c;
+            color: white;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Thumb Rules & Design of Isolated Footing</h1>
+            <p class="subtitle">A comprehensive guide to RCC isolated footing design as per IS codes</p>
+        </header>
+        
+        <div class="content">
+            <section id="thumb-rules">
+                <h2>Thumb Rules (As per IS Codes)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Specification</th>
+                            <th>Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Minimum Depth of Foundation</strong></td>
+                            <td>1.0 m</td>
+                            <td>IS 1080 (Clause 6.2)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minimum Thickness of Footing</strong></td>
+                            <td>150 mm (on soil)<br>300 mm (on piles)</td>
+                            <td>IS 456 (Clause 34.1.2)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minimum Grade of Concrete</strong></td>
+                            <td>M20 (for Mild exposure)</td>
+                            <td>IS 456 (Table 4)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clear Cover to Reinforcement</strong></td>
+                            <td>50 mm</td>
+                            <td>IS 456 (Clause 26.4.2.2)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minimum Percentage of Steel</strong></td>
+                            <td>0.15% (Mild Steel)<br>0.12% (HYSD Steel)</td>
+                            <td>IS 456 (Clause 26.5.2.1)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minimum Spacing Between Bars</strong></td>
+                            <td>150 mm or 6"</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section id="design-steps">
+                <h2>Design Steps for Isolated Footing of Uniform Depth</h2>
+                
+                <div class="step-card">
+                    <h3>Step 1: Determine the Size of the Footing</h3>
+                    <ol>
+                        <li><strong>Total Load:</strong>
+                            <ul>
+                                <li>Let \( W \) = Load on the column</li>
+                                <li>Self-weight of footing, \( W_1 = 0.1W \) (Assumed as 10% of W)</li>
+                                <li>Total Load \( = W + W_1 \)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Factored Load:</strong>
+                            <div class="formula">
+                                Factored Load = 1.5 × (W + W₁)
+                            </div>
+                        </li>
+                        <li><strong>Ultimate Bearing Capacity:</strong>
+                            <div class="formula">
+                                q<sub>ult</sub> = 2 × Safe Bearing Capacity (SBC) of Soil
+                            </div>
+                        </li>
+                        <li><strong>Area of Footing:</strong>
+                            <div class="formula">
+                                A = Factored Load / q<sub>ult</sub> = 1.5 × (W + W₁) / (2 × SBC)
+                            </div>
+                            For a square footing of side \( B \):
+                            <div class="formula">
+                                B = √A
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 2: Find Net Upward Ultimate Soil Pressure</h3>
+                    <p>The weight of the footing is not included for shear and moment calculations.</p>
+                    <div class="formula">
+                        p<sub>u</sub> = (1.5 × W) / (B × B)
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 3: Find Depth of Footing from Bending Moment</h3>
+                    <ol>
+                        <li><strong>Critical Section:</strong> At the face of the column</li>
+                        <li><strong>Bending Moment (B.M.):</strong>
+                            <div class="formula">
+                                M<sub>u</sub> = p<sub>u</sub> × (B / 8) × (B - b)<sup>2</sup>
+                            </div>
+                            where \( b \) is the width of the square column
+                        </li>
+                        <li><strong>Calculate Effective Depth (d):</strong>
+                            <ul>
+                                <li>Use the limiting moment of resistance formula for a singly reinforced section:
+                                    <ul>
+                                        <li>For Fe 250: \( M_u = 0.148 f_{ck} B d^2 \)</li>
+                                        <li>For Fe 415: \( M_u = 0.138 f_{ck} B d^2 \)</li>
+                                        <li>For Fe 500: \( M_u = 0.133 f_{ck} B d^2 \)</li>
+                                    </ul>
+                                </li>
+                                <li>The calculated depth must be increased if required to satisfy shear checks</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <div class="note">
+                        <strong>Note:</strong> Provide a minimum thickness of 150 mm.
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 4: Calculate the Area of Steel Required</h3>
+                    <ol>
+                        <li><strong>Main Reinforcement:</strong>
+                            <p>Solve for \( A_{st} \) using:</p>
+                            <div class="formula">
+                                M<sub>u</sub> = 0.87 f<sub>y</sub> A<sub>st</sub> [d - (f<sub>y</sub> A<sub>st</sub> / (f<sub>ck</sub> B))]
+                            </div>
+                        </li>
+                        <li><strong>Check Minimum Steel:</strong>
+                            <div class="formula">
+                                A<sub>st,min</sub> = 0.0012 × B × d (For HYSD bars)
+                            </div>
+                        </li>
+                        <li><strong>Distribution:</strong> Reinforcement is uniformly distributed over the entire width in both directions</li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 5: Check for One-Way Shear (Beam Shear)</h3>
+                    <ol>
+                        <li><strong>Critical Section:</strong> Located at a distance \( d \) from the face of the column</li>
+                        <li><strong>Shear Force (\( V_u \)):</strong>
+                            <div class="formula">
+                                V<sub>u</sub> = p<sub>u</sub> × B × [ (B - b)/2 - d ]
+                            </div>
+                        </li>
+                        <li><strong>Nominal Shear Stress (\( \tau_v \)):</strong>
+                            <div class="formula">
+                                τ<sub>v</sub> = V<sub>u</sub> / (B × d)
+                            </div>
+                        </li>
+                        <li><strong>Shear Strength Check:</strong>
+                            <ul>
+                                <li>Find \( p = (100 × A<sub>st</sub>) / (B × d) \)</li>
+                                <li>Obtain design shear strength \( \tau_c \) from IS 456 (Table 11.1)</li>
+                                <li>Check: \( \tau_v < \tau_c \)</li>
+                                <li>Also ensure \( \tau_v < \tau_{c,\max} \) (Table 11.3)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <div class="note">
+                        <strong>Note:</strong> Shear reinforcement is generally not provided in isolated footings.
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 6: Check for Two-Way Shear (Punching Shear)</h3>
+                    <ol>
+                        <li><strong>Critical Section:</strong> Located at a distance \( d/2 \) from the periphery of the column</li>
+                        <li><strong>Factored Shear Force (\( V_u \)):</strong>
+                            <div class="formula">
+                                V<sub>u</sub> = p<sub>u</sub> [ B² - (b + d)² ]
+                            </div>
+                        </li>
+                        <li><strong>Perimeter of Critical Section (\( b_0 \)):</strong>
+                            <div class="formula">
+                                b<sub>0</sub> = 4(b + d)
+                            </div>
+                        </li>
+                        <li><strong>Nominal Shear Stress (\( \tau_v \)):</strong>
+                            <div class="formula">
+                                τ<sub>v</sub> = V<sub>u</sub> / (b<sub>0</sub> × d)
+                            </div>
+                        </li>
+                        <li><strong>Permissible Shear Stress (\( \tau_c \)):</strong>
+                            <div class="formula">
+                                τ<sub>c</sub> = k<sub>s</sub> × 0.25 √f<sub>ck</sub>
+                            </div>
+                            where \( k_s = 0.5 + \beta \le 1 \) and \( \beta \) is the ratio of the shorter to longer side of the column
+                        </li>
+                        <li><strong>Check:</strong> \( \tau_v < \tau_c \)</li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 7: Check for Development Length</h3>
+                    <ol>
+                        <li><strong>Critical Section:</strong> Along the face of the column</li>
+                        <li><strong>Development Length (\( L_d \)):</strong>
+                            <div class="formula">
+                                L<sub>d</sub> = (87 f<sub>y</sub> φ) / (4 τ<sub>bd</sub>)
+                            </div>
+                            where \( \tau_{bd} \) is the design bond stress from IS 456 (Table 11.5)
+                        </li>
+                        <li><strong>Available Embedment Length:</strong>
+                            <div class="formula">
+                                L<sub>available</sub> = (B - b) / 2
+                            </div>
+                        </li>
+                        <li><strong>Check:</strong> \( L_{available} > L_d \)</li>
+                    </ol>
+                </div>
+                
+                <div class="step-card">
+                    <h3>Step 8: Summary and Sketch</h3>
+                    <ul>
+                        <li>Prepare a detailed summary of all final dimensions and reinforcement details</li>
+                        <li>Draw a neat structural sketch showing the plan and section of the footing with all critical dimensions and reinforcement</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Structural Engineering Design Reference | Based on IS Codes</p>
+        </footer>
+    </div>
+</body>
+</html>
