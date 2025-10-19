@@ -7,4 +7,10 @@
 | Wall Footing    | Used to support load-bearing walls |<img width="448" height="312" alt="image" src="https://github.com/user-attachments/assets/e48ab74d-5555-4a7c-85d4-5b63505b2a75" />|
 | Stepped Footing | Suitable where soil has low bearing capacity or for heavier loads |<img width="296" height="251" alt="image" src="https://github.com/user-attachments/assets/b6b6c6f0-39b6-42e0-99f4-097d7a279b38" />|
 
-## [Isolated Square Footing](Isolated_Footing(1)_(1).html)
+## Design steps
+
+### [Isolated Square Footing](Isolated_Footing(1)_(1).html)
+
+## Design Calculator
+
+### Isolated Footing
