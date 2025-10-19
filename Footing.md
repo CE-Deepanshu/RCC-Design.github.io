@@ -10,7 +10,3 @@
 ## Design steps
 
 ### [Isolated Square Footing](Isolated_Footing(1)_(1).html)
-
-## Design Calculator
-
-### [Isolated Footing](footing.py)
