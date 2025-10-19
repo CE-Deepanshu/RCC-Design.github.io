@@ -13,4 +13,4 @@
 
 ## Design Calculator
 
-### Isolated Footing
+### [Isolated Footing](footing.py)
