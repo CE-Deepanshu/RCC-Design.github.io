@@ -1,4 +1,4 @@
-## DESIGN OF FOOTINGS
+# DESIGN OF FOOTINGS
 
 | Type of Footing | Suitability | Image |
 |-----------------|-------------|-------|
@@ -7,4 +7,4 @@
 | Wall Footing    | Used to support load-bearing walls | ![Wall Footing](footing-types.png) |
 | Stepped Footing | Suitable where soil has low bearing capacity or for heavier loads | ![Stepped Footing](footing-types.png) |
 
-# Isolated Square Footing
+## Isolated Square Footing
