@@ -1,9 +1,11 @@
 RCC-Design.github.io
 
-# 🏗️ RCC Design Guide 
+# 🏗️ RCC DESIGN GUIDE 
 
 A structured repository dedicated to the design methodologies of **Reinforced Cement Concrete (RCC)** structural elements, tailored for undergraduate civil engineering students.  
 This guide emphasizes **manual design steps** based on **IS code provisions**, helping learners understand the logic behind structural design without relying on calculators or software tools.
+
+[Contents](#) | [Syllabus](#) | [Guidelines](#) | [IS Codes](#) | [Contact](#)
 
 <img width="1024" height="1024" alt="ChatGPT Image Sep 26, 2025, 08_53_18 PM" src="https://github.com/user-attachments/assets/13735fe4-4976-4555-a101-5a66a6b3c5f1" />
 
