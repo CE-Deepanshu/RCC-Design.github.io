@@ -128,7 +128,7 @@ Ensures structure performs satisfactorily during its use without discomfort or d
 
 | **Working Stress Method** | **Limit State Method** |
 |---------------------------|------------------------|
-| It is based on IS: 800 – 1984. | It is based on IS: 800 – 2007. |
+| It is published in IS: 456 - 1978, 800 – 1984. | It is published in IS: 456 - 2000, 800 – 2007. |
 | It is called an Allowable Stress Method (ASM) or Elastic Design Method. | It is also called a Plastic Design Method. |
 | Allowable stress is within its range of elastic limit. | Partial Safety Factor (γmo) is used for Yield Stress and Partial Safety Factor (γm1) is used for Ultimate Stress. |
 | Analysis of the structure is done by the working load. | Working load is factorized by partial safety factor (YF). Analysis of structure is done by factored load. |
