@@ -19,4 +19,4 @@
 
 # Design Steps
 
-## [Singly Reinforced Beams](deepseek_html_20250925_391524.html)
+## [Singly Reinforced Beams(Simply Supported)](deepseek_html_20250925_391524.html)
