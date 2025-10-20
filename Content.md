@@ -39,19 +39,19 @@ This repository covers essential design workflows for major RCC components, foll
 
 ---
 
-**⚠️ Disclaimer**:
+## ⚠️ Disclaimer:
 
 This repository contains only the design steps for RCC structural components.
 It does not include the underlying concepts, derivations, theories, or methodologies used to obtain these steps.
 
 Users are advised to refer to relevant design codes, textbooks, and verified technical references for:
 
-Theoretical background
+**Theoretical background**
 
-Derivation of formulas
+**Derivation of formulas**
 
-Assumptions and limitations
+**Assumptions and limitations**
 
-Detailed design methodology
+**Detailed design methodology**
 
-The content provided here is not a substitute for professional judgment, academic learning, or code-compliant design procedures. Use the material responsibly and at your own discretion.
+The content provided here is not a substitute for professional judgment, academic learning, or code-compliant design procedures. Use the material responsibly and at your own risk.
