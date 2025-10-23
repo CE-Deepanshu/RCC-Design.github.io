@@ -194,11 +194,8 @@
                     Total live load = <span class="input-field">___ kN/m</span><br>
                     Total factored live load, Wu, LL = 1.5 × LL = <span class="input-field">___ kN/m</span>
                 </div>
-        
-        <!-- Step 4 -->
-        <div class="step-box">
-            <h2 class="step-title">Step 4: Calculation of Moment & Shear Force</h2>
-            <p class="clause">Read Clause 22.5: Moment and Shear Coefficients for Continuous Beams for calculation of Moment and Shear Force in a continuous beam</p>
+                
+                <p class="clause">Read Clause 22.5: Moment and Shear Coefficients for Continuous Beams for calculation of Moment and Shear Force in a continuous beam</p>
                 
                 <h3>22.5 Moment and Shear Coefficients for Continuous Beams</h3>
                 <p><strong>22.5.1</strong> Unless more exact estimates are made, for beams of uniform cross-section which support substantially uniformly distributed loads over three or more spans which do not differ by more than 15 percent of the longest, the bending moments and shear forces used in design may be obtained using the coefficients given in Table 12 and Table 13 respectively.</p>
@@ -206,6 +203,10 @@
                 <p>Where coefficients given in Table 12 are used for calculation of bending moments, redistribution referred to in 22.7 shall not be permitted.</p>
             </div>
         </div>
+        
+        <!-- Step 4 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 4: Calculation of Moment & Shear Force</h2>
             <div class="step-content">
                 <h3>Moment</h3>
                 <p class="note">The Coefficients in Table 12 are applicable to cases of:</p>
@@ -295,44 +296,19 @@
         
         <!-- Step 5 -->
         <div class="step-box">
-        <h2><span class="step-title">5</span> Design as Balanced Section/ Check for Depth</h2>
+            <h2 class="step-title">Step 5: Check for Depth</h2>
             <div class="step-content">
-        <p>The beam section is designed as a balanced section. Equate M<sub>u</sub> to M<sub>u,lim</sub> and find the effective depth of beam.</p>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Steel Grade</th>
-                    <th>Limiting Moment Formula</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Fe 250</td>
-                    <td><span class="formula">M<sub>u,lim</sub> = 0.148 f<sub>ck</sub> b d<sup>2</sup></span></td>
-                </tr>
-                <tr>
-                    <td>Fe 415</td>
-                    <td><span class="formula">M<sub>u,lim</sub> = 0.138 f<sub>ck</sub> b d<sup>2</sup></span></td>
-                </tr>
-                <tr>
-                    <td>Fe 500</td>
-                    <td><span class="formula">M<sub>u,lim</sub> = 0.133 f<sub>ck</sub> b d<sup>2</sup></span></td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <p>Compute depth (d) with the assumed depth:</p>
-        <ul>
-            <li>If calculated depth ≤ assumed depth, proceed with design</li>
-            <li>If calculated depth > assumed depth, increase beam depth and recalculate</li>
-        </ul>
-        <p>Recalculate self weight and factored moment based on revised depth.</p>
-    </div>
+                <div class="formula">
+                    Max factored Bending moment, Mu = <span class="input-field">___ kNm</span><br>
+                    Limiting Moment of Resistance, Mu, lim = <span class="input-field">___ kN</span>
+                </div>
+                <p class="highlight">d calculated < d provided</p>
+            </div>
+        </div>
         
         <!-- Step 6 -->
         <div class="step-box">
-            <h2> class="step-title">Step 6: Computation of Steel Required</h2>
+            <h2 class="step-title">Step 6: Computation of Steel Required</h2>
             <div class="step-content">
                 <div class="formula">
                     Ast, required = 0.5 × fck/fy × [1 - √(1-4.6×Mu/(fck×b×d²))] × b×d²
