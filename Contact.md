@@ -1,6 +1,6 @@
-## 📬 Contact
+# 📬 CONTACT
 
-**Created by:** Deepanshu  
+**Creator:** Deepanshu  
 
 **Email:** deepanshurathore634@gmail.com
 
