@@ -325,10 +325,13 @@
             </tbody>
         </table>
                     
-                </div>
-                <p class="highlight">d calculated < d provided</p>
-            </div>
-        </div>
+               <p>Compare depth (d) with the assumed depth:</p>
+        <ul>
+            <li>If calculated depth ≤ assumed depth, proceed with design</li>
+            <li>If calculated depth > assumed depth, increase beam depth and recalculate</li>
+        </ul>
+        <p>Recalculate self weight and factored moment based on revised depth.</p>
+    </div>
         
         <!-- Step 6 -->
         <div class="step-box">
