@@ -1,4 +1,6 @@
-# ✅ Design Methodologies in Structural Engineering
+# METHODOLOGY
+
+### ✅ Design Methodologies in Structural Engineering
 
 ## 1. **Working Stress Method (WSM)**
 
@@ -7,14 +9,14 @@ Also known as:
 - **Modulus Ratio Method**
 - **Factor of Safety Method**
 
-### 🔹 Key Assumptions & Principles
+#### 🔹 Key Assumptions & Principles
 - Structural materials behave **elastically** under working (service) loads.  
 - Stress remains within **permissible limits** using a **factor of safety**.
 - Cross-sections are designed such that:  
   **Developed Stress < Permissible Stress**
 - Allowable stress lies in the **elastic range**, below the **yield stress**.
 
-### 🔹 Design Parameters
+#### 🔹 Design Parameters
 - **Allowable stress** = `0.6 f_y`
 - **Design load (RCC)** = Working/Service load
 - **Permissible stress:**  
@@ -25,14 +27,14 @@ Also known as:
 **Example (M20 Concrete):**  
 - \( f_{ck} = 20 \, \text{MPa} \)
 
-### 🔹 Factors of Safety
+#### 🔹 Factors of Safety
 
 | Material  | Factor of Safety |
 |-----------|------------------|
 | Concrete  | 3.0              |
 | Steel     | 1.78             |
 
-### 🔹 Additional Notes
+#### 🔹 Additional Notes
 - Based on **uniqueness theory** (experience-based).
 - Considers the **lower bound theorem**.
 - **Serviceability is not addressed** in this method.
@@ -45,26 +47,26 @@ Also called:
 - **Plastic Design Method**
 - **Ultimate Load Method**
 
-### 🔹 Design Load in RCC
+#### 🔹 Design Load in RCC
 \[
 \text{Design Load} = \text{Working/Service Load} \times \text{Load Factor}
 \]
 
 - Load factor depends on **working conditions**.
 
-### 🔹 Design Stress
+#### 🔹 Design Stress
 \[
 \text{Design Stress} = \frac{\text{Characteristic Strength}}{\text{Factor of Safety}}
 \]
 
-### 🔹 Material Factors of Safety (Beams)
+#### 🔹 Material Factors of Safety (Beams)
 
 | Material  | Factor of Safety |
 |-----------|------------------|
 | Concrete  | 1.5              |
 | Steel     | 1.15             |
 
-### 🔹 Theoretical Basis
+#### 🔹 Theoretical Basis
 - **Upper Bound Theorem** → used for determining collapse load  
 - **Lower Bound Theorem** → used for material strength  
 - **Serviceability not considered**, which reduced usage
@@ -75,7 +77,7 @@ Also called:
 
 A modern and advanced philosophy that considers both **safety** and **serviceability**.
 
-### 🔹 Comparison with Other Methods
+#### 🔹 Comparison with Other Methods
 
 | Method                | Basis of Design Load |
 |-----------------------|------------------------|
@@ -83,14 +85,14 @@ A modern and advanced philosophy that considers both **safety** and **serviceabi
 | Ultimate Load Method  | Ultimate/Collapse Load |
 | Limit State Method    | Working Load (for Safety & Serviceability) |
 
-### 🔹 What is a Limit State?
+#### 🔹 What is a Limit State?
 A **limit state** is the **acceptable threshold** beyond which a structure no longer satisfies safety or serviceability requirements.
 
 ---
 
-## ✅ Types of Limit States
+### ✅ Types of Limit States
 
-### 🛡️ A. Limit State of Strength
+#### 🛡️ A. Limit State of Strength
 Ensures safety against **structural failure** and **loss of life/property** under worst load combinations.
 
 **Major Types:**
@@ -102,7 +104,7 @@ Ensures safety against **structural failure** and **loss of life/property** unde
 
 ---
 
-### 🏠 B. Limit State of Serviceability
+#### 🏠 B. Limit State of Serviceability
 Ensures structure performs satisfactorily during its use without discomfort or damage.
 
 #### 🔧 Major Serviceability Criteria
@@ -117,7 +119,7 @@ Ensures structure performs satisfactorily during its use without discomfort or d
 
 ---
 
-### 🌱 Durability & Sustainability Factors
+#### 🌱 Durability & Sustainability Factors
 - Environmental conditions  
 - Degree of exposure  
 - Shape of members  
