@@ -1,332 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design of Continous Beam</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Times New Roman", serif !important;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #1a3a5f, #2c5282);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        section {
-            margin-bottom: 40px;
-        }
-        
-        h2 {
-            color: #2c5282;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-        }
-        
-        h3 {
-            color: #2d3748;
-            margin: 25px 0 15px;
-            font-size: 1.4rem;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background-color: #2c5282;
-            color: white;
-            text-align: left;
-            padding: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #f7fafc;
-        }
-        
-        .step-card {
-            background-color: #f7fafc;
-            border-left: 4px solid #2c5282;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .formula {
-            background-color: #edf2f7;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            text-align: center;
-            border-left: 3px solid #2c5282;
-        }
-        
-        .note {
-            background-color: #fffaf0;
-            border-left: 4px solid #ecc94b;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        ul, ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .variables {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .variable-item {
-            background-color: #edf2f7;
-            padding: 12px;
-            border-radius: 5px;
-            border-left: 3px solid #2c5282;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1a202c;
-            color: white;
-            margin-top: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                border-radius: 0;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Design of Continuous Beam</title>
+  <style>
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background: linear-gradient(to bottom right, #f0f4f8, #dbe9f4);
+      color: #222;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #003366;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .formula {
+      background-color: #fff;
+      border: 2px solid #003366;
+      padding: 10px;
+      margin: 10px 0;
+      font-family: "Courier New", Courier, monospace;
+      white-space: pre-wrap;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #003366;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #e6f2ff;
+    }
+    ul {
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-<head>
-    <meta charset="UTF-8">
-    <title>Design of Continuous Beam</title>
-</head>
-<body>
+<header>
+<h1>Design of Continuous Beam</h1>
 
-<h2>Design of Continuous Beam</h2>
+<div class="section">
+    
+  <h2>Step 1: Depth of Beam</h2>
+  <p>Clear span of beam = ___ mm</p>
+  <p>Effective depth of beam, d = span / 12</p>
+  <p>Assume clear cover of beam, c = ___ mm</p>
+  <p>Assume diameter of bar in tension, ø = ___ mm</p>
+  <div class="formula">Overall depth, D = d + c + ø/2</div>
+</div>
 
-<h3>Step 1: Depth of Beam</h3>
-<ul>
-    <li>Clear span of beam = ___ mm</li>
-    <li>Effective depth of beam, d = span / 10-15</li>
-    <li>Eff. depth of beam, d = span / 12</li>
-    <li>Assume clear cover of beam, c = ___ mm</li>
-    <li>Refer to table No. 16 for clear cover as per exposure condition</li>
-    <li>Assume dia. of bar in tension, ø = ___ mm (generally near 20 mm)</li>
-    <li>Overall depth, D = d + c + ø/2 = ___ mm</li>
-</ul>
-
-<h3>Step 2: Effective Span</h3>
-<p>Refer to IS 456 Clause 22.2 (b):</p>
-<ul>
-    <li>If the width of the support is &lt; 1/12 of the clear span, use Clause 22.2(a).</li>
-    <li>If support &gt; 1/12 of clear span or 600 mm (whichever is less):</li>
+<div class="section">
+  <h2>Step 2: Effective Span</h2>
+  <p><strong>Clause 22.2(b):</strong> Effective span depends on support width:</p>
+  <ul>
+    <li>If support width < 1/12 of clear span → use Clause 22.2(a)</li>
+    <li>If support width > 1/12 of clear span or 600 mm (whichever is less):</li>
     <ul>
-        <li>End span (one end fixed, other continuous) or intermediate spans: Effective span = clear span between supports.</li>
-        <li>End span (one end free, other continuous): Effective span = clear span + 0.5 × effective depth or clear span + 0.5 × width of discontinuous support, whichever is less.</li>
-        <li>Spans with roller/rocker bearings: Effective span = distance between centres of bearings.</li>
+      <li>End span (fixed-continuous) or intermediate → span = clear span</li>
+      <li>End span (free-continuous) → span = clear span + ½ × effective depth or ½ × width of discontinuous support (whichever is less)</li>
+      <ul>
+        <li>Spans with roller/rocker bearings → span = distance between centres of bearings</li>
     </ul>
-</ul>
+  </ul>
+</div>
 
-<h3>Step 3: Calculation of Load</h3>
-<ul>
-    <li>Dead load (DL)
-        <ul>
-            <li>Self weight of the beam = 25 × D / 1000 × b / 1000 × 1</li>
-            <li>+ Superimposed dead load (if any)</li>
-            <li>Total factored dead load, Wu, DL = 1.5 × DL = KN/m</li>
-        </ul>
-    </li>
-    <li>Live load (LL):<br>
-        Total live load = LL<br>
-        Total factored live load, Wu, LL = 1.5 × LL = KN/m
-    </li>
-</ul>
-<p>Read Clause 22.5: Moment and Shear Coefficients for Continuous Beams.</p>
+<div class="section">
+  <h2>Step 3: Load Calculation</h2>
+  <p><strong>Dead Load (DL):</strong></p>
+  <div class="formula">Self weight = 25 × D/1000 + b/1000 × 1</div>
+  <p>+ Superimposed dead load (if any)</p>
+  <div class="formula">Wu_DL = 1.5 × DL</div>
 
-<h3>Step 4: Calculation of Moment & Shear Force</h3>
-<p>For beams with three or more spans (not differing by more than 15% of the longest), use coefficients from IS 456 Table 12 (Bending Moments) and Table 13 (Shear Forces):</p>
+  <p><strong>Live Load (LL):</strong></p>
+  <div class="formula">Wu_LL = 1.5 × LL</div>
+</div>
 
-<h4>Table 12: Bending Moment Coefficients (Clause 22.5.1)</h4>
-<table border="1">
+<div class="section">
+  <h2>Step 4: Moment & Shear Force</h2>
+  <p><strong>Moment:</strong></p>
+  <div class="formula">Mu = Coeff_DL × (Wu_DL × l²) + Coeff_LL × (Wu_LL × l²)</div>
+
+  <h3>Table 12: Bending Moment Coefficients</h3>
+  <table>
     <tr>
-        <th>Type of Load</th>
-        <th>Near Middle of End Span</th>
-        <th>At Middle of Interior Span</th>
-        <th>At Support Next to End Support</th>
-        <th>At Other Interior Supports</th>
+      <th>Type of Load</th>
+      <th>End Span</th>
+      <th>Interior Span</th>
+      <th>Next to End Support</th>
+      <th>Other Interior Supports</th>
     </tr>
     <tr>
-        <td>Dead load & imposed load (fixed)</td>
-        <td>+1/12</td>
-        <td>+1/16</td>
-        <td>-1/10</td>
-        <td>-1/12</td>
+      <td>Dead + Imposed (Fixed)</td>
+      <td>+1/12</td>
+      <td>+1/16</td>
+      <td>−1/10</td>
+      <td>−1/12</td>
     </tr>
     <tr>
-        <td>Imposed load (not fixed)</td>
-        <td>+1/10</td>
-        <td>+1/12</td>
-        <td>-1/9</td>
-        <td>-1/9</td>
+      <td>Imposed (Not Fixed)</td>
+      <td>+1/10</td>
+      <td>+1/12</td>
+      <td>−1/9</td>
+      <td>−1/9</td>
     </tr>
-</table>
-<p>To obtain the bending moment, multiply the coefficient by the total design load and effective span.</p>
+  </table>
 
-<h4>Shear Force Calculation</h4>
-<ul>
-    <li>Vu = Coefficient.DL × (Wu, DL × l) + Coefficient.LL × (Wu, LL × l)</li>
-</ul>
+  <p><strong>Shear Force:</strong></p>
+  <div class="formula">Vu = Coeff_DL × (Wu_DL × l) + Coeff_LL × (Wu_LL × l)</div>
 
-<h4>Table 13: Shear Force Coefficients (Clauses 22.5.1, 22.5.2)</h4>
-<table border="1">
+  <h3>Table 13: Shear Force Coefficients</h3>
+  <table>
     <tr>
-        <th>Type of Load</th>
-        <th>At End Support</th>
-        <th>At Support Next to End Support (Outer)</th>
-        <th>At Support Next to End Support (Inner)</th>
-        <th>All Other Interior Supports</th>
+      <th>Type of Load</th>
+      <th>End Support</th>
+      <th>Outer Side of Next Support</th>
+      <th>Inner Side of Next Support</th>
+      <th>Other Interior Supports</th>
     </tr>
     <tr>
-        <td>Dead load & imposed load (fixed)</td>
-        <td>0.4</td>
-        <td>0.6</td>
-        <td>0.55</td>
-        <td>0.5</td>
+      <td>Dead + Imposed (Fixed)</td>
+      <td>0.4</td>
+      <td>0.6</td>
+      <td>0.55</td>
+      <td>0.5</td>
     </tr>
     <tr>
-        <td>Imposed load (not fixed)</td>
-        <td>0.45</td>
-        <td>0.6</td>
-        <td>0.6</td>
-        <td>0.6</td>
+      <td>Imposed (Not Fixed)</td>
+      <td>0.45</td>
+      <td>0.6</td>
+      <td>0.6</td>
+      <td>0.6</td>
     </tr>
-</table>
-<p>For shear force, multiply the coefficient by the total design load.</p>
+  </table>
+</div>
 
-<h3>Step 5: Check for Depth</h3>
-<ul>
-    <li>Max factored Bending Moment, Mu = KNm</li>
-    <li>Limiting Moment of Resistance, Mu, lim = KN</li>
-    <li>If d<sub>calculated</sub> &lt; d<sub>provided</sub></li>
-</ul>
+<div class="section">
+  <h2>Step 5: Depth Check</h2>
+  <div class="formula">Mu = ___ kNm</div>
+  <div class="formula">Mu_lim = ___ kNm</div>
+  <p>Check: d_calculated &lt; d_provided</p>
+</div>
 
-<h3>Step 6: Computation of Steel Required</h3>
-<ul>
-    <li>Ast, required = 0.5 × f<sub>ck</sub> / f<sub>y</sub> × [1 - √(1-4.6×Mu / f<sub>ck</sub>×b×d²)] × b×d²</li>
-    <li>Check for steel: Ast, min = (0.85 × b × d) / f<sub>y</sub></li>
-    <li>Assume dia. of bars generally 20mm</li>
-    <li>Area of 1-φ bar = (π× φ²) / 4 = ____ mm²</li>
-    <li>No. of bars = (Ast, provided) / (Area of 1-φ bar) = ____ no.</li>
-</ul>
+<div class="section">
+  <h2>Step 6: Steel Requirement</h2>
+  <div class="formula">Ast_required = 0.5 × fck / fy × [1 − √(1 − 4.6 × Mu / fck × b × d²)] × b × d²</div>
+  <div class="formula">Ast_min = (0.85 × b × d) / fy</div>
+  <div class="formula">Area of 1-φ bar = (π × φ²) / 4</div>
+  <div class="formula">No. of bars = Ast_provided / Area of 1-φ bar</div>
+</div>
 
-<h3>Step 7: Check for Shear</h3>
-<ul>
-    <li>T<sub>v</sub> = V<sub>u</sub> / (b·d) = _____ N/mm²</li>
-    <li>If τ<sub>v</sub> &gt; τ<sub>c,max</sub>, calculate
-        <ul>
-            <li>Design Shear strength: % area of Steel, P<sub>t</sub> = (100 × Ast) / (b·d)</li>
-            <li>For given concrete grade, calculate τ<sub>c</sub></li>
-            <li>For % area and grade, compute τ<sub>c,max</sub> (N/mm²)</li>
-        </ul>
-    </li>
-    <li>Check τ<sub>c</sub> &lt; τ<sub>c,max</sub></li>
-    <li>If τ<sub>v</sub> &gt; τ<sub>c</sub>, then design for shear stress is required.<br>
-        For vertical stirrups (clause 40.4 (a)):
-        <ul>
-            <li>V<sub>us</sub> = V<sub>u</sub> – τ<sub>c</sub>.b.d = ______ N</li>
-            <li>Asv = 2 (legs) × π × φ² [dia. of stirrup] / 4</li>
-            <li>Sv = 0.87.f<sub>ck</sub> × Asv × d / V<sub>us</sub> = ______ mm (1)</li>
-        </ul>
-    </li>
-    <li>Maximum stirrup spacing permitted (Min. of the following):
-        <ul>
-            <li>Sv ≠ 0.75d (2)</li>
-            <li>Sv ≠ 300mm (3)</li>
-        </ul>
-    </li>
-</ul>
+<div class="section">
+  <h2>Step 7: Shear Check</h2>
+  <div class="formula">τv = Vu / (b × d)</div>
+  <p>Check: τv &gt; τcmax</p>
+  <div class="formula">Pt = (100 × Ast) / (b × d)</div>
+  <div class="formula">Tc = ___ N/mm²</div>
+  <div class="formula">τc_max = ___ N/mm²</div>
+  <p>Check: τc < τc_max</p>
+  <p>Check: τv < τc → If not, design for shear stress is required</p>
 
-<h3>Step 8: Summary & Sketch</h3>
-<ul>
-    <li>Write detailed summary</li>
-    <li>Draw a neat sketch</li>
-</ul>
+  <h3>For Vertical Stirrups (Clause 40.4(a))</h3>
+  <div class="formula">Vus = Vu − τc × b × d</div>
+  <div class="formula">Asv = 2 × π × φ² / 4</div>
+  <div class="formula">Sv = 0.87 × fck × Asv × d / Vus</div>
+
+  <h3>Max Stirrup Spacing (Clause 26.5.1.5)</h3>
+  <ul>
+    <li>Sv ≤ 0.75d</li>
+    <li>Sv ≤ 300 mm</li>
+  </ul>
+  <p><strong>Max spacing permitted = Minimum of above</strong></p>
+</div>
+
+<div class="section">
+  <h2>Step 8: Summary and Sketch</h2>
+  <p>Write a detailed summary and draw a neat sketch of the beam with reinforcement layout.</p>
+</div>
 
 </body>
 </html>
