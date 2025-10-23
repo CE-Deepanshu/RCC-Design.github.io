@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: "Times New Roman", Times, serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    h2 {
+      border-bottom: 2px solid #000;
+      padding-bottom: 5px;
+    }
+    .formula {
+      border: 1px solid #333;
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin: 10px 0;
+      font-family: "Courier New", Courier, monospace;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 15px 0;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    .note {
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Design of Continuous Beam</h2>
+
+<h3>Step 1: Depth of Beam</h3>
+<p>Clear span of beam = ___ mm</p>
+<p>Effective depth of beam, d = span / 12</p>
+<p>Assume clear cover of beam, c = ___ mm</p>
+<p>Assume diameter of bar in tension, ø = ___ mm</p>
+<div class="formula">Overall depth of beam, D = d + c + ø/2</div>
+
+<h3>Step 2: Effective Span</h3>
+<p>Refer to Clause 22.2(b)</p>
+
+<h3>Step 3: Calculation of Load</h3>
+<p><strong>Dead Load (DL)</strong></p>
+<div class="formula">Self weight of beam = 25 × D/1000 × b/1000 × 1</div>
+<p>+ Superimposed dead load (if any)</p>
+<div class="formula">Total factored dead load, Wu_DL = 1.5 × DL</div>
+
+<p><strong>Live Load (LL)</strong></p>
+<div class="formula">Total factored live load, Wu_LL = 1.5 × LL</div>
+
+<h3>Step 4: Calculation of Moment & Shear Force</h3>
+<p><strong>Moment</strong></p>
+<div class="formula">Mu = Coeff_DL × (Wu_DL × l²) + Coeff_LL × (Wu_LL × l²)</div>
+
+<p><strong>Shear Force</strong></p>
+<div class="formula">Vu = Coeff_DL × (Wu_DL × l) + Coeff_LL × (Wu_LL × l)</div>
+
+<h4>Table 12: Bending Moment Coefficients</h4>
+<table>
+  <tr>
+    <th>Type of Load</th>
+    <th>Near Middle of End Span</th>
+    <th>Middle of Interior Span</th>
+    <th>Support Next to End Support</th>
+    <th>Other Interior Supports</th>
+  </tr>
+  <tr>
+    <td>Dead + Imposed (Fixed)</td>
+    <td>+1/12</td>
+    <td>+1/16</td>
+    <td>−1/10</td>
+    <td>−1/12</td>
+  </tr>
+  <tr>
+    <td>Imposed (Not Fixed)</td>
+    <td>+1/10</td>
+    <td>+1/12</td>
+    <td>−1/9</td>
+    <td>−1/9</td>
+  </tr>
+</table>
+
+<h4>Table 13: Shear Force Coefficients</h4>
+<table>
+  <tr>
+    <th>Type of Load</th>
+    <th>End Support</th>
+    <th>Outer Side of Next Support</th>
+    <th>Inner Side of Next Support</th>
+    <th>Other Interior Supports</th>
+  </tr>
+  <tr>
+    <td>Dead + Imposed (Fixed)</td>
+    <td>0.4</td>
+    <td>0.6</td>
+    <td>0.55</td>
+    <td>0.5</td>
+  </tr>
+  <tr>
+    <td>Imposed (Not Fixed)</td>
+    <td>0.45</td>
+    <td>0.6</td>
+    <td>0.6</td>
+    <td>0.6</td>
+  </tr>
+</table>
+
+<h3>Step 5: Check for Depth</h3>
+<div class="formula">Mu = ___ KNm</div>
+<div class="formula">Mu_lim = ___ KNm</div>
+<p>Check: d_calculated &lt; d_provided</p>
+
+<h3>Step 6: Computation of Steel Required</h3>
+<div class="formula">Ast_required = 0.5 × fck / fy × [1 − √(1 − 4.6 × Mu / fck × b × d²)] × b × d²</div>
+<div class="formula">Ast_min = (0.85 × b × d) / fy</div>
+<div class="formula">Area of 1-φ bar = (π × φ²) / 4</div>
+<div class="formula">No. of bars = Ast_provided / Area of 1-φ bar</div>
+
+<h3>Step 7: Check for Shear</h3>
+<div class="formula">Tv = Vu / (b × d)</div>
+<p>Check: τv &gt; τcmax</p>
+<div class="formula">Pt = (100 × Ast) / (b × d)</div>
+<div class="formula">Tc = ___ N/mm²</div>
+<div class="formula">τc_max = ___ N/mm²</div>
+<p>Check: τc &lt; τc_max</p>
+<p>Check: τv &lt; τc → If not, design for shear stress is required</p>
+
+<h4>For Vertical Stirrups (Clause 40.4(a))</h4>
+<div class="formula">Vus = Vu − τc × b × d</div>
+<div class="formula">Asv = 2 × π × φ² / 4</div>
+<div class="formula">Sv = 0.87 × fck × Asv × d / Vus</div>
+
+<h4>Max Stirrup Spacing (Clause 26.5.1.5)</h4>
+<ul>
+  <li>Sv ≤ 0.75d</li>
+  <li>Sv ≤ 300 mm</li>
+</ul>
+<p><strong>Max spacing permitted = Minimum of above</strong></p>
+
+<h3>Step 8: Summary and Sketch</h3>
+<p>Write a detailed summary and draw a neat sketch of the beam with reinforcement layout.</p>
+
+</body>
+</html>
