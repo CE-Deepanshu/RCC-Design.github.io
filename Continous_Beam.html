@@ -5,313 +5,392 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design of Continuous Beam</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #e0f2f1;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #a8d5d8 0%, #b8e6e9 50%, #c8f0f3 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #ffffff;
-            padding: 30px;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #1a5276;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .teal-section {
-            background-color: #008080;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+        
+        .step-box {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #5dade2;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .teal-section h3 {
-            color: #ffffff;
-            border-bottom: 2px solid #ffffff;
+        
+        .step-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-title {
+            font-size: 1.4em;
+            color: #1a5276;
+            margin-bottom: 15px;
             padding-bottom: 10px;
+            border-bottom: 2px solid #5dade2;
+            font-weight: bold;
         }
+        
+        .step-content {
+            font-size: 1.05em;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
         .formula {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 5px;
+            background: #e8f6f3;
+            padding: 10px;
+            border-left: 4px solid #16a085;
             margin: 10px 0;
             font-family: 'Courier New', monospace;
         }
-        .superscript {
-            vertical-align: super;
-            font-size: 0.8em;
+        
+        .clause {
+            background: #fef5e7;
+            padding: 10px;
+            border-left: 4px solid #f39c12;
+            margin: 10px 0;
+            font-style: italic;
         }
-        .fraction {
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-        }
-        .fraction .numerator {
-            border-bottom: 1px solid white;
-            padding: 0 5px;
-        }
-        .fraction .denominator {
-            padding: 0 5px;
-        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            background-color: white;
-            color: #333;
+            margin: 15px 0;
+            background: white;
         }
+        
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            border: 1px solid #5dade2;
+            padding: 10px;
             text-align: left;
         }
+        
         th {
-            background-color: #004d4d;
+            background: #5dade2;
             color: white;
+            font-weight: bold;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        
+        .note {
+            background: #fdebd0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #e67e22;
         }
-        .step {
-            margin-bottom: 30px;
-            padding: 15px;
-            border-left: 4px solid #008080;
-            background-color: #f9f9f9;
-        }
-        .step h2 {
-            color: #008080;
-            margin-top: 0;
-        }
+        
         .highlight {
-            background-color: #ffffcc;
+            background: #d6eaf8;
             padding: 2px 5px;
             border-radius: 3px;
         }
-        .check-item {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .input-field {
+            display: inline-block;
+            border-bottom: 2px dotted #5dade2;
+            min-width: 80px;
+            text-align: center;
+            margin: 0 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Design of Continuous Beam</h1>
+        <h1 class="main-title">Design of Continuous Beam</h1>
         
-        <div class="step">
-            <h2>Step 1. Depth of Beam</h2>
-            <p>Clear span of beam = ___ mm</p>
-            <p>Effective depth of beam, d = <span class="highlight">span to span</span> <span class="fraction"><span class="numerator">10</span><span class="denominator">15</span></span></p>
-            <p>Eff. depth of beam, d = <span class="highlight">span</span> <span class="fraction"><span class="numerator">1</span><span class="denominator">12</span></span></p>
-            <p>Assume clear cover of beam, c = ___ mm</p>
-            <p>(Refer to table No. 16 for clear cover acc. to diff. exposure condition).</p>
-            <p>Assume dia. of bar in tension, ø = ___ mm (generally near 20mm)</p>
-            <p>Overall depth of beam, D = d + c + <span class="fraction"><span class="numerator">ø</span><span class="denominator">2</span></span> = ___ mm</p>
-        </div>
-
-        <div class="step">
-            <h2>Step 2. Effective Span</h2>
-            <p>Refer to clause 22.2 (b)</p>
-            <p>Clause 22.2(b): Effective Span for Continuous Beam or Slab</p>
-            <p>In the case of a continuous beam or slab, the effective span depends on the width of the support:</p>
-            <ul>
-                <li>If the width of the support is less than <span class="fraction"><span class="numerator">1</span><span class="denominator">12</span></span> of the clear span, the effective span shall be as per Clause 22.2(a).</li>
-                <li>If the support is wider than <span class="fraction"><span class="numerator">1</span><span class="denominator">12</span></span> of the clear span or 600 mm, whichever is less, the effective span shall be taken as follows:
-                    <ol>
-                        <li>End span with one end fixed and the other continuous, or intermediate spans:<br>
-                        → Effective span = clear span between supports</li>
-                        <li>End span with one end free and the other continuous:<br>
-                        → Effective span = clear span + <span class="fraction"><span class="numerator">1</span><span class="denominator">2</span></span> × effective depth of beam or slab<br>
-                        → or clear span + <span class="fraction"><span class="numerator">1</span><span class="denominator">2</span></span> × width of discontinuous support<br>
-                        → whichever is less</li>
-                        <li>Spans with roller or rocker bearings:<br>
-                        → Effective span = distance between centres of bearings</li>
-                    </ol>
-                </li>
-            </ul>
-        </div>
-
-        <div class="step">
-            <h2>Step 3. Calculation of Load</h2>
-            <h3>Dead load (DL)</h3>
-            <p>Self wt. of the beam = 25 × <span class="fraction"><span class="numerator">D</span><span class="denominator">1000</span></span> × <span class="fraction"><span class="numerator">b</span><span class="denominator">1000</span></span> × 1 = ___</p>
-            <p>+ Superimposed dead load (if any)</p>
-            <p>Total factored dead load, W<span class="superscript">u</span>, DL = 1.5 × DL = KN/m</p>
-            
-            <h3>Live load (LL)</h3>
-            <p>Total live load = LL</p>
-            <p>Total factored live load, W<span class="superscript">u</span>, LL = 1.5 × LL = KN/m</p>
-            
-            <p>Read Clause 22.5 22.5 Moment and Shear Coefficients for Continuous Beams for calculation of Moment and Shear Force in a continuous beam</p>
-        </div>
-
-        <div class="step">
-            <h2>Step 4. Calculation of Moment & Shear Force</h2>
-            <h3>Moment</h3>
-            <p>Note: The Coefficients in Table 12 are applicable to cases of:</p>
-            <ul>
-                <li>Uniformly loaded beams of uniform section with at least three spans</li>
-                <li>"which do not differ by more than 15% of the longest".</li>
-            </ul>
-            <p>Mathematical conditions:</p>
-            <p>:: (L₁ − L₂) ≯ 15% L₁</p>
-            <p>:: (L₁ − L₃) ≯ 15% L₁</p>
-            <p>M<span class="superscript">u</span> = Coefficient<sub>DL, DL</sub> × (W<span class="superscript">u</span>, DL × l²) + Coefficient<sub>LL, LL</sub> × (W<span class="superscript">u</span>, LL × l²)</p>
-            
-            <h3>Table 12: Bending Moment Coefficients (Clause 22.5.1)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type of Load</th>
-                        <th colspan="2">Span Moments</th>
-                        <th colspan="2">Support Moments</th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th>Near Middle of End Span</th>
-                        <th>At Middle of Interior Span</th>
-                        <th>At Support Next to the End Support</th>
-                        <th>At Other Interior Supports</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dead load and imposed load (fixed)</td>
-                        <td>+<span class="fraction"><span class="numerator">1</span><span class="denominator">12</span></span></td>
-                        <td>+<span class="fraction"><span class="numerator">1</span><span class="denominator">16</span></span></td>
-                        <td>−<span class="fraction"><span class="numerator">1</span><span class="denominator">10</span></span></td>
-                        <td>−<span class="fraction"><span class="numerator">1</span><span class="denominator">12</span></span></td>
-                    </tr>
-                    <tr>
-                        <td>Imposed load (not fixed)</td>
-                        <td>+<span class="fraction"><span class="numerator">1</span><span class="denominator">10</span></span></td>
-                        <td>+<span class="fraction"><span class="numerator">1</span><span class="denominator">12</span></span></td>
-                        <td>−<span class="fraction"><span class="numerator">1</span><span class="denominator">9</span></span></td>
-                        <td>−<span class="fraction"><span class="numerator">1</span><span class="denominator">9</span></span></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3>Shear Force</h3>
-            <p>V<span class="superscript">u</span> = coefficient<sub>DL, DL</sub> × (W<span class="superscript">u</span>, DL × l) + Coefficient<sub>LL, LL</sub> × (W<span class="superscript">u</span>, LL × l)</p>
-            
-            <h3>Table 13: Shear Force Coefficients (Clauses 22.5.1 and 22.5.2)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type of Load</th>
-                        <th>At End Support</th>
-                        <th>At Support Next to the End Support (Outer Side)</th>
-                        <th>At Support Next to the End Support (Inner Side)</th>
-                        <th>At All Other Interior Supports</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dead load and imposed load (fixed)</td>
-                        <td>0.4</td>
-                        <td>0.6</td>
-                        <td>0.55</td>
-                        <td>0.5</td>
-                    </tr>
-                    <tr>
-                        <td>Imposed load (not fixed)</td>
-                        <td>0.45</td>
-                        <td>0.6</td>
-                        <td>0.6</td>
-                        <td>0.6</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="step">
-            <h2>Step 5. Check for Depth</h2>
-            <p>Max factored Bending moment, M<span class="superscript">u</span> = KNm</p>
-            <p>Limiting Moment of Resistance, M<span class="superscript">u</span>, lim = KN</p>
-            <p>d<sub>calculated</sub> < d<sub>provided</sub></p>
-        </div>
-
-        <div class="step">
-            <h2>Step 6. Computation of Steel Required</h2>
-            <p>A<sub>st, required</sub> = 0.5 × <span class="fraction"><span class="numerator">f<sub>ck</sub></span><span class="denominator">f<sub>y</sub></span></span> × [ 1 − √(1−<span class="fraction"><span class="numerator">4.6×M<sub>u</sub></span><span class="denominator">f<sub>ck</sub>×b×d²</span></span>)] × b×d²</p>
-            
-            <h3>Check for Steel</h3>
-            <p>A<sub>st, min</sub> = <span class="fraction"><span class="numerator">0.85 × b × d</span><span class="denominator">f<sub>y</sub></span></span></p>
-            <p>Assume dia. of bars required generally 20mm or more</p>
-            <p>Area of 1-φ bar = <span class="fraction"><span class="numerator">π × φ²</span><span class="denominator">4</span></span> = _____ mm²</p>
-            <p>No. of bars at = <span class="fraction"><span class="numerator">A<sub>st, provided</sub></span><span class="denominator">Area of 1-φ bar</span></span> = ____ no.</p>
-        </div>
-
-        <!-- TEAL BLUE SECTION FOR STEP 7 -->
-        <div class="teal-section">
-            <h2>Step 7. Check for Shear</h2>
-            <div class="formula">
-                <p>τ<sub>v</sub> = <span class="fraction"><span class="numerator">V<sub>u</sub></span><span class="denominator">b×d</span></span> = _____ N/mm²</p>
-            </div>
-            
-            <div class="check-item">
-                <h4>Check</h4>
-                <p>τ<sub>v</sub> > τ<sub>c,max</sub></p>
-            </div>
-            
-            <p>If τ<sub>c,max</sub> is greater than τ<sub>c</sub>, then calculate</p>
-            <h4>Design Shear Strength</h4>
-            <div class="formula">
-                <p>% area of Steel, P<sub>t</sub> = <span class="fraction"><span class="numerator">100 × A<sub>st</sub></span><span class="denominator">b×d</span></span></p>
-                <p>for given grade of conc. calculate τ<sub>c</sub></p>
-            </div>
-            
-            <div class="check-item">
-                <h4>Check</h4>
-                <p>τ<sub>c</sub> < τ<sub>c,max</sub></p>
-                <p>Check τ<sub>v</sub> < τ<sub>c</sub>, if τ<sub>v</sub> > τ<sub>c</sub> then design for shear stress is req.</p>
-            </div>
-            
-            <h4>For vertical stirrups (clause 40.4 (a))</h4>
-            <div class="formula">
-                <p>V<sub>us</sub> = V<sub>u</sub> – τ<sub>c</sub>×b×d = ______ N</p>
-                <p>A<sub>sv</sub> = 2 (legs) × <span class="fraction"><span class="numerator">π × φ²</span><span class="denominator">4</span></span> [dia. of stirrup]</p>
-                <p>S<sub>v</sub> = <span class="fraction"><span class="numerator">0.87×f<sub>ck</sub> × A<sub>sv</sub> × d</span><span class="denominator">V<sub>us</sub></span></span> = ______ mm ①</p>
-                <p>S<sub>v</sub> ≠</p>
-            </div>
-            
-            <h4>Max. spacing of shear reinforcement (clause 26.5.1.5)</h4>
-            <div class="formula">
-                <p>(i) S<sub>v</sub> ≠ 0.75×d ②</p>
-                <p>(ii) S<sub>v</sub> ≠ 300mm ③</p>
-            </div>
-            
-            <div class="check-item">
-                <h4>Max stirrup spacing permitted = Minimum of 1, 2, 3</h4>
+        <!-- Step 1 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 1: Depth of Beam</h2>
+            <div class="step-content">
+                <p>Clear span of beam = <span class="input-field">___ mm</span></p>
+                <div class="formula">
+                    Effective depth of beam, d = span/10 to span/15<br>
+                    Eff. depth of beam, d = span/12
+                </div>
+                <p>Assume clear cover of beam, c = <span class="input-field">___ mm</span></p>
+                <p class="note">(Refer to table No. 16 for clear cover acc. to diff. exposure condition)</p>
+                <p>Assume dia. of bar in tension, ø = <span class="input-field">___ mm</span></p>
+                <p class="note">(generally near 20mm)</p>
+                <div class="formula">
+                    Overall depth of beam, D = d + c + ø/2 = <span class="input-field">___ mm</span>
+                </div>
             </div>
         </div>
-
-        <div class="step">
-            <h2>Step 8. Write Detailed Summary and Draw a Neat Sketch</h2>
-            <p>[Summary and sketch to be added here]</p>
+        
+        <!-- Step 2 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 2: Effective Span</h2>
+            <div class="step-content">
+                <p class="clause">Refer to clause 22.2 (b)</p>
+                <h3>Clause 22.2(b): Effective Span for Continuous Beam or Slab</h3>
+                <p>In the case of a continuous beam or slab, the effective span depends on the width of the support:</p>
+                <ul>
+                    <li>If the width of the support is less than 1/12 of the clear span, the effective span shall be as per Clause 22.2(a).</li>
+                    <li>If the support is wider than 1/12 of the clear span or 600 mm, whichever is less, the effective span shall be taken as follows:</li>
+                </ul>
+                <ol>
+                    <li><strong>End span with one end fixed and the other continuous, or intermediate spans:</strong><br>
+                    → Effective span = clear span between supports</li>
+                    <li><strong>End span with one end free and the other continuous:</strong><br>
+                    → Effective span = clear span + ½ × effective depth of beam or slab<br>
+                    → or clear span + ½ × width of discontinuous support<br>
+                    → whichever is less</li>
+                    <li><strong>Spans with roller or rocker bearings:</strong><br>
+                    → Effective span = distance between centres of bearings</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 3: Calculation of Load</h2>
+            <div class="step-content">
+                <h3>Dead load (DL)</h3>
+                <div class="formula">
+                    Self. wt. of the beam = 25 × D/1000 × b/1000 × 1 = <span class="input-field">___ kN/m</span><br>
+                    + Superimposed dead load (if any)<br>
+                    Total factored dead load, Wu, DL = 1.5 × DL = <span class="input-field">___ kN/m</span>
+                </div>
+                
+                <h3>Live load (LL)</h3>
+                <div class="formula">
+                    Total live load = <span class="input-field">___ kN/m</span><br>
+                    Total factored live load, Wu, LL = 1.5 × LL = <span class="input-field">___ kN/m</span>
+                </div>
+                
+                <p class="clause">Read Clause 22.5: Moment and Shear Coefficients for Continuous Beams for calculation of Moment and Shear Force in a continuous beam</p>
+                
+                <h3>22.5 Moment and Shear Coefficients for Continuous Beams</h3>
+                <p><strong>22.5.1</strong> Unless more exact estimates are made, for beams of uniform cross-section which support substantially uniformly distributed loads over three or more spans which do not differ by more than 15 percent of the longest, the bending moments and shear forces used in design may be obtained using the coefficients given in Table 12 and Table 13 respectively.</p>
+                <p>For moments at supports where two unequal spans meet or in case where the spans are not equally loaded, the average of the two values for the negative moment at the support may be taken for design.</p>
+                <p>Where coefficients given in Table 12 are used for calculation of bending moments, redistribution referred to in 22.7 shall not be permitted.</p>
+            </div>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 4: Calculation of Moment & Shear Force</h2>
+            <div class="step-content">
+                <h3>Moment</h3>
+                <p class="note">The Coefficients in Table 12 are applicable to cases of:</p>
+                <ul>
+                    <li>Uniformly loaded beams of uniform section with at least three spans</li>
+                    <li>"which do not differ by more than 15% of the longest"</li>
+                </ul>
+                <p><strong>Mathematical conditions:</strong></p>
+                <div class="formula">
+                    (L₁ − L₂) ≯ 15% L₁<br>
+                    (L₁ − L₃) ≯ 15% L₁
+                </div>
+                <div class="formula">
+                    Mu = Coefficient<sub>DL</sub> × (Wu, DL × l²) + Coefficient<sub>LL</sub> × (Wu, LL × l²)
+                </div>
+                
+                <h3>Table 12: Bending Moment Coefficients (Clause 22.5.1)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Type of Load</th>
+                            <th colspan="2">Span Moments</th>
+                            <th colspan="2">Support Moments</th>
+                        </tr>
+                        <tr>
+                            <th>Near Middle of End Span</th>
+                            <th>At Middle of Interior Span</th>
+                            <th>At Support Next to the End Support</th>
+                            <th>At Other Interior Supports</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dead load and imposed load (fixed)</td>
+                            <td>+1/12</td>
+                            <td>+1/16</td>
+                            <td>−1/10</td>
+                            <td>−1/12</td>
+                        </tr>
+                        <tr>
+                            <td>Imposed load (not fixed)</td>
+                            <td>+1/10</td>
+                            <td>+1/12</td>
+                            <td>−1/9</td>
+                            <td>−1/9</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note"><strong>Note:</strong> To obtain the bending moment, multiply the coefficient by the total design load and effective span.</p>
+                
+                <h3>Shear Force</h3>
+                <div class="formula">
+                    Vu = Coefficient<sub>DL</sub> × (Wu, DL × l) + Coefficient<sub>LL</sub> × (Wu, LL × l)
+                </div>
+                
+                <h3>Table 13: Shear Force Coefficients (Clauses 22.5.1 and 22.5.2)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type of Load</th>
+                            <th>At End Support</th>
+                            <th>At Support Next to the End Support (Outer Side)</th>
+                            <th>At Support Next to the End Support (Inner Side)</th>
+                            <th>At All Other Interior Supports</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dead load and imposed load (fixed)</td>
+                            <td>0.4</td>
+                            <td>0.6</td>
+                            <td>0.55</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr>
+                            <td>Imposed load (not fixed)</td>
+                            <td>0.45</td>
+                            <td>0.6</td>
+                            <td>0.6</td>
+                            <td>0.6</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note"><strong>Note:</strong> For obtaining the shear force, the coefficient shall be multiplied by the total design load.</p>
+            </div>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 5: Check for Depth</h2>
+            <div class="step-content">
+                <div class="formula">
+                    Max factored Bending moment, Mu = <span class="input-field">___ kNm</span><br>
+                    Limiting Moment of Resistance, Mu, lim = <span class="input-field">___ kN</span>
+                </div>
+                <p class="highlight">d calculated < d provided</p>
+            </div>
+        </div>
+        
+        <!-- Step 6 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 6: Computation of Steel Required</h2>
+            <div class="step-content">
+                <div class="formula">
+                    Ast, required = 0.5 × fck/fy × [1 - √(1-4.6×Mu/(fck×b×d²))] × b×d²
+                </div>
+                
+                <h3>Check for Steel</h3>
+                <div class="formula">
+                    Ast, min = (0.85 × b × d) / fy
+                </div>
+                
+                <p>Assume dia. of bars required generally 20mm or more</p>
+                <div class="formula">
+                    Area of 1-φ bar = (π × φ²) / 4 = <span class="input-field">_____ mm²</span>
+                </div>
+                
+                <div class="formula">
+                    No. of bars = (Ast, provided) / (Area of 1-φ bar) = <span class="input-field">____ no.</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 7 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 7: Check for Shear</h2>
+            <div class="step-content">
+                <div class="formula">
+                    Tv = Vu / (b × d) = <span class="input-field">_____ N/mm²</span>
+                </div>
+                
+                <h3>Check</h3>
+                <p class="highlight">τv > τc,max</p>
+                
+                <p>If τc,max is greater than τc, then calculate Design Shear strength</p>
+                <div class="formula">
+                    % area of Steel, Pt = (100 × Ast) / (b × d)
+                </div>
+                
+                <p>for given grade of conc. calculate τc</p>
+                <div class="formula">
+                    Tc = <span class="input-field">______ N/mm²</span><br>
+                    for grade of conc. compute τc,max (N/mm²)<br>
+                    Check τc < τc,max<br>
+                    Check τv < τc, if τv > τc then design for shear stress is req.
+                </div>
+                
+                <h3>For vertical stirrups (clause 40.4 (a))</h3>
+                <div class="formula">
+                    Vus = Vu – τc × b × d = <span class="input-field">______ N</span><br>
+                    Asv = 2 (legs) × π × φ² [dia. of stirrup]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4<br>
+                    Sv = (0.87 × fy × Asv × d) / Vus = <span class="input-field">______ mm</span> ①
+                </div>
+                
+                <h3>Max. spacing of shear reinforcement (clause 26.5.1.5)</h3>
+                <ul>
+                    <li>Sv ≠ 0.75d ②</li>
+                    <li>Sv ≠ 300mm ③</li>
+                </ul>
+                <p class="highlight">Max stirrup spacing permitted = Minimum of 1, 2, 3</p>
+            </div>
+        </div>
+        
+        <!-- Step 8 -->
+        <div class="step-box">
+            <h2 class="step-title">Step 8: Write Detailed Summary and Draw a Neat Sketch</h2>
+            <div class="step-content">
+                <p><strong>Summary Requirements:</strong></p>
+                <ul>
+                    <li>Document all calculated values and assumptions</li>
+                    <li>Verify all design checks are satisfied</li>
+                    <li>Prepare reinforcement detailing</li>
+                    <li>Create structural drawings showing:</li>
+                    <ul>
+                        <li>Beam dimensions and spans</li>
+                        <li>Reinforcement layout (longitudinal and shear)</li>
+                        <li>Support conditions</li>
+                        <li>Load diagrams</li>
+                        <li>Cross-sectional details</li>
+                    </ul>
+                </ul>
+                <p class="note">Ensure all calculations comply with relevant design codes and standards.</p>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Add interactive behavior for formulas
-        document.addEventListener('DOMContentLoaded', function() {
-            const formulas = document.querySelectorAll('.formula');
-            
-            formulas.forEach(formula => {
-                formula.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    this.style.transition = 'background-color 0.3s';
-                });
-                
-                formula.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                });
-            });
-        });
-    </script>
 </body>
-</html>
