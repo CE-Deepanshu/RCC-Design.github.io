@@ -1,64 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design of Continuous Beam</title>
-<style>
-    body {
-        font-family: "Times New Roman", serif;
-        line-height: 1.6;
-        margin: 40px;
-        background-color: #fdfdfd;
-        color: #222;
-    }
-    h1, h2, h3 {
-        text-align: center;
-        color: #333;
-    }
-    h3 {
-        margin-top: 40px;
-        border-bottom: 2px solid #888;
-        display: inline-block;
-        padding-bottom: 4px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    th, td {
-        border: 1px solid #777;
-        padding: 8px 12px;
-        text-align: center;
-    }
-    th {
-        background-color: #e6e6e6;
-    }
-    .note {
-        font-style: italic;
-        background-color: #f5f5f5;
-        border-left: 4px solid #666;
-        padding: 8px 12px;
-        margin: 10px 0;
-    }
-    .step {
-        background-color: #f9f9f9;
-        padding: 12px;
-        border-left: 4px solid #333;
-        margin-bottom: 15px;
-    }
-    code {
-        background-color: #eee;
-        padding: 2px 6px;
-        border-radius: 4px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumb Rules & Design of Isolated Footing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Times New Roman", serif !important;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a3a5f, #2c5282);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #2d3748;
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background-color: #2c5282;
+            color: white;
+            text-align: left;
+            padding: 15px;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        
+        .step-card {
+            background-color: #f7fafc;
+            border-left: 4px solid #2c5282;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .formula {
+            background-color: #edf2f7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            border-left: 3px solid #2c5282;
+        }
+        
+        .note {
+            background-color: #fffaf0;
+            border-left: 4px solid #ecc94b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .variables {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .variable-item {
+            background-color: #edf2f7;
+            padding: 12px;
+            border-radius: 5px;
+            border-left: 3px solid #2c5282;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a202c;
+            color: white;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<h1>Design of Continuous Beam</h1>
-
+    <div class="container">
+        <header>
+            <h1>Design of Continuous Beam</h1>
 <div class="step">
 <h2>Step 1. Depth of Beam</h2>
 <p>Clear span of beam = ___ mm</p>
