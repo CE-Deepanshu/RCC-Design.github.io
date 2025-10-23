@@ -295,19 +295,44 @@
         
         <!-- Step 5 -->
         <div class="step-box">
-            <h2 class="step-title">Step 5: Check for Depth</h2>
+        <h2><span class="step-title">5</span> Design as Balanced Section/ Check for Depth</h2>
             <div class="step-content">
-                <div class="formula">
-                    Max factored Bending moment, Mu = <span class="input-field">___ kNm</span><br>
-                    Limiting Moment of Resistance, Mu, lim = <span class="input-field">___ kNm</span>
-                </div>
-                <p class="highlight">d calculated < d provided</p>
-            </div>
-        </div>
+        <p>The beam section is designed as a balanced section. Equate M<sub>u</sub> to M<sub>u,lim</sub> and find the effective depth of beam.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Steel Grade</th>
+                    <th>Limiting Moment Formula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fe 250</td>
+                    <td><span class="formula">M<sub>u,lim</sub> = 0.148 f<sub>ck</sub> b d<sup>2</sup></span></td>
+                </tr>
+                <tr>
+                    <td>Fe 415</td>
+                    <td><span class="formula">M<sub>u,lim</sub> = 0.138 f<sub>ck</sub> b d<sup>2</sup></span></td>
+                </tr>
+                <tr>
+                    <td>Fe 500</td>
+                    <td><span class="formula">M<sub>u,lim</sub> = 0.133 f<sub>ck</sub> b d<sup>2</sup></span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p>Compute depth (d) with the assumed depth:</p>
+        <ul>
+            <li>If calculated depth ≤ assumed depth, proceed with design</li>
+            <li>If calculated depth > assumed depth, increase beam depth and recalculate</li>
+        </ul>
+        <p>Recalculate self weight and factored moment based on revised depth.</p>
+    </div>
         
         <!-- Step 6 -->
         <div class="step-box">
-            <h2 class="step-title">Step 6: Computation of Steel Required</h2>
+            <h2> class="step-title">Step 6: Computation of Steel Required</h2>
             <div class="step-content">
                 <div class="formula">
                     Ast, required = 0.5 × fck/fy × [1 - √(1-4.6×Mu/(fck×b×d²))] × b×d²
