@@ -1,5 +1,3 @@
-RCC-Design.github.io
-
 # 🏗️ RCC DESIGN GUIDE 
 
 A structured repository dedicated to the design methodologies of **Reinforced Cement Concrete (RCC)** structural elements, tailored for undergraduate civil engineering students.  
@@ -11,7 +9,7 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 ---
 
-# 🎯 Purpose of This Repository
+## 🎯 Purpose of This Repository
 
 - To provide **clear, code-based design steps** for RCC elements.
 - To support **academic learning and project documentation**.
