@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chart 19 — Flexure (Recreated)</title>
+<style>
+:root{--bg:#ffffff;--muted:#6b7280;--grid:#e6eef7;--axis:#1f2937;--curve:#0b5394}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--axis); margin:22px}
+.card{max-width:900px;margin:0 auto;border:1px solid #eef3fb;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(9,30,66,0.04)}
+h1{font-size:18px;margin:0 0 6px;font-weight:700}
+.meta{font-size:13px;color:var(--muted);margin-bottom:12px}
+.svgwrap{width:100%;overflow:auto}
+svg{width:100%;height:auto;display:block}
+.axis-label{font-size:13px;fill:var(--muted)}
+.tick-label{font-size:12px;fill:var(--muted)}
+.curve-label{font-size:13px;fill:#08264d;font-weight:700}
+.note{margin-top:12px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Chart 19 — Flexure: Doubly Reinforced Section</h1>
+<div class="meta">f<sub>y</sub> = 250 N/mm<sup>2</sup> &nbsp;&middot;&nbsp; Visual reproduction (modern minimal grid)</div>
+
+
+<div class="svgwrap" role="img" aria-label="Recreated Chart 19 Flexure — Doubly Reinforced Section">
+<!-- SVG canvas: x -> (d-d') from 20..50, y -> A_sc from 0..40 -->
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="false">
+<defs>
+<linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="#ffffff" />
+<stop offset="1" stop-color="#fbfdff" />
+</linearGradient>
+</defs>
+
+
+<!-- Background -->
+<rect x="0" y="0" width="1000" height="640" fill="url(#bg)" rx="8"/>
+
+
+<!-- Plot area -->
+<g transform="translate(80,40)">
+<!-- axes box size: 840 x 520 -->
+<rect x="0" y="0" width="840" height="520" fill="transparent" stroke="#e6eef7" stroke-width="0"/>
+
+
+<!-- minimal grid: vertical and horizontal light lines -->
+<!-- vertical grid every 70 px (~10 units on x) -->
+<g stroke="#eef6ff" stroke-width="1">
+<!-- lighter verticals -->
+<line x1="0" y1="0" x2="0" y2="520" transform="translate(0,0)" />
+<!-- draw repeating verticals -->
+<g>
+<!-- 10 vertical lines -->
+<script type="application/ecmascript"><![CDATA[/* noop for static export */]]></script>
+</g>
+</g>
+
+
+<!-- draw vertical ticks & labels (x-axis: 20..50) -->
+<g id="x-axis">
+<!-- ticks and labels -->
+<!-- map x value to px: px = (x-20)/30 * 840 -->
+<!-- values at 20,25,30,35,40,45,50 -->
+<!-- draw ticks -->
+<g stroke="#dbefff">
+<line x1="0" y1="520" x2="840" y2="520" stroke-width="1.2" stroke="#cbdff6" />
+</g>
+</html>
