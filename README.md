@@ -9,7 +9,7 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 ---
 
-## 🎯 Purpose of This Repository
+## 🎯 Purpose of the website/ Repository
 
 - To provide **clear, code-based design steps** for RCC elements.
 - To support **academic learning and project documentation**.
