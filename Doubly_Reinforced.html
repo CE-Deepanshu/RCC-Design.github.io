@@ -15,113 +15,119 @@
             font-family: "Times New Roman", serif;
             background-color: #0A5F38; /* Bottle Green */
             color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            line-height: 1.7;
+            padding: 25px;
+            font-size: 18px; /* Increased base font size */
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.25);
         }
         
         h1 {
             text-align: center;
             color: #0A5F38;
-            border-bottom: 3px solid #0A5F38;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-            font-size: 28px;
+            border-bottom: 4px solid #0A5F38;
+            padding-bottom: 20px;
+            margin-bottom: 35px;
+            font-size: 36px; /* Larger heading */
+            font-weight: bold;
         }
         
         h2 {
             color: #0A5F38;
-            border-left: 6px solid #0A5F38;
-            padding-left: 15px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 22px;
+            border-left: 8px solid #0A5F38;
+            padding-left: 20px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 28px; /* Larger subheading */
+            font-weight: bold;
         }
         
         .step-box {
             background-color: #F5D76E; /* Butterscotch Yellow */
-            border: 1px solid #E6C05A;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            border: 2px solid #E6C05A;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 19px; /* Increased step content size */
         }
         
         .step-title {
             font-weight: bold;
             color: #8B6B00;
-            margin-bottom: 12px;
-            font-size: 18px;
-            border-bottom: 1px dashed #8B6B00;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 22px; /* Larger step titles */
+            border-bottom: 2px dashed #8B6B00;
+            padding-bottom: 8px;
         }
         
         .sub-step {
-            margin-left: 20px;
-            margin-bottom: 10px;
+            margin-left: 25px;
+            margin-bottom: 12px;
         }
         
         .formula {
             font-style: italic;
             text-align: center;
-            margin: 18px 0;
-            padding: 12px;
+            margin: 22px 0;
+            padding: 15px;
             background-color: #f9f9f9;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 16px;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+            font-size: 20px; /* Larger formulas */
         }
         
         .note {
             background-color: #f0f8ff;
-            border-left: 5px solid #4682b4;
-            padding: 12px 18px;
-            margin: 18px 0;
-            border-radius: 0 5px 5px 0;
+            border-left: 6px solid #4682b4;
+            padding: 15px 22px;
+            margin: 22px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 18px;
         }
         
         .reference {
-            font-size: 0.9em;
+            font-size: 17px;
             color: #555;
             font-style: italic;
-            margin: 8px 0;
-        }
-        
-        ul, ol {
-            padding-left: 30px;
             margin: 10px 0;
         }
         
+        ul, ol {
+            padding-left: 35px;
+            margin: 15px 0;
+        }
+        
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .code {
             font-family: monospace;
             background-color: #f5f5f5;
-            padding: 2px 6px;
-            border-radius: 3px;
+            padding: 3px 8px;
+            border-radius: 4px;
             border: 1px solid #e0e0e0;
+            font-size: 17px;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 14px;
+            margin: 25px 0;
+            font-size: 17px; /* Larger table text */
         }
         
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px 10px;
+            border: 2px solid #ddd;
+            padding: 10px 12px;
             text-align: center;
         }
         
@@ -132,28 +138,36 @@
         
         .table-container {
             overflow-x: auto;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .table-title {
             font-weight: bold;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 16px;
+            margin-bottom: 15px;
+            font-size: 20px; /* Larger table titles */
             color: #0A5F38;
         }
         
         .table-note {
-            font-size: 0.85em;
+            font-size: 16px;
             font-style: italic;
-            margin-top: 8px;
+            margin-top: 10px;
             color: #666;
         }
         
         .section-divider {
-            height: 2px;
+            height: 3px;
             background: linear-gradient(to right, transparent, #0A5F38, transparent);
-            margin: 25px 0;
+            margin: 30px 0;
+        }
+        
+        .content-bold {
+            font-weight: bold;
+        }
+        
+        .content-normal {
+            font-weight: normal;
         }
     </style>
 </head>
@@ -163,7 +177,7 @@
         
         <div class="step-box">
             <div class="step-title">Given Data</div>
-            <ul>
+            <ul class="content-normal">
                 <li>Grade of concrete = M__, f<sub>ck</sub> = __ N/mm²</li>
                 <li>Grade of steel = Fe__, f<sub>y</sub> = __ N/mm²</li>
                 <li>Overall depth of section, D = __ mm</li>
@@ -172,7 +186,7 @@
         </div>
         
         <h2>Step 1: Calculate Effective Depth of Beam (d)</h2>
-        <div class="step-box">
+        <div class="step-box content-normal">
             <div class="sub-step">1. Assume nominal clear cover (Table 16, cl. 26.4.2) c = __ mm</div>
             <div class="sub-step">2. Assume bar diameter = __ mm (20mm, if not given)</div>
             <div class="sub-step">3. Effective cover = clear cover + 0.5 × Bar diameter</div>
@@ -180,7 +194,7 @@
         </div>
         
         <h2>Step 2: Calculate Effective Span (l<sub>eff</sub>)</h2>
-        <div class="step-box">
+        <div class="step-box content-normal">
             <div class="sub-step">1. l<sub>eff</sub> = Clear span + d</div>
             <div class="sub-step">2. l<sub>eff</sub> = Clear span + support width / 2 + support width / 2</div>
             <div class="sub-step">Adopt l<sub>eff</sub> = Minimum of (1) & (2)</div>
@@ -197,7 +211,7 @@
         </div>
         
         <h2>Step 3: Calculate Loads Acting on the Beam</h2>
-        <div class="step-box">
+        <div class="step-box content-normal">
             <div class="step-title">3.1 Dead Load (DL)</div>
             <div class="sub-step">Self weight of beam = (b/1000) × (D/1000) × 1 × 25 (Conc. Density, kN/m³) = __ kN/m</div>
             <div class="sub-step">+ Other imposed dead load</div>
@@ -211,7 +225,7 @@
         </div>
         
         <h2>Step 4: Calculate Ultimate Forces</h2>
-        <div class="step-box">
+        <div class="step-box content-normal">
             <div class="step-title">4.1 Calculate Ultimate Bending Moment (M<sub>u</sub>)</div>
             <div class="formula">M<sub>u</sub> = W<sub>u</sub> × l<sub>eff</sub>² / 8 = __ kNm (for UDL)</div>
             
@@ -234,7 +248,7 @@
         </div>
         
         <h2>Step 5: Calculation of Reinforcement</h2>
-        <div class="step-box">
+        <div class="step-box content-normal">
             <div class="step-title">5.1 Compressive Steel (A<sub>sc</sub>)</div>
             <div class="reference">Refer Clause G-1.2, Page No. 96, IS 456</div>
             <div class="formula">M<sub>u</sub> - M<sub>u,lim</sub> = f<sub>sc</sub> × A<sub>sc</sub> × (d - d')</div>
@@ -364,7 +378,7 @@
         </div>
         
         <h2>Step 6: Check for Shear</h2>
-        <div class="step-box">
+        <div class="step-box content-normal">
             <div class="step-title">Calculate Nominal Shear Stress (τ<sub>v</sub>)</div>
             <div class="reference">Refer Cl. 40.1, IS 456</div>
             <div class="formula">τ<sub>v</sub> = V<sub>u</sub> / (b × d) = __ N/mm²</div>
