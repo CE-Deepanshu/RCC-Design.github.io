@@ -20,5 +20,5 @@
 # Design Steps
 
 ## [Simply Supported Beam (Singly Reinforced)](deepseek_html_20250925_391524.html)
-**[SP16 Fe250 graph](SP16Fe250.html)**
+
 ## [Continous Beam](Continous_Beam.html)
