@@ -1,148 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Design Steps - Doubly Reinforced Beam</title>
-
-<style>
-    body {
-        font-family: "Times New Roman", serif;
-        background-color: #90C7A5; /* Light Bottle Green */
-        margin: 20px;
-        line-height: 1.5;
-    }
-    h2, h3 {
-        text-align: center;
-        text-decoration: underline;
-        font-weight: bold;
-    }
-    .step-box {
-        background-color: #FFFACD; /* Light Yellow */
-        border: 1px solid #555;
-        border-radius: 6px;
-        padding: 15px;
-        margin-bottom: 18px;
-    }
-    .step-title {
-        font-weight: bold;
-        color: #000;
-        margin-bottom: 10px;
-        font-size: 18px;
-        text-decoration: underline;
-    }
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly Reinforced Beam Design - IS 456</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: #d8e8d8; /* Light Bottle Green */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5530;
+            border-bottom: 2px solid #2c5530;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        h2 {
+            color: #2c5530;
+            border-left: 5px solid #2c5530;
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+        
+        .step-box {
+            background-color: #fffacd; /* Light Yellow */
+            border: 1px solid #e6d700;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #8b7500;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .sub-step {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .formula {
+            font-style: italic;
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .note {
+            background-color: #f0f8ff;
+            border-left: 4px solid #4682b4;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        
+        .reference {
+            font-size: 0.9em;
+            color: #555;
+            font-style: italic;
+        }
+        
+        ul {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .code {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
-
-<h2>Simply Supported Beam</h2>
-<h3>Doubly Reinforced Section – Design Steps</h3>
-
-<div class="step-box">
-    <div class="step-title">Given Data</div>
-    Grade of Concrete = M__ , fck = ___ N/mm² <br>
-    Grade of Steel = Fe__ , fy = ___ N/mm² <br>
-    Overall depth of section, D = ___ mm <br>
-    Width of section, b = ___ mm
-</div>
-
-<div class="step-box">
-    <div class="step-title">Step 1: Calculate Effective Depth (d)</div>
-    1. Assume nominal clear cover (Table 16, Cl. 26.4.2)<br>
-    Clear cover, c = ___ mm <br>
-    2. Assume bar diameter = ___ mm (20mm if not given)<br>
-    3. Effective cover = c + 0.5 × bar dia.<br>
-    <strong>d = D − (effective cover)</strong>
-</div>
-
-<div class="step-box">
-    <div class="step-title">Step 2: Calculate Effective Span (Leff)</div>
-    1️⃣ Leff = Clear span + d <br>
-    2️⃣ Leff = Clear span + (support width/2 + support width/2)<br><br>
-    ✅ Adopt minimum of (1) & (2)<br><br>
-
-    If only clear span given:<br>
-    <strong>Leff = Clear span + d</strong><br><br>
-
-    If c/c span given:<br>
-    <strong>Leff = Centre-to-centre span</strong>
-</div>
-
-<div class="step-box">
-    <div class="step-title">Step 3: Load Calculation</div>
-
-    ✅ Dead Load (DL):<br>
-    Self weight = (b/1000) × (D/1000) × 1 × 25 = ___ kN/m <br>
-    Additional load = ___ kN/m<br>
-    <strong>W<sub>DL</sub> = ___ kN/m</strong><br><br>
-
-    ✅ Live Load (LL):<br>
-    <strong>W<sub>LL</sub> = ___ kN/m</strong><br><br>
-
-    ✅ Factored Load:<br>
-    <strong>W<sub>u</sub> = 1.5 (W<sub>DL</sub> + W<sub>LL</sub>) = ___ kN/m</strong>
-</div>
-
-<div class="step-box">
-    <div class="step-title">Step 4: Ultimate Forces</div>
-
-    <strong>4.1 Ultimate Bending Moment (UDL only)</strong><br>
-    M<sub>u</sub> = W<sub>u</sub> × L<sub>eff²</sub> / 8 = ___ kNm <br><br>
-
-    <strong>4.2 Ultimate Shear Force</strong><br>
-    V<sub>u</sub> = W<sub>u</sub> × L<sub>eff²</sub> / 2<br><br>
-
-    <strong>4.3 Limiting Moment of Resistance (M<sub>u,lim</sub>)</strong><br>
-    Refer Annex G, IS 456<br>
-    <span style="font-style: italic;">
-    M<sub>u,lim</sub> = 0.36 fck b x<sub>u,max</sub>/d × (1 - 0.42 x<sub>u,max</sub>/d) × b d²
-    </span><br>
-    If <strong>M<sub>u,lim</sub> < M<sub>u</sub></strong> → Doubly Reinforced Beam required
-</div>
-
-<div class="step-box">
-    <div class="step-title">Step 5: Reinforcement Design</div>
-
-    <strong>5.1 Compression Steel (A<sub>sc</sub>)</strong><br>
-    M<sub>u</sub> − M<sub>u,lim</sub> = f<sub>sc</sub> A<sub>sc</sub> (d − d')<br>
-    ⇒ A<sub>sc</sub> = (M<sub>u</sub> − M<sub>u,lim</sub>) / (f<sub>sc</sub>(d − d'))<br><br>
-
-    Compute:<br>
-    ε<sub>sc</sub> = 0.0035 × (x<sub>u,max</sub> − d') / x<sub>u,max</sub><br>
-    Get f<sub>sc</sub> from IS 456 / SP 16<br><br>
-
-    Select bars → compute number of bars<br><br>
-
-    <strong>5.2 Tension Steel (A<sub>st</sub>)</strong><br>
-    A<sub>st</sub> = A<sub>st1</sub> + A<sub>st2</sub><br>
-    A<sub>st1</sub> = 0.36 fck b x<sub>u,max</sub> / (0.87 fy)<br>
-    A<sub>st2</sub> = A<sub>sc</sub> × f<sub>sc</sub> / (0.87 fy)<br><br>
-
-    Minimum Steel Check:<br>
-    A<sub>st,min</sub> = 0.85 b d / fy
-</div>
-
-<div class="step-box">
-    <div class="step-title">Step 6: Shear Design</div>
-
-    Nominal shear stress:<br>
-    τ<sub>v</sub> = V<sub>u</sub> / (b d) <br><br>
-
-    Find τ<sub>c,max</sub> from Table 20 (IS 456)<br>
-    Find τ<sub>c</sub> from Table 19 (Pt%)<br><br>
-
-    If τ<sub>v</sub> > τ<sub>c</sub> → design shear reinforcement<br><br>
-
-    V<sub>us</sub> = V<sub>u</sub> − τ<sub>c</sub> b d<br>
-    Assume stirrup → A<sub>sv</sub><br><br>
-
-    Sv = 0.87 fy A<sub>sv</sub> d / V<sub>us</sub><br><br>
-
-    Limit checks:<br>
-    Sv ≤ 0.75d<br>
-    Sv ≤ 300 mm<br>
-    Provide **minimum** of permitted spacings
-</div>
-
+    <div class="container">
+        <h1>Simply Supported Beam (Doubly Reinforced Section) Design Steps</h1>
+        
+        <div class="step-box">
+            <div class="step-title">Given Data</div>
+            <ul>
+                <li>Grade of concrete = M__, fck = __ N/mm²</li>
+                <li>Grade of steel = Fe__, fy = __ N/mm²</li>
+                <li>Overall depth of section, D = __ mm</li>
+                <li>Width of section, b = __ mm</li>
+            </ul>
+        </div>
+        
+        <h2>Step 1: Calculate Effective Depth of Beam (d)</h2>
+        <div class="step-box">
+            <div class="sub-step">1. Assume nominal clear cover (Table 16, cl. 26.4.2) c = __ mm</div>
+            <div class="sub-step">2. Assume bar diameter = __ mm (20mm, if not given)</div>
+            <div class="sub-step">3. Effective cover = clear cover + 0.5 × Bar diameter</div>
+            <div class="formula">Effective depth, d = D - effective cover</div>
+        </div>
+        
+        <h2>Step 2: Calculate Effective Span (l<sub>eff</sub>)</h2>
+        <div class="step-box">
+            <div class="sub-step">1. l<sub>eff</sub> = Clear span + d</div>
+            <div class="sub-step">2. l<sub>eff</sub> = Clear span + support width / 2 + support width / 2</div>
+            <div class="sub-step">Adopt l<sub>eff</sub> = Minimum of (1) & (2)</div>
+            
+            <div class="note">
+                <strong>Note:</strong>
+                <ul>
+                    <li>If only clear span is given or support width not given instead of effective span (l<sub>eff</sub>):<br>
+                    l<sub>eff</sub> = clear span + d</li>
+                    <li>If only c-c span is given instead of eff. span (l<sub>eff</sub>):<br>
+                    l<sub>eff</sub> = Centre to Centre span</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2>Step 3: Calculate Loads Acting on the Beam</h2>
+        <div class="step-box">
+            <div class="step-title">3.1 Dead Load (DL)</div>
+            <div class="sub-step">Self weight of beam = (b/1000) × (D/1000) × 1 × 25 (Conc. Density, kN/m³) = __ kN/m</div>
+            <div class="sub-step">+ Other imposed dead load</div>
+            <div class="sub-step">Total dead load, W<sub>DL</sub> = __ kN/m</div>
+            
+            <div class="step-title">3.2 Live Load (LL)</div>
+            <div class="sub-step">Total Imposed live load/moving load, W<sub>LL</sub> = __ kN/m</div>
+            
+            <div class="step-title">Factored Design Load</div>
+            <div class="formula">W<sub>u</sub> = 1.5 (W<sub>DL</sub> + W<sub>LL</sub>) = __ kN/m</div>
+        </div>
+        
+        <h2>Step 4: Calculate Ultimate Forces</h2>
+        <div class="step-box">
+            <div class="step-title">4.1 Calculate Ultimate Bending Moment (M<sub>u</sub>)</div>
+            <div class="formula">M<sub>u</sub> = W<sub>u</sub> × l<sub>eff</sub>² / 8 = __ kNm (for UDL)</div>
+            
+            <div class="step-title">4.2 Calculate Ultimate Shear Force (V<sub>u</sub>)</div>
+            <div class="formula">V<sub>u</sub> = W<sub>u</sub> × l<sub>eff</sub> / 2</div>
+            
+            <div class="step-title">4.3 Calculate Limiting Moment of Resistance of Beam Section (M<sub>u,lim</sub>)</div>
+            <div class="reference">Refer Clause G-1-(c), Annexure G, Page 96, IS 456</div>
+            <div class="formula">M<sub>u,lim</sub> = 0.36 (x<sub>u,max</sub>/d) (1 - 0.42 (x<sub>u,max</sub>/d)) b d² f<sub>ck</sub></div>
+            <div class="reference">For maximum depth of neutral axis (x<sub>u,max</sub>) refer Page 70, IS 456</div>
+            
+            <div class="note">
+                <strong>Decision:</strong>
+                <ul>
+                    <li>If M<sub>u,lim</sub> < M<sub>u</sub>: Then beam section is not sufficient to resist the acting bending moment</li>
+                    <li>If M<sub>u,lim</sub> < M<sub>u</sub>: Design the beam as Doubly Reinforced section</li>
+                </ul>
+                <p>Generally in singly reinforced beam, the size of the beam section will be increased to make M<sub>u,lim</sub> > M<sub>u</sub></p>
+            </div>
+        </div>
+        
+        <h2>Step 5: Calculation of Reinforcement</h2>
+        <div class="step-box">
+            <div class="step-title">5.1 Compressive Steel (A<sub>sc</sub>)</div>
+            <div class="reference">Refer Clause G-1.2, Page No. 96, IS 456</div>
+            <div class="formula">M<sub>u</sub> - M<sub>u,lim</sub> = f<sub>sc</sub> × A<sub>sc</sub> × (d - d')</div>
+            <div class="formula">After rearranging: A<sub>sc</sub> = (M<sub>u</sub> - M<sub>u,lim</sub>) / [f<sub>sc</sub> × (d - d')]</div>
+            
+            <div class="sub-step">Where:</div>
+            <ul>
+                <li>d' = Effective cover to compressive steel</li>
+                <li>f<sub>sc</sub> = Design stress in compression reinforcement corresponding to a strain of E<sub>sc</sub> (Refer SP 16, clause 1:4, Page No. 6)</li>
+                <li>Compute E<sub>sc</sub> = 0.0035 (x<sub>u,max</sub> - d') / x<sub>u,max</sub> (for x<sub>u,max</sub> refer clause 38.1, page 70, IS 456)</li>
+            </ul>
+            
+            <div class="step-title">Provide Compressive Steel (A<sub>sc</sub>)</div>
+            <ul>
+                <li>Select suitable bar diameter (e.g., 10, 12, 16, 20, 25 & 32mm)</li>
+                <li>Calculate area of 1 bar; A<sub>bar</sub> = __ mm²</li>
+                <li>No. of bars required = A<sub>sc</sub> / A<sub>bar</sub> = __ no. (Round off to nearest integer)</li>
+            </ul>
+            
+            <div class="note">
+                <strong>Note:</strong>
+                <ul>
+                    <li>Minimum bars = 2 no.</li>
+                    <li>Maximum bars = 6 no. in one layer</li>
+                </ul>
+            </div>
+            <div class="formula">Calculate A<sub>sc,provided</sub> = N × A<sub>bar</sub></div>
+            
+            <div class="step-title">5.2 Tension Steel (A<sub>st</sub>)</div>
+            <div class="reference">Refer Clause G-1.2, Page No. 96, IS 456</div>
+            <div class="formula">A<sub>st</sub> = A<sub>st1</sub> + A<sub>st2</sub></div>
+            <div class="sub-step">Where:</div>
+            <ul>
+                <li>A<sub>st</sub> = Area of total tensile reinforcement</li>
+                <li>A<sub>st1</sub> = Area of the tensile reinforcement for a singly reinforced section for M<sub>u,lim</sub></li>
+                <li>A<sub>st2</sub> = A<sub>sc</sub> × f<sub>sc</sub> / (0.87 × f<sub>y</sub>)</li>
+            </ul>
+            
+            <div class="formula">A<sub>st1</sub> = [0.36 × f<sub>ck</sub> × b × x<sub>u,max</sub>] / (0.87 × f<sub>y</sub>) = __ mm²</div>
+            <div class="formula">A<sub>st2</sub> = A<sub>sc</sub> × (f<sub>sc</sub> / (0.87 × f<sub>y</sub>)) = __ mm²</div>
+            
+            <div class="step-title">Check for Minimum Steel (A<sub>s,min</sub>)</div>
+            <div class="reference">Refer Cl. 26.5.1.1 (a)</div>
+            <div class="formula">A<sub>st,min</sub> = 0.85 × b × d / f<sub>y</sub> = __ mm²</div>
+            
+            <div class="step-title">Provide Tension Steel</div>
+            <ul>
+                <li>Select suitable bar diameter</li>
+                <li>Calculate area of one bar; A<sub>bar</sub> = π × Φ² / 4 = __ mm²</li>
+                <li>Calculate number of bars, N = A<sub>st</sub> / A<sub>bar</sub></li>
+            </ul>
+            
+            <div class="note">
+                <strong>Note:</strong>
+                <ul>
+                    <li>Minimum bars = 2 no.</li>
+                    <li>Maximum bar = 6 nos in one layer</li>
+                </ul>
+            </div>
+            
+            <div class="formula">Calculate A<sub>st,provided</sub> = N × A<sub>bar</sub></div>
+            <div class="sub-step">Provide bars at bottom (tension face of beam)</div>
+        </div>
+        
+        <h2>Step 6: Check for Shear</h2>
+        <div class="step-box">
+            <div class="step-title">Calculate Nominal Shear Stress (τ<sub>v</sub>)</div>
+            <div class="reference">Refer Cl. 40.1, IS 456</div>
+            <div class="formula">τ<sub>v</sub> = V<sub>u</sub> / (b × d) = __ N/mm²</div>
+            
+            <div class="step-title">Get Maximum Shear Stress (τ<sub>c,max</sub>)</div>
+            <div class="reference">Refer Table 20, Page No. 73, IS 456</div>
+            <div class="formula">τ<sub>c,max</sub> = __ N/mm²</div>
+            
+            <div class="step-title">Check τ<sub>c,max</sub> > τ<sub>v</sub></div>
+            <div class="reference">Clause 40.2.3, IS 456</div>
+            
+            <div class="step-title">Calculate Design Shear Strength of Concrete (τ<sub>c</sub>)</div>
+            <div class="reference">Calculate τ<sub>c</sub> from Table No. 19, Page 73, IS 456</div>
+            <div class="sub-step">→ % steel provided in Tension side (P<sub>t</sub>)</div>
+            <div class="formula">P<sub>t</sub> = (100 × A<sub>st,provided</sub>) / (b × d)</div>
+            <div class="sub-step">Calculate τ<sub>c</sub> from Table No. 19, Page 73, IS 456</div>
+            
+            <div class="step-title">Check If τ<sub>v</sub> > τ<sub>c</sub></div>
+            <div class="sub-step">If τ<sub>v</sub> > τ<sub>c</sub>, then design shear reinforcement:</div>
+            <ul>
+                <li>Calculate V<sub>us</sub> = V<sub>u</sub> - τ<sub>c</sub> × b × d</li>
+                <li>Assume legs & diameter of vertical stirrups</li>
+                <li>A<sub>sv</sub> = No. of legs × cross sectional area of stirrup bar</li>
+                <li>Calculate spacing of stirrups (S<sub>v</sub>) Clause 26.5.1.6, IS 456</li>
+            </ul>
+            
+            <div class="formula">V<sub>us</sub> = (0.87 × f<sub>y</sub> × A<sub>sv</sub> × d) / S<sub>v</sub></div>
+            <div class="formula">Rearrange: S<sub>v</sub> = (0.87 × f<sub>y</sub> × A<sub>sv</sub> × d) / V<sub>us</sub> ①</div>
+            
+            <div class="sub-step">Calculate minimum shear spacing for stirrup:</div>
+            <div class="formula">S<sub>v,min</sub> = (0.87 × f<sub>y</sub> × A<sub>sv</sub>) / (0.4 × b) ②</div>
+            
+            <div class="sub-step">Maximum stirrup spacing:</div>
+            <div class="formula">S<sub>v</sub> = 0.75 × d ③ (Clause 26.5.1.5, Page No. 47, IS 456)</div>
+            <div class="formula">S<sub>v</sub> = 300 mm ④ (Clause 26.5.1.5, Page No. 47, IS 456)</div>
+            
+            <div class="sub-step">Provide stirrup spacing minimum of ①, ②, ③ or ④</div>
+            
+            <div class="step-title">If τ<sub>v</sub> ≤ τ<sub>c</sub>, then minimum shear reinforcement must be provided</div>
+            <ul>
+                <li>Assume legs & diameter of vertical stirrups</li>
+                <li>A<sub>sv</sub> = No. of legs × cross sectional area of stirrup bar</li>
+                <li>Calculate minimum shear spacing for stirrup:</li>
+            </ul>
+            
+            <div class="formula">S<sub>v,min</sub> = (0.87 × f<sub>y</sub> × A<sub>sv</sub>) / (0.4 × b) ②</div>
+            
+            <div class="sub-step">Maximum stirrup spacing:</div>
+            <div class="formula">S<sub>v</sub> = 0.75 × d ③ (Clause 26.5.1.5, Page No. 47, IS 456)</div>
+            <div class="formula">S<sub>v</sub> = 300 mm ④ (Clause 26.5.1.5, Page No. 47, IS 456)</div>
+            
+            <div class="sub-step">Provide stirrup spacing minimum of ②, ③ or ④</div>
+            <div class="formula">Final stirrup spacing = the smallest value among S<sub>v(min)</sub>, 0.75d, and 300 mm</div>
+        </div>
+    </div>
 </body>
 </html>
