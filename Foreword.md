@@ -49,4 +49,4 @@ We hope **RCC Design Guide** becomes a trusted companion throughout your structu
 <br>
 
 **Warm regards,**  
-**The RCC Design Guide Team**
+**Deepanshu**
