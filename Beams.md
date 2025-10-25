@@ -19,6 +19,6 @@
 
 # Design Steps
 
-## [Simply Supported Beam (Singly Reinforced)](deepseek_html_20250925_391524.html)
-
+## [Simply Supported Beam (Singly Reinforced Section)](deepseek_html_20250925_391524.html)
+## [Simply Supported Beam (Doubly Reinforced Section)](Doubly_Reinforced.html)
 ## [Continous Beam](Continous_Beam.html)
