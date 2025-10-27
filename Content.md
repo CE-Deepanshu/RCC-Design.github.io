@@ -28,7 +28,8 @@ This repository covers essential design workflows for major RCC components, foll
 - Design of cantilever and counterfort retaining walls
 - Covers earth pressure theory, stability checks, and reinforcement zones
 
-### 💧 Liquid Retaining Structures
+### 💧Liquid Retaining Structures
+
 - Design of water tanks, reservoirs, and sumps
 - Based on **IS 3370** series for hydrostatic pressure and crack control
 - Includes wall and base slab design with water-tight detailing
