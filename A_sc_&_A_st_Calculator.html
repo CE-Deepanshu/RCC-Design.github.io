@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly Reinforced Concrete Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Times New Roman", serif;
+        }
+        
+        body {
+            background-color: beige;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, maroon, #8B0000);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-section, .results-section {
+            background-color: white;
+            border: 2px solid maroon;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: maroon;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.3rem;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .input-with-unit {
+            display: flex;
+            align-items: center;
+        }
+        
+        input, select {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: maroon;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(128, 0, 0, 0.2);
+        }
+        
+        .unit {
+            margin-left: 10px;
+            color: #666;
+            font-weight: bold;
+            min-width: 50px;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, maroon, #8B0000);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .calculate-btn i {
+            margin-right: 8px;
+        }
+        
+        .error-msg {
+            color: #d32f2f;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .results-container {
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid maroon;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        
+        .result-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .result-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .result-value {
+            font-weight: bold;
+            color: maroon;
+            font-size: 1.2rem;
+        }
+        
+        .formula-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        .formula-title {
+            color: maroon;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .formula {
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: white;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            font-size: 1.1rem;
+            border-left: 3px solid maroon;
+        }
+        
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        .info-title {
+            color: #1976d2;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .reinforcement-section {
+            background-color: white;
+            border: 2px solid maroon;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .reinforcement-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1100px) {
+            .reinforcement-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .reinforcement-box {
+            border: 2px solid #8B0000;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .reinforcement-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8B0000;
+        }
+        
+        .reinforcement-title {
+            color: maroon;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .required-area {
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 5px;
+        }
+        
+        .reinforcement-options {
+            margin-top: 15px;
+        }
+        
+        .option-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 4px solid maroon;
+            transition: all 0.2s;
+        }
+        
+        .option-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .bar-icon {
+            color: maroon;
+            font-size: 1.2rem;
+        }
+        
+        .bar-info {
+            font-weight: bold;
+        }
+        
+        .bar-area {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .best-option {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .best-tag {
+            background-color: #4caf50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .practical-tag {
+            background-color: #2196f3;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .auto-calculation {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .steel-grade-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .grade-item {
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .highlight {
+            background-color: #fff8e1;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, maroon, transparent);
+            margin: 20px 0;
+        }
+        
+        .reinforcement-note {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+        }
+        
+        .detailed-results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .detailed-title {
+            color: maroon;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .detailed-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Doubly Reinforced Concrete Calculator</h1>
+            <p class="subtitle">Calculate Asc, Ast1, and Ast2 for doubly reinforced sections</p>
+        </header>
+        
+        <div class="calculator-container">
+            <div class="input-section">
+                <h2 class="section-title"><i class="fas fa-calculator"></i> Input Parameters</h2>
+                
+                <div class="input-group">
+                    <label for="Mu">Ultimate Moment (M<sub>u</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="Mu" step="any" placeholder="Enter value">
+                        <span class="unit">kNm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="Mu_lim">Limiting Moment (M<sub>u,lim</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="Mu_lim" step="any" placeholder="Enter value">
+                        <span class="unit">kNm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="d">Effective Depth (d)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="d" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="d_prime">Compression Cover Depth (d')</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="d_prime" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fy">Yield Strength of Steel (f<sub>y</sub>)</label>
+                    <div class="input-with-unit">
+                        <select id="fy">
+                            <option value="250">Fe 250 (250 MPa)</option>
+                            <option value="415" selected>Fe 415 (415 MPa)</option>
+                            <option value="500">Fe 500 (500 MPa)</option>
+                            <option value="550">Fe 550 (550 MPa)</option>
+                            <option value="custom">Custom Value</option>
+                        </select>
+                        <span class="unit">MPa</span>
+                    </div>
+                    <div class="steel-grade-info">
+                        <div class="grade-item">Fe 250: x<sub>u,max</sub> = 0.53d</div>
+                        <div class="grade-item">Fe 415: x<sub>u,max</sub> = 0.48d</div>
+                        <div class="grade-item">Fe 500: x<sub>u,max</sub> = 0.46d</div>
+                        <div class="grade-item">Fe 550: x<sub>u,max</sub> = 0.44d</div>
+                    </div>
+                    <div id="customFyContainer" style="display: none; margin-top: 10px;">
+                        <div class="input-with-unit">
+                            <input type="number" id="customFy" step="any" placeholder="Enter custom fy value">
+                            <span class="unit">MPa</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="xu_max">Maximum Neutral Axis Depth (x<sub>u,max</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="xu_max" step="any" placeholder="Auto-calculated" readonly>
+                        <span class="unit">mm</span>
+                    </div>
+                    <div class="auto-calculation">
+                        <i class="fas fa-info-circle"></i> Automatically calculated based on steel grade and effective depth
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="Es">Modulus of Elasticity of Steel (E<sub>s</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="Es" step="any" value="200000" placeholder="Enter value">
+                        <span class="unit">MPa</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fck">Characteristic Strength of Concrete (f<sub>ck</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="fck" step="any" placeholder="Enter value">
+                        <span class="unit">MPa</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="b">Width of Beam (b)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="b" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" id="calculateBtn">
+                    <i class="fas fa-calculator"></i> Calculate Reinforcement
+                </button>
+                
+                <div class="error-msg" id="errorMsg">
+                    Please check your input values.
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">
+                        <i class="fas fa-info-circle"></i> Note
+                    </div>
+                    <p>This calculator is for doubly reinforced sections only. Ensure that M<sub>u</sub> > M<sub>u,lim</sub> for accurate results.</p>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Results</h2>
+                
+                <div class="results-container" id="resultsContainer">
+                    <p>Enter values and click "Calculate" to see results</p>
+                </div>
+                
+                <div class="formula-section">
+                    <h3 class="formula-title">Formulas Used</h3>
+                    
+                    <div class="formula">
+                        A<sub>sc</sub> = (M<sub>u</sub> - M<sub>u,lim</sub>) / [f<sub>sc</sub> × (d - d')]
+                    </div>
+                    
+                    <div class="formula">
+                        f<sub>sc</sub> = [0.0035 × (x<sub>u,max</sub> - d') / x<sub>u,max</sub>] × E<sub>s</sub>
+                    </div>
+                    
+                    <div class="formula">
+                        A<sub>st1</sub> = [0.36 × f<sub>ck</sub> × b × x<sub>u,max</sub>] / (0.87 × f<sub>y</sub>)
+                    </div>
+                    
+                    <div class="formula">
+                        A<sub>st2</sub> = (A<sub>sc</sub> × f<sub>sc</sub>) / (0.87 × f<sub>y</sub>)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reinforcement-section" id="reinforcementSection" style="display: none;">
+            <h2 class="section-title"><i class="fas fa-bars"></i> Reinforcement Suggestions</h2>
+            
+            <div class="reinforcement-container" id="reinforcementContainer">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="detailed-results" id="detailedResults">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="reinforcement-note">
+                <div class="info-title">
+                    <i class="fas fa-lightbulb"></i> Design Recommendations
+                </div>
+                <p>• The <span class="best-tag">BEST</span> option provides the most practical solution considering field constraints.</p>
+                <p>• Consider practical constraints like bar spacing and availability when selecting reinforcement.</p>
+                <p>• For compression steel (Asc), smaller diameter bars are often preferred for better distribution.</p>
+                <p>• Total tension steel (Ast) is the sum of Ast1 and Ast2, which can be provided using a single bar arrangement.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Doubly Reinforced Concrete Calculator &copy; 2023 | Structural Engineering Tool</p>
+        </footer>
+    </div>
+
+    <script>
+        // Handle steel grade selection
+        document.getElementById('fy').addEventListener('change', function() {
+            const customFyContainer = document.getElementById('customFyContainer');
+            if (this.value === 'custom') {
+                customFyContainer.style.display = 'block';
+            } else {
+                customFyContainer.style.display = 'none';
+                calculateXuMax();
+            }
+        });
+        
+        // Calculate xu_max when d or fy changes
+        document.getElementById('d').addEventListener('input', calculateXuMax);
+        document.getElementById('fy').addEventListener('change', calculateXuMax);
+        document.getElementById('customFy').addEventListener('input', calculateXuMax);
+        
+        function calculateXuMax() {
+            const d = parseFloat(document.getElementById('d').value);
+            const fySelect = document.getElementById('fy');
+            let fyValue;
+            
+            if (fySelect.value === 'custom') {
+                fyValue = parseFloat(document.getElementById('customFy').value);
+            } else {
+                fyValue = parseFloat(fySelect.value);
+            }
+            
+            if (isNaN(d) || isNaN(fyValue)) {
+                return;
+            }
+            
+            let xuMaxRatio;
+            if (fyValue <= 250) {
+                xuMaxRatio = 0.53;
+            } else if (fyValue <= 415) {
+                xuMaxRatio = 0.48;
+            } else if (fyValue <= 500) {
+                xuMaxRatio = 0.46;
+            } else if (fyValue <= 550) {
+                xuMaxRatio = 0.44; // Updated for Fe 550
+            } else {
+                // For higher grades, use a conservative value
+                xuMaxRatio = 0.42;
+            }
+            
+            const xuMax = xuMaxRatio * d;
+            document.getElementById('xu_max').value = xuMax.toFixed(2);
+        }
+        
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            // Get input values
+            const Mu = parseFloat(document.getElementById('Mu').value);
+            const Mu_lim = parseFloat(document.getElementById('Mu_lim').value);
+            const d = parseFloat(document.getElementById('d').value);
+            const d_prime = parseFloat(document.getElementById('d_prime').value);
+            const xu_max = parseFloat(document.getElementById('xu_max').value);
+            const Es = parseFloat(document.getElementById('Es').value);
+            const fck = parseFloat(document.getElementById('fck').value);
+            const b = parseFloat(document.getElementById('b').value);
+            
+            // Get fy value
+            let fy;
+            const fySelect = document.getElementById('fy');
+            if (fySelect.value === 'custom') {
+                fy = parseFloat(document.getElementById('customFy').value);
+            } else {
+                fy = parseFloat(fySelect.value);
+            }
+            
+            // Validate inputs
+            const errorMsg = document.getElementById('errorMsg');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const reinforcementSection = document.getElementById('reinforcementSection');
+            errorMsg.style.display = 'none';
+            reinforcementSection.style.display = 'none';
+            
+            if (isNaN(Mu) || isNaN(Mu_lim) || isNaN(d) || isNaN(d_prime) || 
+                isNaN(xu_max) || isNaN(Es) || isNaN(fck) || isNaN(fy) || isNaN(b)) {
+                errorMsg.textContent = 'Please enter all required values.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            if (Mu <= Mu_lim) {
+                errorMsg.textContent = 'M_u must be greater than M_{u,lim} for doubly reinforced section.';
+                errorMsg.style.display = 'block';
+                resultsContainer.innerHTML = '<p>Enter values and click "Calculate" to see results</p>';
+                return;
+            }
+            
+            if (d_prime >= d) {
+                errorMsg.textContent = 'd\' must be less than d for valid calculation.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            if (d_prime >= xu_max) {
+                errorMsg.textContent = 'd\' must be less than x_{u,max} for valid calculation.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // Calculate f_sc
+            const f_sc = (0.0035 * (xu_max - d_prime) / xu_max) * Es;
+            
+            // Calculate A_sc
+            const Asc = (Mu - Mu_lim) * 1e6 / (f_sc * (d - d_prime)); // Convert kNm to Nmm
+            
+            // Calculate A_st1
+            const Ast1 = (0.36 * fck * b * xu_max) / (0.87 * fy);
+            
+            // Calculate A_st2
+            const Ast2 = (Asc * f_sc) / (0.87 * fy);
+            
+            // Calculate total tension steel
+            const totalTensionSteel = Ast1 + Ast2;
+            
+            // Display results
+            resultsContainer.innerHTML = `
+                <div class="result-item">
+                    <span class="result-label">Compression Steel Area (A<sub>sc</sub>)</span>
+                    <span class="result-value">${Asc.toFixed(2)} mm²</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Tension Steel Area 1 (A<sub>st1</sub>)</span>
+                    <span class="result-value">${Ast1.toFixed(2)} mm²</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Tension Steel Area 2 (A<sub>st2</sub>)</span>
+                    <span class="result-value">${Ast2.toFixed(2)} mm²</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Total Tension Steel (A<sub>st</sub>)</span>
+                    <span class="result-value">${totalTensionSteel.toFixed(2)} mm²</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Stress in Compression Steel (f<sub>sc</sub>)</span>
+                    <span class="result-value">${f_sc.toFixed(2)} MPa</span>
+                </div>
+            `;
+            
+            // Generate reinforcement suggestions
+            generateReinforcementSuggestions(Asc, totalTensionSteel, Ast1, Ast2);
+            reinforcementSection.style.display = 'block';
+        });
+        
+        function generateReinforcementSuggestions(Asc, totalTensionSteel, Ast1, Ast2) {
+            const container = document.getElementById('reinforcementContainer');
+            const detailedResults = document.getElementById('detailedResults');
+            
+            // Standard bar diameters available in Indian market (excluding 28mm and 36mm)
+            const barDiameters = [8, 10, 12, 16, 20, 25, 32];
+            
+            // Function to generate options for a given area with practical selection
+            function generateOptions(area, type) {
+                const options = [];
+                
+                for (let diam of barDiameters) {
+                    const areaPerBar = Math.PI * Math.pow(diam/2, 2);
+                    const number = Math.ceil(area / areaPerBar);
+                    const providedArea = number * areaPerBar;
+                    const excess = providedArea - area;
+                    
+                    options.push({
+                        diameter: diam,
+                        number: number,
+                        providedArea: providedArea,
+                        excess: excess
+                    });
+                }
+                
+                // Sort by practical feasibility (not efficiency)
+                options.sort((a, b) => {
+                    // Prefer moderate number of bars (4-8 bars)
+                    const aBarScore = getBarCountScore(a.number, type);
+                    const bBarScore = getBarCountScore(b.number, type);
+                    
+                    if (aBarScore !== bBarScore) {
+                        return bBarScore - aBarScore;
+                    }
+                    
+                    // Then prefer less excess steel
+                    return a.excess - b.excess;
+                });
+                
+                return options;
+            }
+            
+            // Function to score bar count based on practical feasibility
+            function getBarCountScore(barCount, type) {
+                if (type === 'Asc') {
+                    // For compression steel, prefer 2-6 bars
+                    if (barCount >= 2 && barCount <= 4) return 10;
+                    if (barCount === 5 || barCount === 6) return 8;
+                    if (barCount === 1 || barCount === 7) return 5;
+                    if (barCount >= 8) return 3;
+                    return 0;
+                } else {
+                    // For tension steel, prefer 3-8 bars
+                    if (barCount >= 3 && barCount <= 6) return 10;
+                    if (barCount === 2 || barCount === 7 || barCount === 8) return 8;
+                    if (barCount === 1 || barCount === 9) return 5;
+                    if (barCount >= 10) return 3;
+                    return 0;
+                }
+            }
+            
+            // Generate options for Asc and total Ast
+            const ascOptions = generateOptions(Asc, 'Asc');
+            const astOptions = generateOptions(totalTensionSteel, 'Ast');
+            
+            // Create HTML for reinforcement boxes
+            container.innerHTML = `
+                <div class="reinforcement-box">
+                    <div class="reinforcement-header">
+                        <div class="reinforcement-title">Compression Steel (A<sub>sc</sub>)</div>
+                        <div class="required-area">Required: ${Asc.toFixed(2)} mm²</div>
+                    </div>
+                    <div class="reinforcement-options">
+                        ${ascOptions.map((option, index) => `
+                            <div class="option-item ${index === 0 ? 'best-option' : ''}">
+                                <div class="option-details">
+                                    <i class="fas fa-grip-lines bar-icon"></i>
+                                    <div>
+                                        <div class="bar-info">${option.number} bars of ${option.diameter} mm</div>
+                                        <div class="bar-area">Provided: ${option.providedArea.toFixed(2)} mm²</div>
+                                    </div>
+                                    ${index === 0 ? '<span class="best-tag">BEST</span>' : ''}
+                                </div>
+                                <div>
+                                    <div>Excess: ${option.excess.toFixed(2)} mm²</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="reinforcement-box">
+                    <div class="reinforcement-header">
+                        <div class="reinforcement-title">Total Tension Steel (A<sub>st</sub>)</div>
+                        <div class="required-area">Required: ${totalTensionSteel.toFixed(2)} mm²</div>
+                    </div>
+                    <div class="reinforcement-options">
+                        ${astOptions.map((option, index) => `
+                            <div class="option-item ${index === 0 ? 'best-option' : ''}">
+                                <div class="option-details">
+                                    <i class="fas fa-grip-lines bar-icon"></i>
+                                    <div>
+                                        <div class="bar-info">${option.number} bars of ${option.diameter} mm</div>
+                                        <div class="bar-area">Provided: ${option.providedArea.toFixed(2)} mm²</div>
+                                    </div>
+                                    ${index === 0 ? '<span class="best-tag">BEST</span>' : ''}
+                                </div>
+                                <div>
+                                    <div>Excess: ${option.excess.toFixed(2)} mm²</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Add detailed breakdown
+            detailedResults.innerHTML = `
+                <div class="detailed-title">Detailed Steel Area Breakdown</div>
+                <div class="detailed-item">
+                    <span>Tension Steel Area 1 (A<sub>st1</sub>):</span>
+                    <span>${Ast1.toFixed(2)} mm²</span>
+                </div>
+                <div class="detailed-item">
+                    <span>Tension Steel Area 2 (A<sub>st2</sub>):</span>
+                    <span>${Ast2.toFixed(2)} mm²</span>
+                </div>
+                <div class="detailed-item">
+                    <span><strong>Total Tension Steel (A<sub>st</sub>):</strong></span>
+                    <span><strong>${totalTensionSteel.toFixed(2)} mm²</strong></span>
+                </div>
+                <div class="detailed-item">
+                    <span>Compression Steel Area (A<sub>sc</sub>):</span>
+                    <span>${Asc.toFixed(2)} mm²</span>
+                </div>
+            `;
+        }
+        
+        // Initialize xu_max calculation
+        calculateXuMax();
+    </script>
+</body>
+</html>
