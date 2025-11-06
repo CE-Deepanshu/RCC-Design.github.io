@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Times New Roman", Times, serif;
         }
 
         body {
@@ -81,7 +81,7 @@
             position: relative;
         }
 
-        input, select {
+        input {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -90,7 +90,7 @@
             transition: all 0.3s;
         }
 
-        input:focus, select:focus {
+        input:focus {
             border-color: #3498db;
             outline: none;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
@@ -255,37 +255,27 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="fck">Concrete Grade (f<sub>ck</sub>)</label>
+                    <label for="fck">Concrete Compressive Strength (f<sub>ck</sub>)</label>
                     <div class="input-with-unit">
-                        <select id="fck">
-                            <option value="15">M15 (15 N/mm²)</option>
-                            <option value="20" selected>M20 (20 N/mm²)</option>
-                            <option value="25">M25 (25 N/mm²)</option>
-                            <option value="30">M30 (30 N/mm²)</option>
-                            <option value="35">M35 (35 N/mm²)</option>
-                            <option value="40">M40 (40 N/mm²)</option>
-                            <option value="45">M45 (45 N/mm²)</option>
-                            <option value="50">M50 (50 N/mm²)</option>
-                        </select>
+                        <input type="number" id="fck" placeholder="Enter fck value" step="0.1" min="0">
+                        <span class="unit">N/mm²</span>
                     </div>
+                    <div class="error-message" id="fck-error">Please enter a positive value</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="fy">Steel Grade (f<sub>y</sub>)</label>
+                    <label for="fy">Steel Yield Strength (f<sub>y</sub>)</label>
                     <div class="input-with-unit">
-                        <select id="fy">
-                            <option value="250">Fe 250 (250 N/mm²)</option>
-                            <option value="415" selected>Fe 415 (415 N/mm²)</option>
-                            <option value="500">Fe 500 (500 N/mm²)</option>
-                            <option value="550">Fe 550 (550 N/mm²)</option>
-                        </select>
+                        <input type="number" id="fy" placeholder="Enter fy value" step="1" min="0">
+                        <span class="unit">N/mm²</span>
                     </div>
+                    <div class="error-message" id="fy-error">Please enter a positive value</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="mu">Factored Moment (M<sub>u</sub>)</label>
                     <div class="input-with-unit">
-                        <input type="number" id="mu" placeholder="e.g., 50" step="0.1" min="0.1">
+                        <input type="number" id="mu" placeholder="e.g., 50" step="0.1" min="0">
                         <span class="unit">kN·m</span>
                     </div>
                     <div class="error-message" id="mu-error">Please enter a positive value</div>
@@ -294,19 +284,19 @@
                 <div class="form-group">
                     <label for="b">Width of Section (b)</label>
                     <div class="input-with-unit">
-                        <input type="number" id="b" placeholder="e.g., 230" step="1" min="100" max="1000">
+                        <input type="number" id="b" placeholder="e.g., 230" step="1" min="0">
                         <span class="unit">mm</span>
                     </div>
-                    <div class="error-message" id="b-error">Please enter a value between 100 and 1000</div>
+                    <div class="error-message" id="b-error">Please enter a positive value</div>
                 </div>
                 
                 <div class="form-group">
                     <label for="d">Effective Depth (d)</label>
                     <div class="input-with-unit">
-                        <input type="number" id="d" placeholder="e.g., 400" step="1" min="100" max="2000">
+                        <input type="number" id="d" placeholder="e.g., 400" step="1" min="0">
                         <span class="unit">mm</span>
                     </div>
-                    <div class="error-message" id="d-error">Please enter a value between 100 and 2000</div>
+                    <div class="error-message" id="d-error">Please enter a positive value</div>
                 </div>
                 
                 <button class="calculate-btn" id="calculate-btn">Calculate A<sub>st</sub></button>
@@ -367,7 +357,7 @@
             let isSlab = false;
             
             // Standard bar diameters available in Indian market (in mm)
-            const barSizes = [6, 8, 10, 12, 16, 20, 25, 32, 40];
+            const barSizes = [6, 8, 10, 12, 16, 20, 25, 28, 32, 36, 40];
             
             // Area of bars in mm² (π × d² / 4)
             const barAreas = {
@@ -378,7 +368,9 @@
                 16: 201.06,
                 20: 314.16,
                 25: 490.87,
+                28: 615.75,
                 32: 804.25,
+                36: 1017.88,
                 40: 1256.64
             };
             
@@ -415,20 +407,12 @@
                 
                 let isValid = true;
                 
-                switch(id) {
-                    case 'mu':
-                        isValid = value > 0;
-                        break;
-                    case 'b':
-                        isValid = value >= 100 && value <= 1000;
-                        break;
-                    case 'd':
-                        isValid = value >= 100 && value <= 2000;
-                        break;
-                }
+                // Only check if value is positive
+                isValid = value > 0;
                 
-                if (!isValid && value) {
+                if (!isValid && value !== undefined) {
                     errorElement.style.display = 'block';
+                    errorElement.textContent = 'Please enter a positive value';
                     input.style.borderColor = '#e74c3c';
                 } else {
                     errorElement.style.display = 'none';
@@ -455,7 +439,7 @@
                 });
                 
                 if (!allValid) {
-                    alert('Please correct the errors in the input fields.');
+                    alert('Please correct the errors in the input fields. All values must be positive.');
                     return;
                 }
                 
