@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AST Calculator - Flexural Reinforcement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+        }
+
+        .calculator-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .calculator-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .calculator-header p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .calculator-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .input-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 25px;
+            background: #f8f9fa;
+        }
+
+        .result-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 25px;
+            background: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-with-unit {
+            position: relative;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .unit {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .calculate-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .calculate-btn:hover {
+            background: #2980b9;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-left: 5px solid #3498db;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+
+        .result-unit {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .formula-display {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .reinforcement-suggestions {
+            background: #e8f4fc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .reinforcement-suggestions h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .suggestion-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-table th, .suggestion-table td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #d1ecf1;
+        }
+
+        .suggestion-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        .suggestion-table tr:nth-child(even) {
+            background-color: #f2f9fc;
+        }
+
+        .member-type-toggle {
+            display: flex;
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        .member-type-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .member-type-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .info-text {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-content {
+                flex-direction: column;
+            }
+            .suggestion-table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>A<sub>st</sub> Calculator for Flexural Members</h1>
+            <p>Calculate required steel area for beams and slabs using IS code formula</p>
+        </div>
+        
+        <div class="calculator-content">
+            <div class="input-section">
+                <div class="form-group">
+                    <label>Member Type</label>
+                    <div class="member-type-toggle">
+                        <div class="member-type-btn active" id="beam-btn">Beam</div>
+                        <div class="member-type-btn" id="slab-btn">Slab</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fck">Concrete Grade (f<sub>ck</sub>)</label>
+                    <div class="input-with-unit">
+                        <select id="fck">
+                            <option value="15">M15 (15 N/mm²)</option>
+                            <option value="20" selected>M20 (20 N/mm²)</option>
+                            <option value="25">M25 (25 N/mm²)</option>
+                            <option value="30">M30 (30 N/mm²)</option>
+                            <option value="35">M35 (35 N/mm²)</option>
+                            <option value="40">M40 (40 N/mm²)</option>
+                            <option value="45">M45 (45 N/mm²)</option>
+                            <option value="50">M50 (50 N/mm²)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fy">Steel Grade (f<sub>y</sub>)</label>
+                    <div class="input-with-unit">
+                        <select id="fy">
+                            <option value="250">Fe 250 (250 N/mm²)</option>
+                            <option value="415" selected>Fe 415 (415 N/mm²)</option>
+                            <option value="500">Fe 500 (500 N/mm²)</option>
+                            <option value="550">Fe 550 (550 N/mm²)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mu">Factored Moment (M<sub>u</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="mu" placeholder="e.g., 50" step="0.1" min="0.1">
+                        <span class="unit">kN·m</span>
+                    </div>
+                    <div class="error-message" id="mu-error">Please enter a positive value</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="b">Width of Section (b)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="b" placeholder="e.g., 230" step="1" min="100" max="1000">
+                        <span class="unit">mm</span>
+                    </div>
+                    <div class="error-message" id="b-error">Please enter a value between 100 and 1000</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="d">Effective Depth (d)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="d" placeholder="e.g., 400" step="1" min="100" max="2000">
+                        <span class="unit">mm</span>
+                    </div>
+                    <div class="error-message" id="d-error">Please enter a value between 100 and 2000</div>
+                </div>
+                
+                <button class="calculate-btn" id="calculate-btn">Calculate A<sub>st</sub></button>
+                
+                <div class="formula-display">
+                    A<sub>st</sub> = 0.5 × (f<sub>ck</sub>/f<sub>y</sub>) × [1 - √(1 - (4.6 × M<sub>u</sub> × 10<sup>6</sup>)/(f<sub>ck</sub> × b × d<sup>2</sup>))] × b × d
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <h2>Calculation Results</h2>
+                
+                <div class="result-box">
+                    <div>Required Steel Area</div>
+                    <div class="result-value" id="ast-value">0</div>
+                    <div class="result-unit">mm²</div>
+                </div>
+                
+                <div class="result-box">
+                    <div>Required Steel Area</div>
+                    <div class="result-value" id="ast-cm-value">0</div>
+                    <div class="result-unit">cm²</div>
+                </div>
+                
+                <div class="result-box">
+                    <div>Steel Percentage (p<sub>t</sub>)</div>
+                    <div class="result-value" id="steel-percentage">0</div>
+                    <div class="result-unit">%</div>
+                </div>
+                
+                <div class="reinforcement-suggestions">
+                    <h3>Suggested Reinforcement Options</h3>
+                    <div id="reinforcement-text">Enter values and calculate to see suggested reinforcement options</div>
+                    <table class="suggestion-table" id="suggestion-table" style="display: none;">
+                        <thead id="table-header">
+                            <!-- Table headers will be dynamically added -->
+                        </thead>
+                        <tbody id="suggestion-body">
+                        </tbody>
+                    </table>
+                    <div class="info-text" id="info-text"></div>
+                </div>
+                
+                <div class="formula-display">
+                    p<sub>t</sub> = (A<sub>st</sub> × 100) / (b × d)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const inputs = document.querySelectorAll('input');
+            const beamBtn = document.getElementById('beam-btn');
+            const slabBtn = document.getElementById('slab-btn');
+            const tableHeader = document.getElementById('table-header');
+            let isSlab = false;
+            
+            // Standard bar diameters available in Indian market (in mm)
+            const barSizes = [6, 8, 10, 12, 16, 20, 25, 32, 40];
+            
+            // Area of bars in mm² (π × d² / 4)
+            const barAreas = {
+                6: 28.27,
+                8: 50.27,
+                10: 78.54,
+                12: 113.10,
+                16: 201.06,
+                20: 314.16,
+                25: 490.87,
+                32: 804.25,
+                40: 1256.64
+            };
+            
+            // Set up member type toggle
+            beamBtn.addEventListener('click', function() {
+                beamBtn.classList.add('active');
+                slabBtn.classList.remove('active');
+                isSlab = false;
+                document.getElementById('b').placeholder = 'e.g., 230';
+                document.querySelector('label[for="b"]').textContent = 'Width of Beam (b)';
+            });
+            
+            slabBtn.addEventListener('click', function() {
+                slabBtn.classList.add('active');
+                beamBtn.classList.remove('active');
+                isSlab = true;
+                document.getElementById('b').placeholder = 'e.g., 1000';
+                document.querySelector('label[for="b"]').textContent = 'Width of Slab (b)';
+            });
+            
+            // Add event listeners for input validation
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    validateInput(this);
+                });
+            });
+            
+            calculateBtn.addEventListener('click', calculateAst);
+            
+            function validateInput(input) {
+                const id = input.id;
+                const value = parseFloat(input.value);
+                const errorElement = document.getElementById(`${id}-error`);
+                
+                let isValid = true;
+                
+                switch(id) {
+                    case 'mu':
+                        isValid = value > 0;
+                        break;
+                    case 'b':
+                        isValid = value >= 100 && value <= 1000;
+                        break;
+                    case 'd':
+                        isValid = value >= 100 && value <= 2000;
+                        break;
+                }
+                
+                if (!isValid && value) {
+                    errorElement.style.display = 'block';
+                    input.style.borderColor = '#e74c3c';
+                } else {
+                    errorElement.style.display = 'none';
+                    input.style.borderColor = '#e0e0e0';
+                }
+                
+                return isValid;
+            }
+            
+            function calculateAst() {
+                // Get input values
+                const fck = parseFloat(document.getElementById('fck').value);
+                const fy = parseFloat(document.getElementById('fy').value);
+                const mu = parseFloat(document.getElementById('mu').value);
+                const b = parseFloat(document.getElementById('b').value);
+                const d = parseFloat(document.getElementById('d').value);
+                
+                // Validate all inputs
+                let allValid = true;
+                inputs.forEach(input => {
+                    if (!validateInput(input)) {
+                        allValid = false;
+                    }
+                });
+                
+                if (!allValid) {
+                    alert('Please correct the errors in the input fields.');
+                    return;
+                }
+                
+                // Convert Mu from kN·m to N·mm
+                const muNmm = mu * 1e6;
+                
+                // Calculate the term inside the square root
+                const term = 1 - (4.6 * muNmm) / (fck * b * d * d);
+                
+                // Check if the term is valid (not negative)
+                if (term < 0) {
+                    alert('The section is over-reinforced! Increase section dimensions or use higher grade materials.');
+                    return;
+                }
+                
+                // Calculate Ast using the formula
+                const ast = 0.5 * (fck / fy) * (1 - Math.sqrt(term)) * b * d;
+                
+                // Display results
+                document.getElementById('ast-value').textContent = ast.toFixed(2);
+                document.getElementById('ast-cm-value').textContent = (ast / 100).toFixed(2);
+                
+                // Calculate steel percentage
+                const steelPercentage = (ast * 100) / (b * d);
+                document.getElementById('steel-percentage').textContent = steelPercentage.toFixed(3);
+                
+                // Suggest reinforcement options
+                suggestReinforcement(ast, b);
+            }
+            
+            function suggestReinforcement(ast, width) {
+                let suggestions = [];
+                
+                if (isSlab) {
+                    // For slabs, calculate spacing for all bar sizes
+                    tableHeader.innerHTML = `
+                        <tr>
+                            <th>Bar Diameter (mm)</th>
+                            <th>Spacing (mm)</th>
+                            <th>Area Provided (mm²/m)</th>
+                            <th>Difference (%)</th>
+                        </tr>
+                    `;
+                    
+                    for (let i = 0; i < barSizes.length; i++) {
+                        const size = barSizes[i];
+                        const area = barAreas[size];
+                        
+                        // Calculate spacing: (Area of one bar / Ast required) * 1000
+                        const spacing = Math.floor((area / ast) * 1000);
+                        
+                        // Check if spacing is within reasonable limits (75mm to 300mm)
+                        if (spacing >= 75 && spacing <= 300) {
+                            const areaProvided = (area * (1000 / spacing));
+                            const difference = ((areaProvided - ast) / ast * 100).toFixed(1);
+                            
+                            suggestions.push({
+                                size: size,
+                                spacing: spacing,
+                                areaProvided: areaProvided.toFixed(2),
+                                difference: difference
+                            });
+                        }
+                    }
+                    
+                    // Sort by closest to required area
+                    suggestions.sort((a, b) => Math.abs(a.difference) - Math.abs(b.difference));
+                    
+                    document.getElementById('info-text').textContent = 
+                        "Spacing calculated as: (Area of one bar / Required Ast) × 1000";
+                } else {
+                    // For beams, calculate number of bars for all sizes
+                    tableHeader.innerHTML = `
+                        <tr>
+                            <th>Bar Diameter (mm)</th>
+                            <th>No. of Bars</th>
+                            <th>Area Provided (mm²)</th>
+                            <th>Difference (%)</th>
+                        </tr>
+                    `;
+                    
+                    for (let i = 0; i < barSizes.length; i++) {
+                        const size = barSizes[i];
+                        const area = barAreas[size];
+                        
+                        // Calculate number of bars
+                        const numBars = Math.ceil(ast / area);
+                        
+                        // Check if number of bars is reasonable (up to 8 bars)
+                        if (numBars <= 8) {
+                            const areaProvided = (numBars * area);
+                            const difference = ((areaProvided - ast) / ast * 100).toFixed(1);
+                            
+                            suggestions.push({
+                                size: size,
+                                number: numBars,
+                                areaProvided: areaProvided.toFixed(2),
+                                difference: difference
+                            });
+                        }
+                    }
+                    
+                    // Sort by closest to required area
+                    suggestions.sort((a, b) => Math.abs(a.difference) - Math.abs(b.difference));
+                    
+                    document.getElementById('info-text').textContent = 
+                        "Number of bars calculated as: Required Ast / Area of one bar (rounded up)";
+                }
+                
+                // Display suggestions
+                const suggestionBody = document.getElementById('suggestion-body');
+                const table = document.getElementById('suggestion-table');
+                const reinforcementText = document.getElementById('reinforcement-text');
+                
+                // Clear previous suggestions
+                suggestionBody.innerHTML = '';
+                
+                if (suggestions.length > 0) {
+                    reinforcementText.style.display = 'none';
+                    table.style.display = 'table';
+                    
+                    // Show all suggestions (up to 10)
+                    const displaySuggestions = suggestions.slice(0, 10);
+                    
+                    displaySuggestions.forEach(suggestion => {
+                        const row = document.createElement('tr');
+                        
+                        if (isSlab) {
+                            row.innerHTML = `
+                                <td>${suggestion.size}</td>
+                                <td>${suggestion.spacing}</td>
+                                <td>${suggestion.areaProvided}</td>
+                                <td>${suggestion.difference}%</td>
+                            `;
+                        } else {
+                            row.innerHTML = `
+                                <td>${suggestion.size}</td>
+                                <td>${suggestion.number}</td>
+                                <td>${suggestion.areaProvided}</td>
+                                <td>${suggestion.difference}%</td>
+                            `;
+                        }
+                        
+                        suggestionBody.appendChild(row);
+                    });
+                } else {
+                    reinforcementText.style.display = 'block';
+                    reinforcementText.textContent = 'No suitable reinforcement options found. Try increasing section dimensions or using higher grade materials.';
+                    table.style.display = 'none';
+                    document.getElementById('info-text').textContent = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
