@@ -7,8 +7,6 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 <img width="1024" height="1024" alt="ChatGPT Image Sep 26, 2025, 08_53_18 PM" src="https://github.com/user-attachments/assets/13735fe4-4976-4555-a101-5a66a6b3c5f1" />
 
-https://github.com/user-attachments/assets/e995b611-f10e-4810-bc0f-009d0678f14a
-
 ---
 
 ## 🎯 Purpose of the website/ Repository
