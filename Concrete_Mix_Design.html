@@ -180,6 +180,35 @@
             color: #6c757d;
             cursor: not-allowed;
         }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+        }
+
+        .target-strength-display {
+            background-color: #e8f4fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-left: 4px solid #3498db;
+        }
+
+        .target-strength-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
     </style>
 </head>
 <body>
@@ -200,6 +229,10 @@
                     <div class="form-group">
                         <label for="grade">Grade of Concrete (fck in MPa):</label>
                         <input type="number" id="grade" min="10" max="100" step="1" value="40">
+                        <div class="target-strength-display" id="targetStrengthDisplay">
+                            <strong>Target Mean Strength:</strong> <span class="target-strength-value" id="targetStrengthValue">48.25 MPa</span>
+                            <div class="info-text">Calculated as f'<sub>ck</sub> = f<sub>ck</sub> + 1.65 × S</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col">
@@ -295,6 +328,19 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="useCustomWCRatio">
+                        <label for="useCustomWCRatio">Use custom Water-Cement Ratio</label>
+                    </div>
+                    <div class="form-group" id="customWCRatioGroup" style="display: none;">
+                        <label for="customWCRatio">Water-Cement Ratio:</label>
+                        <input type="number" id="customWCRatio" step="0.01" min="0.3" max="0.6" value="0.36">
+                        <div class="info-text">Note: This value will override the calculated water-cement ratio</div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="step-box">
@@ -354,7 +400,7 @@
                 f'<sub>ck</sub> = f<sub>ck</sub> + 1.65 × S<br>
                 f'<sub>ck</sub> = <span id="calcTargetStrength"></span> N/mm²
             </div>
-            <div class="result-item" id="targetStrength"></div>
+            <div class="result-item" id="targetStrengthResult"></div>
             <div class="result-item" id="waterCementRatio"></div>
             <div class="result-item" id="waterContent"></div>
             <div class="result-item" id="cementContent"></div>
@@ -386,8 +432,16 @@
     </div>
 
     <script>
+        // Initialize target strength display
+        updateTargetStrength();
+
+        // Add event listeners
         document.getElementById('calculateBtn').addEventListener('click', function() {
             calculateMixDesign();
+        });
+
+        document.getElementById('grade').addEventListener('input', function() {
+            updateTargetStrength();
         });
 
         // Add event listener to cement type to handle fly ash restrictions
@@ -405,6 +459,16 @@
             }
         });
 
+        // Add event listener for custom water-cement ratio checkbox
+        document.getElementById('useCustomWCRatio').addEventListener('change', function() {
+            const customWCRatioGroup = document.getElementById('customWCRatioGroup');
+            if (this.checked) {
+                customWCRatioGroup.style.display = 'block';
+            } else {
+                customWCRatioGroup.style.display = 'none';
+            }
+        });
+
         // Initialize fly ash input state based on default cement type
         document.addEventListener('DOMContentLoaded', function() {
             const cementType = document.getElementById('cementType').value;
@@ -415,6 +479,19 @@
                 flyAshInput.classList.add('disabled');
             }
         });
+
+        function updateTargetStrength() {
+            const grade = parseFloat(document.getElementById('grade').value);
+            const standardDeviation = getStandardDeviation(grade);
+            const targetMeanStrength = grade + 1.65 * standardDeviation;
+            
+            document.getElementById('targetStrengthValue').textContent = 
+                `${targetMeanStrength.toFixed(2)} MPa`;
+            
+            // Update the calculation display as well
+            document.getElementById('calcTargetStrength').textContent = 
+                `${grade} + 1.65 × ${standardDeviation} = ${targetMeanStrength.toFixed(2)}`;
+        }
 
         function calculateMixDesign() {
             // Get input values
@@ -435,6 +512,8 @@
             const waterReduction = parseFloat(document.getElementById('waterReduction').value);
             const slump = parseInt(document.getElementById('slump').value);
             const maxAggSize = parseInt(document.getElementById('maxAggSize').value);
+            const useCustomWCRatio = document.getElementById('useCustomWCRatio').checked;
+            const customWCRatio = parseFloat(document.getElementById('customWCRatio').value);
             
             // Calculate target mean strength
             const fck = grade;
@@ -449,8 +528,15 @@
             // Calculate water-cement ratio based on target strength
             let wcRatio = getWaterCementRatio(targetMeanStrength, cementType);
             
+            // Use custom water-cement ratio if selected
+            if (useCustomWCRatio) {
+                wcRatio = customWCRatio;
+            }
+            
             // Ensure w/c ratio doesn't exceed maximum for exposure
+            let wcRatioSource = useCustomWCRatio ? "User Provided" : "Calculated";
             if (wcRatio > maxWCRatio) {
+                wcRatioSource = "Adjusted (Exceeds Exposure Limit)";
                 wcRatio = maxWCRatio;
             }
             
@@ -536,11 +622,11 @@
             document.getElementById('calcTargetStrength').textContent = 
                 `${fck} + 1.65 × ${standardDeviation} = ${targetMeanStrength.toFixed(2)}`;
             
-            document.getElementById('targetStrength').innerHTML = 
+            document.getElementById('targetStrengthResult').innerHTML = 
                 `<strong>Target Mean Strength:</strong> ${targetMeanStrength.toFixed(2)} MPa`;
             
             document.getElementById('waterCementRatio').innerHTML = 
-                `<strong>Water-Cementitious Ratio:</strong> ${wcRatio.toFixed(2)}`;
+                `<strong>Water-Cementitious Ratio:</strong> ${wcRatio.toFixed(2)} (${wcRatioSource})`;
             
             document.getElementById('waterContent').innerHTML = 
                 `<strong>Water Content:</strong> ${waterContent.toFixed(2)} kg/m³`;
