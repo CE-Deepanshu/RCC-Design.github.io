@@ -20,17 +20,9 @@
 # Design Steps
 
 ## [Simply Supported Beam (Singly Reinforced Section)](deepseek_html_20250925_391524.html)
-### [Ast Calculator](Ast_Calculator_Flexure.html)
-
----
-
 ## [Simply Supported Beam (Doubly Reinforced Section)](Doubly_Reinforced.html)
-### [A_sc_&_A_st_Calculator.html](A_sc&A_stCalculator.html)
-
----
-
 ## [Continous Beam](Continous_Beam.html)
 
 ---
 
-
+# [Reinfy](Reinfy.html)
