@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinfy - RCC Design Calculator</title>
+    <style>
+        :root {
+            --primary-blue: #1a4b8c;
+            --secondary-blue: #2c6cb0;
+            --light-blue: #e8f1f8;
+            --accent-blue: #4a90e2;
+            --dark-blue: #0a2a53;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333333;
+            --success-green: #4caf50;
+            --warning-orange: #ff9800;
+            --error-red: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--light-blue);
+            color: var(--dark-gray);
+            font-family: 'Calibre', 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: var(--dark-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-family: 'Calibre', sans-serif;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            border-bottom: 2px solid var(--light-blue);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header i {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-family: 'Calibre', sans-serif;
+        }
+
+        .input-with-unit {
+            display: flex;
+            align-items: center;
+        }
+
+        input, select {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Calibre', sans-serif;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .unit {
+            margin-left: 10px;
+            color: var(--dark-gray);
+            font-weight: 500;
+            min-width: 50px;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Calibre', sans-serif;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-msg {
+            color: var(--error-red);
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .result-section {
+            margin-top: 20px;
+        }
+
+        .reinforcement-type {
+            padding: 15px;
+            background-color: var(--light-blue);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .type-label {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .result-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .result-item {
+            background-color: var(--light-blue);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .result-label {
+            font-weight: bold;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+            font-family: 'Calibre', sans-serif;
+        }
+
+        .result-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .result-unit {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-top: 5px;
+        }
+
+        .bar-selection {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: var(--light-blue);
+            border-radius: 8px;
+        }
+
+        .bar-selection-title {
+            margin-bottom: 15px;
+            color: var(--dark-blue);
+            font-size: 1.2rem;
+        }
+
+        .bar-input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .bar-results {
+            margin-top: 15px;
+        }
+
+        .bar-result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background-color: var(--white);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .compression-steel-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            border: 2px solid var(--secondary-blue);
+            display: none;
+        }
+
+        .compression-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .formula-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .formula-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .formula {
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: var(--light-blue);
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            font-size: 1rem;
+            border-left: 3px solid var(--primary-blue);
+            overflow-x: auto;
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--accent-blue);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .info-title {
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .credits {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .disclaimer {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--dark-gray);
+            border-top: 1px solid var(--medium-gray);
+            font-family: 'Calibre', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .calculator-grid {
+                gap: 15px;
+            }
+            
+            .result-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .bar-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Reinfy</div>
+            <p class="tagline">Advanced RCC Design Calculator for Singly and Doubly Reinforced Sections</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="calculator-grid">
+            <div class="card">
+                <div class="card-header">
+                    <i>📐</i>
+                    <h2 class="card-title">Section Parameters</h2>
+                </div>
+                
+                <div class="input-group">
+                    <label for="Mu">Ultimate Moment (M<sub>u</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="Mu" step="any" placeholder="Enter value">
+                        <span class="unit">kNm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="Mu_lim">Limiting Moment (M<sub>u,lim</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="Mu_lim" step="any" placeholder="Enter value">
+                        <span class="unit">kNm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fck">Concrete Strength (f<sub>ck</sub>)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="fck" step="any" placeholder="Enter value">
+                        <span class="unit">MPa</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fy">Steel Yield Strength (f<sub>y</sub>)</label>
+                    <div class="input-with-unit">
+                        <select id="fy">
+                            <option value="250">Fe 250 (250 MPa)</option>
+                            <option value="415" selected>Fe 415 (415 MPa)</option>
+                            <option value="500">Fe 500 (500 MPa)</option>
+                            <option value="550">Fe 550 (550 MPa)</option>
+                            <option value="custom">Custom Value</option>
+                        </select>
+                        <span class="unit">MPa</span>
+                    </div>
+                    <div id="customFyContainer" style="display: none; margin-top: 10px;">
+                        <div class="input-with-unit">
+                            <input type="number" id="customFy" step="any" placeholder="Enter custom fy value">
+                            <span class="unit">MPa</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="b">Width of Section (b)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="b" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="d">Effective Depth (d)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="d" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group" id="d_prime_group">
+                    <label for="d_prime">Compression Cover Depth (d')</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="d_prime" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" id="calculateBtn">
+                    Calculate Reinforcement
+                </button>
+                
+                <div class="error-msg" id="errorMsg">
+                    Please check your input values.
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">
+                        <i>ℹ️</i> Note
+                    </div>
+                    <p>For singly reinforced sections (M<sub>u</sub> ≤ M<sub>u,lim</sub>), only tension steel is required. For doubly reinforced sections (M<sub>u</sub> > M<sub>u,lim</sub>), both compression and tension steel are calculated.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <i>📊</i>
+                    <h2 class="card-title">Results</h2>
+                </div>
+                
+                <div class="result-section">
+                    <div class="reinforcement-type" id="reinforcementType">
+                        <span class="type-label">Reinforcement Type: </span>
+                        <span id="typeValue">Not Calculated</span>
+                    </div>
+                    
+                    <div class="result-container" id="resultsContainer">
+                        <p>Enter values and click "Calculate" to see results</p>
+                    </div>
+                    
+                    <!-- Tension Steel Bar Selection -->
+                    <div class="bar-selection">
+                        <h3 class="bar-selection-title">Tension Steel Bar Selection</h3>
+                        <div class="bar-input-group">
+                            <div class="input-group" style="flex: 1;">
+                                <label for="tensionBarDia">Bar Diameter</label>
+                                <select id="tensionBarDia">
+                                    <option value="6">6 mm</option>
+                                    <option value="8">8 mm</option>
+                                    <option value="10">10 mm</option>
+                                    <option value="12" selected>12 mm</option>
+                                    <option value="16">16 mm</option>
+                                    <option value="20">20 mm</option>
+                                    <option value="25">25 mm</option>
+                                    <option value="28">28 mm</option>
+                                    <option value="32">32 mm</option>
+                                </select>
+                            </div>
+                            <button class="calculate-btn" id="calculateTensionBars" style="width: auto; padding: 12px 20px; margin-top: 25px;">
+                                Calculate Bars
+                            </button>
+                        </div>
+                        
+                        <div class="bar-results" id="tensionBarResults">
+                            <p>Select bar diameter and click "Calculate Bars"</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Compression Steel Section (Only for Doubly Reinforced) -->
+                    <div class="compression-steel-section" id="compressionSteelSection">
+                        <h3 class="compression-title">
+                            <i>🔽</i> Compression Steel Bar Selection
+                        </h3>
+                        <div class="bar-input-group">
+                            <div class="input-group" style="flex: 1;">
+                                <label for="compressionBarDia">Bar Diameter</label>
+                                <select id="compressionBarDia">
+                                    <option value="6">6 mm</option>
+                                    <option value="8" selected>8 mm</option>
+                                    <option value="10">10 mm</option>
+                                    <option value="12">12 mm</option>
+                                    <option value="16">16 mm</option>
+                                    <option value="20">20 mm</option>
+                                </select>
+                            </div>
+                            <button class="calculate-btn" id="calculateCompressionBars" style="width: auto; padding: 12px 20px; margin-top: 25px;">
+                                Calculate Bars
+                            </button>
+                        </div>
+                        
+                        <div class="bar-results" id="compressionBarResults">
+                            <p>Select bar diameter and click "Calculate Bars"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="formula-section">
+            <h3 class="formula-title">Formulas Used</h3>
+            
+            <div class="formula">
+                For Singly Reinforced (M<sub>u</sub> ≤ M<sub>u,lim</sub>):<br>
+                A<sub>st</sub> = 0.5 × (f<sub>ck</sub>/f<sub>y</sub>) × [1 - √(1 - (4.6 × M<sub>u</sub> × 10<sup>6</sup>)/(f<sub>ck</sub> × b × d<sup>2</sup>))] × b × d
+            </div>
+            
+            <div class="formula">
+                For Doubly Reinforced (M<sub>u</sub> > M<sub>u,lim</sub>):<br>
+                A<sub>sc</sub> = (M<sub>u</sub> - M<sub>u,lim</sub>) / [f<sub>sc</sub> × (d - d')]<br>
+                f<sub>sc</sub> = [0.0035 × (x<sub>u,max</sub> - d') / x<sub>u,max</sub>] × E<sub>s</sub><br>
+                A<sub>st1</sub> = [0.36 × f<sub>ck</sub> × b × x<sub>u,max</sub>] / (0.87 × f<sub>y</sub>)<br>
+                A<sub>st2</sub> = (A<sub>sc</sub> × f<sub>sc</sub>) / (0.87 × f<sub>y</sub>)<br>
+                Total A<sub>st</sub> = A<sub>st1</sub> + A<sub>st2</sub>
+            </div>
+        </div>
+        
+        <div class="credits">
+            The website is created by Deepanshu / Civil Engineering Department / GNDEC, Ludhiana
+        </div>
+        
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> This website is made using AI and may contain some mistakes. Please verify all calculations with standard design codes before implementation.
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Reinfy - RCC Design Calculator &copy; 2023 | Structural Engineering Tool</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculateBtn');
+            const calculateTensionBarsBtn = document.getElementById('calculateTensionBars');
+            const calculateCompressionBarsBtn = document.getElementById('calculateCompressionBars');
+            const fySelect = document.getElementById('fy');
+            const customFyContainer = document.getElementById('customFyContainer');
+            const errorMsg = document.getElementById('errorMsg');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const reinforcementType = document.getElementById('reinforcementType');
+            const typeValue = document.getElementById('typeValue');
+            const tensionBarResults = document.getElementById('tensionBarResults');
+            const compressionBarResults = document.getElementById('compressionBarResults');
+            const compressionSteelSection = document.getElementById('compressionSteelSection');
+            
+            let currentAst = 0;
+            let currentAsc = 0;
+            let isDoubly = false;
+            
+            // Handle steel grade selection
+            fySelect.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customFyContainer.style.display = 'block';
+                } else {
+                    customFyContainer.style.display = 'none';
+                }
+            });
+            
+            // Calculate reinforcement
+            calculateBtn.addEventListener('click', function() {
+                // Get input values
+                const Mu = parseFloat(document.getElementById('Mu').value);
+                const Mu_lim = parseFloat(document.getElementById('Mu_lim').value);
+                const fck = parseFloat(document.getElementById('fck').value);
+                const b = parseFloat(document.getElementById('b').value);
+                const d = parseFloat(document.getElementById('d').value);
+                const d_prime = parseFloat(document.getElementById('d_prime').value);
+                
+                // Get fy value
+                let fy;
+                if (fySelect.value === 'custom') {
+                    fy = parseFloat(document.getElementById('customFy').value);
+                } else {
+                    fy = parseFloat(fySelect.value);
+                }
+                
+                // Validate inputs
+                errorMsg.style.display = 'none';
+                
+                if (isNaN(Mu) || isNaN(Mu_lim) || isNaN(fck) || isNaN(fy) || isNaN(b) || isNaN(d)) {
+                    errorMsg.textContent = 'Please enter all required values.';
+                    errorMsg.style.display = 'block';
+                    return;
+                }
+                
+                if (Mu <= Mu_lim) {
+                    // Singly reinforced section
+                    isDoubly = false;
+                    typeValue.textContent = 'Singly Reinforced Section';
+                    reinforcementType.style.borderLeftColor = '#4caf50';
+                    compressionSteelSection.style.display = 'none';
+                    
+                    // Calculate Ast using the formula for singly reinforced
+                    const muNmm = Mu * 1e6;
+                    const term = 1 - (4.6 * muNmm) / (fck * b * d * d);
+                    
+                    // Check if the term is valid (not negative)
+                    if (term < 0) {
+                        errorMsg.textContent = 'The section is over-reinforced! Increase section dimensions or use higher grade materials.';
+                        errorMsg.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Calculate Ast
+                    currentAst = 0.5 * (fck / fy) * (1 - Math.sqrt(term)) * b * d;
+                    currentAsc = 0;
+                    
+                    // Display results
+                    resultsContainer.innerHTML = `
+                        <div class="result-item">
+                            <div class="result-label">Required Steel Area</div>
+                            <div class="result-value">${currentAst.toFixed(2)}</div>
+                            <div class="result-unit">mm²</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Required Steel Area</div>
+                            <div class="result-value">${(currentAst / 100).toFixed(2)}</div>
+                            <div class="result-unit">cm²</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Steel Percentage (p<sub>t</sub>)</div>
+                            <div class="result-value">${((currentAst * 100) / (b * d)).toFixed(3)}</div>
+                            <div class="result-unit">%</div>
+                        </div>
+                    `;
+                } else {
+                    // Doubly reinforced section
+                    isDoubly = true;
+                    typeValue.textContent = 'Doubly Reinforced Section';
+                    reinforcementType.style.borderLeftColor = '#ff9800';
+                    compressionSteelSection.style.display = 'block';
+                    
+                    // Check if d_prime is provided
+                    if (isNaN(d_prime)) {
+                        errorMsg.textContent = 'For doubly reinforced sections, d\' (Compression Cover Depth) is required.';
+                        errorMsg.style.display = 'block';
+                        return;
+                    }
+                    
+                    if (d_prime >= d) {
+                        errorMsg.textContent = 'd\' must be less than d for valid calculation.';
+                        errorMsg.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Calculate xu_max based on steel grade
+                    let xuMaxRatio;
+                    if (fy <= 250) {
+                        xuMaxRatio = 0.53;
+                    } else if (fy <= 415) {
+                        xuMaxRatio = 0.48;
+                    } else if (fy <= 500) {
+                        xuMaxRatio = 0.46;
+                    } else {
+                        xuMaxRatio = 0.44;
+                    }
+                    
+                    const xu_max = xuMaxRatio * d;
+                    
+                    if (d_prime >= xu_max) {
+                        errorMsg.textContent = 'd\' must be less than x_{u,max} for valid calculation.';
+                        errorMsg.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Calculate f_sc
+                    const Es = 200000; // Modulus of elasticity of steel
+                    const f_sc = (0.0035 * (xu_max - d_prime) / xu_max) * Es;
+                    
+                    // Calculate A_sc
+                    currentAsc = (Mu - Mu_lim) * 1e6 / (f_sc * (d - d_prime));
+                    
+                    // Calculate A_st1
+                    const Ast1 = (0.36 * fck * b * xu_max) / (0.87 * fy);
+                    
+                    // Calculate A_st2
+                    const Ast2 = (currentAsc * f_sc) / (0.87 * fy);
+                    
+                    // Calculate total tension steel
+                    currentAst = Ast1 + Ast2;
+                    
+                    // Display results
+                    resultsContainer.innerHTML = `
+                        <div class="result-item">
+                            <div class="result-label">Compression Steel (A<sub>sc</sub>)</div>
+                            <div class="result-value">${currentAsc.toFixed(2)}</div>
+                            <div class="result-unit">mm²</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Tension Steel 1 (A<sub>st1</sub>)</div>
+                            <div class="result-value">${Ast1.toFixed(2)}</div>
+                            <div class="result-unit">mm²</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Tension Steel 2 (A<sub>st2</sub>)</div>
+                            <div class="result-value">${Ast2.toFixed(2)}</div>
+                            <div class="result-unit">mm²</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Total Tension Steel (A<sub>st</sub>)</div>
+                            <div class="result-value">${currentAst.toFixed(2)}</div>
+                            <div class="result-unit">mm²</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Stress in Compression Steel (f<sub>sc</sub>)</div>
+                            <div class="result-value">${f_sc.toFixed(2)}</div>
+                            <div class="result-unit">MPa</div>
+                        </div>
+                    `;
+                }
+                
+                // Reset bar results
+                tensionBarResults.innerHTML = '<p>Select bar diameter and click "Calculate Bars"</p>';
+                compressionBarResults.innerHTML = '<p>Select bar diameter and click "Calculate Bars"</p>';
+            });
+            
+            // Calculate number of tension bars
+            calculateTensionBarsBtn.addEventListener('click', function() {
+                if (currentAst === 0) {
+                    tensionBarResults.innerHTML = '<p>Please calculate reinforcement first</p>';
+                    return;
+                }
+                
+                const barDia = parseFloat(document.getElementById('tensionBarDia').value);
+                const areaPerBar = Math.PI * Math.pow(barDia/2, 2);
+                
+                const numBars = Math.ceil(currentAst / areaPerBar);
+                const providedArea = numBars * areaPerBar;
+                const excess = providedArea - currentAst;
+                
+                tensionBarResults.innerHTML = `
+                    <div class="bar-result-item">
+                        <div>
+                            <strong>Tension Steel (A<sub>st</sub>):</strong><br>
+                            ${numBars} bars of ${barDia} mm
+                        </div>
+                        <div>
+                            Provided: ${providedArea.toFixed(2)} mm²<br>
+                            Excess: ${excess.toFixed(2)} mm²
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Calculate number of compression bars
+            calculateCompressionBarsBtn.addEventListener('click', function() {
+                if (currentAsc === 0) {
+                    compressionBarResults.innerHTML = '<p>Please calculate reinforcement first</p>';
+                    return;
+                }
+                
+                const barDia = parseFloat(document.getElementById('compressionBarDia').value);
+                const areaPerBar = Math.PI * Math.pow(barDia/2, 2);
+                
+                const numBars = Math.ceil(currentAsc / areaPerBar);
+                const providedArea = numBars * areaPerBar;
+                const excess = providedArea - currentAsc;
+                
+                compressionBarResults.innerHTML = `
+                    <div class="bar-result-item">
+                        <div>
+                            <strong>Compression Steel (A<sub>sc</sub>):</strong><br>
+                            ${numBars} bars of ${barDia} mm
+                        </div>
+                        <div>
+                            Provided: ${providedArea.toFixed(2)} mm²<br>
+                            Excess: ${excess.toFixed(2)} mm²
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
