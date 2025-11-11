@@ -364,6 +364,56 @@
             font-family: 'Calibre', sans-serif;
         }
 
+        /* 2D Diagram Styles */
+        .diagram-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .diagram-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .diagram-container {
+            width: 100%;
+            height: 500px;
+            background-color: white;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-type-indicator {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: var(--light-blue);
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .under-reinforced {
+            color: var(--success-green);
+            border-left: 4px solid var(--success-green);
+        }
+
+        .balanced {
+            color: var(--warning-orange);
+            border-left: 4px solid var(--warning-orange);
+        }
+
+        .over-reinforced {
+            color: var(--error-red);
+            border-left: 4px solid var(--error-red);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -384,6 +434,10 @@
             .bar-input-group {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+            
+            .diagram-container {
+                height: 400px;
             }
         }
     </style>
@@ -457,9 +511,17 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="d">Effective Depth (d)</label>
+                    <label for="D">Overall Depth (D)</label>
                     <div class="input-with-unit">
-                        <input type="number" id="d" step="any" placeholder="Enter value">
+                        <input type="number" id="D" step="any" placeholder="Enter value">
+                        <span class="unit">mm</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="effective_cover">Effective Cover</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="effective_cover" step="any" placeholder="Enter value">
                         <span class="unit">mm</span>
                     </div>
                 </div>
@@ -511,15 +573,14 @@
                             <div class="input-group" style="flex: 1;">
                                 <label for="tensionBarDia">Bar Diameter</label>
                                 <select id="tensionBarDia">
-                                    <option value="6">6 mm</option>
                                     <option value="8">8 mm</option>
                                     <option value="10">10 mm</option>
                                     <option value="12" selected>12 mm</option>
                                     <option value="16">16 mm</option>
                                     <option value="20">20 mm</option>
                                     <option value="25">25 mm</option>
-                                    <option value="28">28 mm</option>
                                     <option value="32">32 mm</option>
+                                    <option value="40">40 mm</option>
                                 </select>
                             </div>
                             <button class="calculate-btn" id="calculateTensionBars" style="width: auto; padding: 12px 20px; margin-top: 25px;">
@@ -541,12 +602,14 @@
                             <div class="input-group" style="flex: 1;">
                                 <label for="compressionBarDia">Bar Diameter</label>
                                 <select id="compressionBarDia">
-                                    <option value="6">6 mm</option>
-                                    <option value="8" selected>8 mm</option>
+                                    <option value="8">8 mm</option>
                                     <option value="10">10 mm</option>
-                                    <option value="12">12 mm</option>
+                                    <option value="12" selected>12 mm</option>
                                     <option value="16">16 mm</option>
                                     <option value="20">20 mm</option>
+                                    <option value="25">25 mm</option>
+                                    <option value="32">32 mm</option>
+                                    <option value="40">40 mm</option>
                                 </select>
                             </div>
                             <button class="calculate-btn" id="calculateCompressionBars" style="width: auto; padding: 12px 20px; margin-top: 25px;">
@@ -559,6 +622,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- 2D Diagram Section -->
+        <div class="diagram-section">
+            <h3 class="diagram-title">Section Diagram</h3>
+            <div class="diagram-container" id="diagramContainer">
+                <canvas id="diagramCanvas"></canvas>
+            </div>
+            <div class="section-type-indicator" id="sectionTypeIndicator">
+                Section Type: Not Calculated
             </div>
         </div>
         
@@ -576,7 +650,8 @@
                 f<sub>sc</sub> = [0.0035 × (x<sub>u,max</sub> - d') / x<sub>u,max</sub>] × E<sub>s</sub><br>
                 A<sub>st1</sub> = [0.36 × f<sub>ck</sub> × b × x<sub>u,max</sub>] / (0.87 × f<sub>y</sub>)<br>
                 A<sub>st2</sub> = (A<sub>sc</sub> × f<sub>sc</sub>) / (0.87 × f<sub>y</sub>)<br>
-                Total A<sub>st</sub> = A<sub>st1</sub> + A<sub>st2</sub>
+                Total A<sub>st</sub> = A<sub>st1</sub> + A<sub>st2</sub><br>
+                Depth of Neutral Axis: x<sub>u</sub> = (0.87 × f<sub>y</sub> × A<sub>st</sub>) / (0.36 × f<sub>ck</sub> × b)
             </div>
         </div>
         
@@ -609,10 +684,289 @@
             const tensionBarResults = document.getElementById('tensionBarResults');
             const compressionBarResults = document.getElementById('compressionBarResults');
             const compressionSteelSection = document.getElementById('compressionSteelSection');
+            const diagramCanvas = document.getElementById('diagramCanvas');
+            const diagramContainer = document.getElementById('diagramContainer');
+            const sectionTypeIndicator = document.getElementById('sectionTypeIndicator');
             
             let currentAst = 0;
             let currentAsc = 0;
             let isDoubly = false;
+            let xu_max = 0;
+            let xu = 0;
+            let effectiveDepth = 0;
+            let sectionWidth = 0;
+            let overallDepth = 0;
+            let tensionBarDia = 12;
+            let compressionBarDia = 12;
+            let tensionNumBars = 0;
+            let compressionNumBars = 0;
+            
+            // Set up canvas
+            function setupCanvas() {
+                diagramCanvas.width = diagramContainer.clientWidth;
+                diagramCanvas.height = diagramContainer.clientHeight;
+            }
+            
+            setupCanvas();
+            window.addEventListener('resize', setupCanvas);
+            
+            // Draw arrowhead function
+            function drawArrowhead(ctx, x, y, angle, size) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(-size, -size/2);
+                ctx.lineTo(-size, size/2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+            
+            // Draw dimension line function
+            function drawDimensionLine(ctx, x1, y1, x2, y2, text, offset) {
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                
+                // Draw arrowheads
+                const angle1 = Math.atan2(y2 - y1, x2 - x1);
+                const angle2 = angle1 + Math.PI;
+                
+                drawArrowhead(ctx, x1, y1, angle1, 8);
+                drawArrowhead(ctx, x2, y2, angle2, 8);
+                
+                // Draw text
+                ctx.font = '12px Arial';
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                const textX = (x1 + x2) / 2 + offset.x;
+                const textY = (y1 + y2) / 2 + offset.y;
+                
+                ctx.fillText(text, textX, textY);
+            }
+            
+            // Draw the 2D diagram
+            function drawDiagram() {
+                const ctx = diagramCanvas.getContext('2d');
+                ctx.clearRect(0, 0, diagramCanvas.width, diagramCanvas.height);
+                
+                // Return if we don't have necessary data
+                if (sectionWidth === 0 || overallDepth === 0 || effectiveDepth === 0) {
+                    ctx.font = '16px Arial';
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Enter section dimensions and calculate to see diagram', diagramCanvas.width/2, diagramCanvas.height/2);
+                    return;
+                }
+                
+                // Calculate scaling factors
+                const scaleX = (diagramCanvas.width * 0.7) / sectionWidth;
+                const scaleY = (diagramCanvas.height * 0.7) / overallDepth;
+                const scale = Math.min(scaleX, scaleY);
+                
+                // Calculate offsets for centering
+                const offsetX = (diagramCanvas.width - sectionWidth * scale) / 2;
+                const offsetY = (diagramCanvas.height - overallDepth * scale) / 2 + 30;
+                
+                // Draw section outline
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(offsetX, offsetY, sectionWidth * scale, overallDepth * scale);
+                
+                // Draw neutral axis
+                if (xu > 0) {
+                    ctx.strokeStyle = '#00FF00'; // Dark neon green
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+                    ctx.moveTo(offsetX, offsetY + xu * scale);
+                    ctx.lineTo(offsetX + sectionWidth * scale, offsetY + xu * scale);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    
+                    // Label for neutral axis
+                    ctx.font = '12px Arial';
+                    ctx.fillStyle = 'black';
+                    ctx.fillText(`NA (${xu.toFixed(1)}mm)`, offsetX + 5, offsetY + xu * scale - 5);
+                }
+                
+                // Draw maximum neutral axis
+                if (xu_max > 0) {
+                    ctx.strokeStyle = '#FF8C00'; // Dark orange
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 3]);
+                    ctx.beginPath();
+                    ctx.moveTo(offsetX, offsetY + xu_max * scale);
+                    ctx.lineTo(offsetX + sectionWidth * scale, offsetY + xu_max * scale);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    
+                    // Label for maximum neutral axis
+                    ctx.font = '12px Arial';
+                    ctx.fillStyle = 'black';
+                    ctx.fillText(`Max NA (${xu_max.toFixed(1)}mm)`, offsetX + 5, offsetY + xu_max * scale - 5);
+                }
+                
+                // Draw tension reinforcement
+                if (tensionNumBars > 0) {
+                    const barDia = tensionBarDia;
+                    const barRadius = (barDia * scale) / 2;
+                    
+                    // Calculate bar positions with effective cover
+                    const spacing = (sectionWidth * scale - 2 * barRadius) / (tensionNumBars - 1);
+                    const effectiveCover = parseFloat(document.getElementById('effective_cover').value);
+                    
+                    for (let i = 0; i < tensionNumBars; i++) {
+                        const x = offsetX + barRadius + i * spacing;
+                        const y = offsetY + (overallDepth - effectiveCover) * scale;
+                        
+                        // Draw bar
+                        ctx.fillStyle = 'red';
+                        ctx.beginPath();
+                        ctx.arc(x, y, barRadius, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Draw leader line for the first bar (solid black with arrowhead)
+                        if (i === 0) {
+                            ctx.strokeStyle = 'black';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([]);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y - barRadius);
+                            ctx.lineTo(x, offsetY - 30);
+                            ctx.lineTo(offsetX + sectionWidth * scale + 50, offsetY - 30);
+                            ctx.stroke();
+                            
+                            // Draw arrowhead
+                            drawArrowhead(ctx, offsetX + sectionWidth * scale + 50, offsetY - 30, 0, 8);
+                            
+                            // Draw text
+                            ctx.font = '12px Arial';
+                            ctx.fillStyle = 'black';
+                            ctx.textAlign = 'left';
+                            ctx.fillText(`${tensionNumBars} bars of ${barDia}mm`, offsetX + sectionWidth * scale + 55, offsetY - 30);
+                        }
+                    }
+                    
+                    // Draw effective cover dimension
+                    drawDimensionLine(
+                        ctx, 
+                        offsetX + sectionWidth * scale + 10, 
+                        offsetY + overallDepth * scale, 
+                        offsetX + sectionWidth * scale + 10, 
+                        offsetY + (overallDepth - effectiveCover) * scale,
+                        `${effectiveCover}mm`,
+                        {x: 15, y: 0}
+                    );
+                }
+                
+                // Draw compression reinforcement
+                if (isDoubly && compressionNumBars > 0) {
+                    const barDia = compressionBarDia;
+                    const barRadius = (barDia * scale) / 2;
+                    
+                    // Calculate bar positions with effective cover
+                    const spacing = (sectionWidth * scale - 2 * barRadius) / (compressionNumBars - 1);
+                    const d_prime = parseFloat(document.getElementById('d_prime').value);
+                    
+                    for (let i = 0; i < compressionNumBars; i++) {
+                        const x = offsetX + barRadius + i * spacing;
+                        const y = offsetY + d_prime * scale;
+                        
+                        // Draw bar
+                        ctx.fillStyle = 'blue';
+                        ctx.beginPath();
+                        ctx.arc(x, y, barRadius, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Draw leader line for the first bar (solid black with arrowhead)
+                        if (i === 0) {
+                            ctx.strokeStyle = 'black';
+                            ctx.lineWidth = 1;
+                            ctx.setLineDash([]);
+                            ctx.beginPath();
+                            ctx.moveTo(x, y - barRadius);
+                            ctx.lineTo(x, offsetY - 60);
+                            ctx.lineTo(offsetX + sectionWidth * scale + 50, offsetY - 60);
+                            ctx.stroke();
+                            
+                            // Draw arrowhead
+                            drawArrowhead(ctx, offsetX + sectionWidth * scale + 50, offsetY - 60, 0, 8);
+                            
+                            // Draw text
+                            ctx.font = '12px Arial';
+                            ctx.fillStyle = 'black';
+                            ctx.textAlign = 'left';
+                            ctx.fillText(`${compressionNumBars} bars of ${barDia}mm`, offsetX + sectionWidth * scale + 55, offsetY - 60);
+                        }
+                    }
+                    
+                    // Draw effective cover dimension for compression bars
+                    drawDimensionLine(
+                        ctx, 
+                        offsetX + sectionWidth * scale + 30, 
+                        offsetY, 
+                        offsetX + sectionWidth * scale + 30, 
+                        offsetY + d_prime * scale,
+                        `${d_prime}mm`,
+                        {x: 15, y: 0}
+                    );
+                }
+                
+                // Draw section dimensions
+                drawDimensionLine(
+                    ctx,
+                    offsetX,
+                    offsetY + overallDepth * scale + 20,
+                    offsetX + sectionWidth * scale,
+                    offsetY + overallDepth * scale + 20,
+                    `${sectionWidth}mm`,
+                    {x: 0, y: 0}
+                );
+                
+                drawDimensionLine(
+                    ctx,
+                    offsetX - 20,
+                    offsetY,
+                    offsetX - 20,
+                    offsetY + overallDepth * scale,
+                    `${overallDepth}mm`,
+                    {x: 0, y: 0}
+                );
+                
+                // Draw labels
+                ctx.font = '14px Arial';
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'left';
+                ctx.fillText(`Effective Depth: ${effectiveDepth.toFixed(0)}mm`, offsetX, offsetY - 10);
+            }
+            
+            // Update section type indicator
+            function updateSectionTypeIndicator() {
+                if (xu === 0 || xu_max === 0) {
+                    sectionTypeIndicator.textContent = "Section Type: Not Calculated";
+                    sectionTypeIndicator.className = "section-type-indicator";
+                    return;
+                }
+                
+                if (xu < xu_max) {
+                    sectionTypeIndicator.textContent = "Section Type: Under Reinforced Section (xu < xu,max)";
+                    sectionTypeIndicator.className = "section-type-indicator under-reinforced";
+                } else if (Math.abs(xu - xu_max) < 0.01) {
+                    sectionTypeIndicator.textContent = "Section Type: Balanced Section (xu = xu,max)";
+                    sectionTypeIndicator.className = "section-type-indicator balanced";
+                } else {
+                    sectionTypeIndicator.textContent = "Section Type: Over Reinforced Section (xu > xu,max)";
+                    sectionTypeIndicator.className = "section-type-indicator over-reinforced";
+                }
+            }
             
             // Handle steel grade selection
             fySelect.addEventListener('change', function() {
@@ -630,8 +984,16 @@
                 const Mu_lim = parseFloat(document.getElementById('Mu_lim').value);
                 const fck = parseFloat(document.getElementById('fck').value);
                 const b = parseFloat(document.getElementById('b').value);
-                const d = parseFloat(document.getElementById('d').value);
+                const D = parseFloat(document.getElementById('D').value);
+                const effective_cover = parseFloat(document.getElementById('effective_cover').value);
                 const d_prime = parseFloat(document.getElementById('d_prime').value);
+                
+                // Store section dimensions for diagram
+                sectionWidth = b;
+                overallDepth = D;
+                
+                // Calculate effective depth
+                effectiveDepth = D - effective_cover;
                 
                 // Get fy value
                 let fy;
@@ -644,8 +1006,14 @@
                 // Validate inputs
                 errorMsg.style.display = 'none';
                 
-                if (isNaN(Mu) || isNaN(Mu_lim) || isNaN(fck) || isNaN(fy) || isNaN(b) || isNaN(d)) {
+                if (isNaN(Mu) || isNaN(Mu_lim) || isNaN(fck) || isNaN(fy) || isNaN(b) || isNaN(D) || isNaN(effective_cover)) {
                     errorMsg.textContent = 'Please enter all required values.';
+                    errorMsg.style.display = 'block';
+                    return;
+                }
+                
+                if (effectiveDepth <= 0) {
+                    errorMsg.textContent = 'Effective depth must be positive. Check your overall depth and effective cover values.';
                     errorMsg.style.display = 'block';
                     return;
                 }
@@ -659,7 +1027,7 @@
                     
                     // Calculate Ast using the formula for singly reinforced
                     const muNmm = Mu * 1e6;
-                    const term = 1 - (4.6 * muNmm) / (fck * b * d * d);
+                    const term = 1 - (4.6 * muNmm) / (fck * b * effectiveDepth * effectiveDepth);
                     
                     // Check if the term is valid (not negative)
                     if (term < 0) {
@@ -669,8 +1037,32 @@
                     }
                     
                     // Calculate Ast
-                    currentAst = 0.5 * (fck / fy) * (1 - Math.sqrt(term)) * b * d;
+                    currentAst = 0.5 * (fck / fy) * (1 - Math.sqrt(term)) * b * effectiveDepth;
                     currentAsc = 0;
+                    
+                    // Calculate xu_max
+                    let xuMaxRatio;
+                    if (fy <= 250) {
+                        xuMaxRatio = 0.53;
+                    } else if (fy <= 415) {
+                        xuMaxRatio = 0.48;
+                    } else if (fy <= 500) {
+                        xuMaxRatio = 0.46;
+                    } else {
+                        xuMaxRatio = 0.44;
+                    }
+                    
+                    xu_max = xuMaxRatio * effectiveDepth;
+                    
+                    // Calculate xu using the provided formula
+                    // First, get the current bar selection for tension
+                    tensionBarDia = parseFloat(document.getElementById('tensionBarDia').value);
+                    const areaPerBar = Math.PI * Math.pow(tensionBarDia/2, 2);
+                    tensionNumBars = Math.ceil(currentAst / areaPerBar);
+                    const providedAst = tensionNumBars * areaPerBar;
+                    
+                    // Now calculate xu with provided reinforcement
+                    xu = (0.87 * fy * providedAst) / (0.36 * fck * b);
                     
                     // Display results
                     resultsContainer.innerHTML = `
@@ -686,8 +1078,18 @@
                         </div>
                         <div class="result-item">
                             <div class="result-label">Steel Percentage (p<sub>t</sub>)</div>
-                            <div class="result-value">${((currentAst * 100) / (b * d)).toFixed(3)}</div>
+                            <div class="result-value">${((currentAst * 100) / (b * effectiveDepth)).toFixed(3)}</div>
                             <div class="result-unit">%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Neutral Axis Depth (x<sub>u</sub>)</div>
+                            <div class="result-value">${xu.toFixed(2)}</div>
+                            <div class="result-unit">mm</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Max Neutral Axis (x<sub>u,max</sub>)</div>
+                            <div class="result-value">${xu_max.toFixed(2)}</div>
+                            <div class="result-unit">mm</div>
                         </div>
                     `;
                 } else {
@@ -704,8 +1106,8 @@
                         return;
                     }
                     
-                    if (d_prime >= d) {
-                        errorMsg.textContent = 'd\' must be less than d for valid calculation.';
+                    if (d_prime >= effectiveDepth) {
+                        errorMsg.textContent = 'd\' must be less than effective depth for valid calculation.';
                         errorMsg.style.display = 'block';
                         return;
                     }
@@ -722,7 +1124,8 @@
                         xuMaxRatio = 0.44;
                     }
                     
-                    const xu_max = xuMaxRatio * d;
+                    xu_max = xuMaxRatio * effectiveDepth;
+                    xu = xu_max; // For doubly reinforced, we assume xu = xu_max
                     
                     if (d_prime >= xu_max) {
                         errorMsg.textContent = 'd\' must be less than x_{u,max} for valid calculation.';
@@ -734,17 +1137,29 @@
                     const Es = 200000; // Modulus of elasticity of steel
                     const f_sc = (0.0035 * (xu_max - d_prime) / xu_max) * Es;
                     
+                    // Limit f_sc to 0.87*fy
+                    const f_sc_limited = Math.min(f_sc, 0.87 * fy);
+                    
                     // Calculate A_sc
-                    currentAsc = (Mu - Mu_lim) * 1e6 / (f_sc * (d - d_prime));
+                    currentAsc = (Mu - Mu_lim) * 1e6 / (f_sc_limited * (effectiveDepth - d_prime));
                     
                     // Calculate A_st1
                     const Ast1 = (0.36 * fck * b * xu_max) / (0.87 * fy);
                     
                     // Calculate A_st2
-                    const Ast2 = (currentAsc * f_sc) / (0.87 * fy);
+                    const Ast2 = (currentAsc * f_sc_limited) / (0.87 * fy);
                     
                     // Calculate total tension steel
                     currentAst = Ast1 + Ast2;
+                    
+                    // Get bar details for diagram
+                    tensionBarDia = parseFloat(document.getElementById('tensionBarDia').value);
+                    const tensionAreaPerBar = Math.PI * Math.pow(tensionBarDia/2, 2);
+                    tensionNumBars = Math.ceil(currentAst / tensionAreaPerBar);
+                    
+                    compressionBarDia = parseFloat(document.getElementById('compressionBarDia').value);
+                    const compressionAreaPerBar = Math.PI * Math.pow(compressionBarDia/2, 2);
+                    compressionNumBars = Math.ceil(currentAsc / compressionAreaPerBar);
                     
                     // Display results
                     resultsContainer.innerHTML = `
@@ -770,8 +1185,18 @@
                         </div>
                         <div class="result-item">
                             <div class="result-label">Stress in Compression Steel (f<sub>sc</sub>)</div>
-                            <div class="result-value">${f_sc.toFixed(2)}</div>
+                            <div class="result-value">${f_sc_limited.toFixed(2)}</div>
                             <div class="result-unit">MPa</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Neutral Axis Depth (x<sub>u</sub>)</div>
+                            <div class="result-value">${xu.toFixed(2)}</div>
+                            <div class="result-unit">mm</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Max Neutral Axis (x<sub>u,max</sub>)</div>
+                            <div class="result-value">${xu_max.toFixed(2)}</div>
+                            <div class="result-unit">mm</div>
                         </div>
                     `;
                 }
@@ -779,6 +1204,12 @@
                 // Reset bar results
                 tensionBarResults.innerHTML = '<p>Select bar diameter and click "Calculate Bars"</p>';
                 compressionBarResults.innerHTML = '<p>Select bar diameter and click "Calculate Bars"</p>';
+                
+                // Update section type indicator
+                updateSectionTypeIndicator();
+                
+                // Draw the diagram
+                drawDiagram();
             });
             
             // Calculate number of tension bars
@@ -788,25 +1219,51 @@
                     return;
                 }
                 
-                const barDia = parseFloat(document.getElementById('tensionBarDia').value);
-                const areaPerBar = Math.PI * Math.pow(barDia/2, 2);
+                tensionBarDia = parseFloat(document.getElementById('tensionBarDia').value);
+                const areaPerBar = Math.PI * Math.pow(tensionBarDia/2, 2);
                 
-                const numBars = Math.ceil(currentAst / areaPerBar);
-                const providedArea = numBars * areaPerBar;
+                tensionNumBars = Math.ceil(currentAst / areaPerBar);
+                const providedArea = tensionNumBars * areaPerBar;
                 const excess = providedArea - currentAst;
+                
+                // Recalculate xu with provided reinforcement
+                const fck = parseFloat(document.getElementById('fck').value);
+                const b = parseFloat(document.getElementById('b').value);
+                let fy;
+                if (fySelect.value === 'custom') {
+                    fy = parseFloat(document.getElementById('customFy').value);
+                } else {
+                    fy = parseFloat(fySelect.value);
+                }
+                
+                xu = (0.87 * fy * providedArea) / (0.36 * fck * b);
+                
+                // Check if width is 1000mm and calculate spacing
+                let spacingInfo = '';
+                
+                if (b === 1000) {
+                    const spacing = (areaPerBar / currentAst) * 1000;
+                    spacingInfo = `<br>Spacing (c/c): ${spacing.toFixed(2)} mm`;
+                }
                 
                 tensionBarResults.innerHTML = `
                     <div class="bar-result-item">
                         <div>
                             <strong>Tension Steel (A<sub>st</sub>):</strong><br>
-                            ${numBars} bars of ${barDia} mm
+                            ${tensionNumBars} bars of ${tensionBarDia} mm
                         </div>
                         <div>
                             Provided: ${providedArea.toFixed(2)} mm²<br>
-                            Excess: ${excess.toFixed(2)} mm²
+                            Excess: ${excess.toFixed(2)} mm²${spacingInfo}
                         </div>
                     </div>
                 `;
+                
+                // Update section type indicator
+                updateSectionTypeIndicator();
+                
+                // Update diagram
+                drawDiagram();
             });
             
             // Calculate number of compression bars
@@ -816,25 +1273,37 @@
                     return;
                 }
                 
-                const barDia = parseFloat(document.getElementById('compressionBarDia').value);
-                const areaPerBar = Math.PI * Math.pow(barDia/2, 2);
+                compressionBarDia = parseFloat(document.getElementById('compressionBarDia').value);
+                const areaPerBar = Math.PI * Math.pow(compressionBarDia/2, 2);
                 
-                const numBars = Math.ceil(currentAsc / areaPerBar);
-                const providedArea = numBars * areaPerBar;
+                compressionNumBars = Math.ceil(currentAsc / areaPerBar);
+                const providedArea = compressionNumBars * areaPerBar;
                 const excess = providedArea - currentAsc;
+                
+                // Check if width is 1000mm and calculate spacing
+                const b = parseFloat(document.getElementById('b').value);
+                let spacingInfo = '';
+                
+                if (b === 1000) {
+                    const spacing = (areaPerBar / currentAsc) * 1000;
+                    spacingInfo = `<br>Spacing (c/c): ${spacing.toFixed(2)} mm`;
+                }
                 
                 compressionBarResults.innerHTML = `
                     <div class="bar-result-item">
                         <div>
                             <strong>Compression Steel (A<sub>sc</sub>):</strong><br>
-                            ${numBars} bars of ${barDia} mm
+                            ${compressionNumBars} bars of ${compressionBarDia} mm
                         </div>
                         <div>
                             Provided: ${providedArea.toFixed(2)} mm²<br>
-                            Excess: ${excess.toFixed(2)} mm²
+                            Excess: ${excess.toFixed(2)} mm²${spacingInfo}
                         </div>
                     </div>
                 `;
+                
+                // Update diagram
+                drawDiagram();
             });
         });
     </script>
