@@ -18,3 +18,8 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 **Disclaimer:** All rights and credits reserved to the respective owner(s) of the uploaded content/images. The uploaded content is solely for educational purpose. If you are the main copyright owner, contact to claim credit or content removal.
 
+<p align="center">
+  <a href="https://github.com/CE-Deepanshu/RCC-Design.github.io">
+    <img src="https://img.shields.io/badge/dynamic/json?color=blueviolet&label=Visitors&query=value&url=https://api.countapi.xyz/hit/CE-Deepanshu.RCC-Design.github.io/visits&style=for-the-badge&logo=github" alt="Visitor Count" />
+  </a>
+</p>
