@@ -27,18 +27,13 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 <!-- LIKE / DISLIKE BUTTONS -->
   
 [![Like](https://img.shields.io/badge/👍%20LIKE-green?style=for-the-badge&logoColor=white)](https://ce-deepanshu.github.io/RCC-Design.github.io/)
-&nbsp;&nbsp;
 [![Dislike](https://img.shields.io/badge/👎%20DISLIKE-red?style=for-the-badge&logoColor=white)](https://ce-deepanshu.github.io/RCC-Design.github.io/)
-
-<br><br>
 
 <!-- COUNTERS -->
 
 <!-- LIKE COUNTER -->
 <img src="https://img.shields.io/badge/👍_Likes-green?style=for-the-badge&logoColor=white"/>
 <img src="https://img.shields.io/badge/0-000000?style=for-the-badge&logoColor=white"/>
-
-&nbsp;&nbsp;
 
 <!-- DISLIKE COUNTER -->
 <img src="https://img.shields.io/badge/👎_Dislikes-red?style=for-the-badge&logoColor=white"/>
