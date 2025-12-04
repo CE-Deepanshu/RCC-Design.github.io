@@ -24,7 +24,7 @@ This repository covers essential design workflows for major RCC components, foll
 - Design of dog-legged and open-well staircases
 - Includes effective span, load calculation, reinforcement detailing
 
-### 🧱 Retaining Walls
+### 🧱 [Retaining Walls](Retaining_Wall.md)
 - Design of cantilever and counterfort retaining walls
 - Covers earth pressure theory, stability checks, and reinforcement zones
 
