@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Steps of Cantilever Retaining Wall</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Times New Roman", serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fdf6f0 0%, #fffaf5 100%);
+            color: #222;
+            line-height: 1.7;
+            padding: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.15), 
+                        0 2px 10px rgba(0, 255, 255, 0.08);
+            padding: 40px;
+            border-left: 8px solid #ff1493;
+            border-right: 1px solid rgba(255, 20, 147, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff1493, #00ffff, #ff1493);
+            z-index: 1;
+        }
+        
+        h1, h2, h3 {
+            color: #d40078;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #00ffff;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: 32px;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 30%;
+            right: 30%;
+            height: 1px;
+            background: rgba(255, 20, 147, 0.3);
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 35px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        h2 i {
+            color: #00ffff;
+            font-size: 22px;
+        }
+        
+        h3 {
+            font-size: 20px;
+            margin-top: 25px;
+            color: #ff1493;
+            padding-left: 10px;
+            border-left: 4px solid #00ffff;
+        }
+        
+        .step-section {
+            background: linear-gradient(to right, #fff 0%, #fff9fb 100%);
+            border: 2px solid rgba(255, 20, 147, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.05);
+        }
+        
+        .step-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.15), 
+                        0 0 0 1px rgba(0, 255, 255, 0.1);
+            border-color: rgba(255, 20, 147, 0.4);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ff1493;
+            color: white;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            box-shadow: 0 3px 8px rgba(255, 20, 147, 0.4);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            font-size: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid rgba(255, 20, 147, 0.3);
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .data-table th {
+            background: linear-gradient(to bottom, #ff1493, #d40078);
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid #00ffff;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: rgba(255, 20, 147, 0.03);
+        }
+        
+        .data-table tr:hover {
+            background-color: rgba(0, 255, 255, 0.05);
+        }
+        
+        .formula-box {
+            background: linear-gradient(145deg, #fff 0%, #f8f7ff 100%);
+            border: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: "Times New Roman", serif;
+            font-size: 17px;
+            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .formula-box::before {
+            content: "Formula";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #00ffff;
+            color: #005577;
+            font-weight: bold;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .formula {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            border-left: 4px solid #ff1493;
+        }
+        
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 5px;
+        }
+        
+        .fraction span {
+            display: block;
+            padding: 0 8px;
+        }
+        
+        .fraction .numerator {
+            border-bottom: 2px solid #ff1493;
+            padding-bottom: 3px;
+            font-weight: bold;
+        }
+        
+        .fraction .denominator {
+            padding-top: 3px;
+            font-weight: bold;
+        }
+        
+        .given-data {
+            background: linear-gradient(to right, rgba(255, 20, 147, 0.08), rgba(0, 255, 255, 0.08));
+            border-left: 5px solid #ff1493;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .given-data::before {
+            content: "Given Data";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ff1493;
+            color: white;
+            font-weight: bold;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            box-shadow: 0 3px 8px rgba(255, 20, 147, 0.4);
+        }
+        
+        .note {
+            background: linear-gradient(to right, rgba(0, 255, 255, 0.1), rgba(255, 255, 255, 0.8));
+            border-left: 5px solid #00ffff;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 3px 10px rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .note::before {
+            content: "Note";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #00ffff;
+            color: #005577;
+            font-weight: bold;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .input-field {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px dashed #ff1493;
+            text-align: center;
+            margin: 0 8px;
+            font-weight: bold;
+            color: #d40078;
+            padding: 0 5px 5px;
+            font-size: 16px;
+            background: rgba(255, 20, 147, 0.05);
+            border-radius: 4px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+            color: #666;
+            font-size: 15px;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 30%;
+            right: 30%;
+            height: 2px;
+            background: rgba(255, 20, 147, 0.3);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 20, 147, 0.15) 0%, rgba(255, 20, 147, 0) 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .sub-heading {
+            color: #ff1493;
+            font-weight: bold;
+            margin-top: 15px;
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(255, 20, 147, 0.1);
+            border-radius: 4px;
+        }
+        
+        @media print {
+            .container {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            
+            .step-section {
+                break-inside: avoid;
+                border: 1px solid #ccc;
+            }
+        }
+        
+        /* Neon glow effect */
+        .neon-glow {
+            text-shadow: 0 0 5px rgba(255, 20, 147, 0.7), 
+                         0 0 10px rgba(255, 20, 147, 0.5),
+                         0 0 15px rgba(255, 20, 147, 0.3);
+        }
+        
+        .neon-glow-blue {
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 
+                         0 0 10px rgba(0, 255, 255, 0.5),
+                         0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .formula-box:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 
+                        0 0 25px rgba(255, 20, 147, 0.2);
+        }
+        
+        .header-design {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header-design h1 {
+            font-size: 36px;
+            color: #ff1493;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .header-design p {
+            color: #00aaff;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-design">
+            <h1 class="neon-glow">Design Steps of Cantilever Retaining Wall</h1>
+            <p class="neon-glow-blue">Structural Engineering Design Procedure</p>
+        </div>
+        
+        <div class="given-data">
+            <h2><i class="fas fa-clipboard-list"></i> Given Data:</h2>
+            <p>Height of wall = <span class="input-field" contenteditable="true"></span> m</p>
+            <p>Angle of inclination of backfill (δ) = <span class="input-field" contenteditable="true"></span> degree</p>
+            <p>Unit weight of backfill soil = <span class="input-field" contenteditable="true"></span> kN/m²</p>
+            <p>Angle of internal friction (ɸ) = <span class="input-field" contenteditable="true"></span> degree</p>
+            <p>Exposure Condition = <span class="input-field" contenteditable="true"></span></p>
+            <p>Safe bearing capacity of soil (q<sub>u</sub>) = <span class="input-field" contenteditable="true"></span> kN/m²</p>
+            <p>Coefficient of friction (μ) = <span class="input-field" contenteditable="true"></span> (unitless)</p>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 1</div>
+            <h2><i class="fas fa-ruler-combined"></i> Computation of Initial Dimensions of the Wall</h2>
+            
+            <h3>1. Depth of foundation</h3>
+            <div class="formula-box">
+                <div class="formula">
+                    D<sub>f</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">q₀(1 - sinɸ)²</span>
+                        <span class="denominator">γₛ(1 + sinɸ)</span>
+                    </div>
+                </div>
+            </div>
+            <p>Overall depth of retaining wall = D<sub>f</sub> + wall height = <span class="input-field" contenteditable="true"></span> m = H</p>
+            
+            <h3>2. Select the initial sizes</h3>
+            <ul>
+                <li>Width of footing = B = 0.5H to 0.7H = <span class="input-field" contenteditable="true"></span> m</li>
+                <li>Width of heel = 0.5B = <span class="input-field" contenteditable="true"></span> m</li>
+                <li>Thickness of base slab = H/12 = <span class="input-field" contenteditable="true"></span> mm</li>
+                <li>Adopt top thickness of stem = <span class="input-field" contenteditable="true"></span> mm</li>
+                <li>Height of stem = overall depth of retaining wall − thickness of base slab</li>
+            </ul>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 2</div>
+            <h2><i class="fas fa-calculator"></i> Calculate the forces and moments acting on the wall</h2>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Notation</th>
+                        <th>Item</th>
+                        <th>Force (kN)</th>
+                        <th>Distance from Heel (m)</th>
+                        <th>Moment about top of toe (kNm) = Force × distance from heel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>W₁</td>
+                        <td>Footing Rectangular</td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>W₂</td>
+                        <td>Portion of wall Triangular</td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>W₃</td>
+                        <td>Portion of wall</td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>W₄</td>
+                        <td>Soil on heel</td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>W₅</td>
+                        <td>Soil in inclined slope</td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                        <td><span class="input-field" contenteditable="true"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Force Calculation (kN)</h3>
+            <ol>
+                <li>W₁ = B × thickness of base slab × concrete density (25 kN/m³)</li>
+                <li>W₂ = width of rectangular portion of wall × (overall depth of wall - B) × 25</li>
+                <li>W₃ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">(B - width of rectangular portion of wall) × (overall depth of wall - B) × 25</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+                <li>W₄ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">(overall depth of wall - B) × heel width × γₛ</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+                <li>W₅ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">width of heel × height of slope (backfill) × γₛ</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+            </ol>
+            
+            <h3>Distance from Heel (m)</h3>
+            <ol>
+                <li>W₁ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">Width of footing</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+                <li>W₂ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">width of footing</span>
+                        <span class="denominator">2</span>
+                    </div> + 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">top width of wall</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+                <li>W₃ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">width of footing</span>
+                        <span class="denominator">2</span>
+                    </div> + top width of wall + 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">width of rectangular portion</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+                <li>W₄ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">Width of footing</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </li>
+                <li>W₅ = 
+                    <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                        <span class="numerator">Width of backfill slope</span>
+                        <span class="denominator">3</span>
+                    </div>
+                </li>
+            </ol>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 4</div>
+            <h2><i class="fas fa-mountain"></i> Calculation of Earth Pressure (kN)</h2>
+            
+            <h3>When the surface is inclined</h3>
+            <p class="sub-heading">Active Earth Pressure:</p>
+            <div class="formula-box">
+                <div class="formula">
+                    P<sub>a</sub> = K<sub>a</sub>γₛ
+                    <div class="fraction">
+                        <span class="numerator">H²</span>
+                        <span class="denominator">2</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> kN
+                </div>
+                <p>Where:</p>
+                <div class="formula">
+                    K<sub>a</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">cosδ - √(cos²δ - cos²ɸ)</span>
+                        <span class="denominator">cosδ + √(cos²δ - cos²ɸ)</span>
+                    </div>
+                </div>
+                <div class="formula">H = overall height of wall + height of inclined portion</div>
+                <p>∴ Height of inclined portion = width of heel × tan δ</p>
+            </div>
+            
+            <p class="sub-heading">Passive Earth Pressure:</p>
+            <div class="formula-box">
+                <div class="formula">
+                    P<sub>p</sub> = K<sub>p</sub>γₛ
+                    <div class="fraction">
+                        <span class="numerator">H²</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </div>
+                <p>Where:</p>
+                <div class="formula">
+                    K<sub>p</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">cosδ + √(cos²δ - cos²ɸ)</span>
+                        <span class="denominator">cosδ - √(cos²δ - cos²ɸ)</span>
+                    </div>
+                </div>
+                <div class="formula">H = overall height of wall + height of inclined portion</div>
+                <p>Height of inclined portion = width of heel × tan δ</p>
+            </div>
+            
+            <h3>When the surface is flat</h3>
+            <p class="sub-heading">Passive Pressure:</p>
+            <div class="formula-box">
+                <div class="formula">
+                    P<sub>p</sub> = K<sub>p</sub>γₛ
+                    <div class="fraction">
+                        <span class="numerator">H²</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </div>
+                <div class="formula">
+                    K<sub>p</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">1 + sinɸ</span>
+                        <span class="denominator">1 - sinɸ</span>
+                    </div> = tan²(45° + ɸ/2)
+                </div>
+            </div>
+            
+            <p class="sub-heading">Active Pressure (Flat Surface):</p>
+            <div class="formula-box">
+                <div class="formula">
+                    P<sub>a</sub> = K<sub>a</sub>γₛ
+                    <div class="fraction">
+                        <span class="numerator">H²</span>
+                        <span class="denominator">2</span>
+                    </div>
+                </div>
+                <div class="formula">
+                    K<sub>a</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">1 - sinɸ</span>
+                        <span class="denominator">1 + sinɸ</span>
+                    </div> = tan²(45° - ɸ/2)
+                </div>
+                <div class="formula">H = overall height of wall + height of inclined portion</div>
+                <p>Height of inclined portion = width of heel × tan δ</p>
+            </div>
+            
+            <div class="note">
+                <p><span class="highlight">Vertical force component:</span> P<sub>a</sub>·sinδ</p>
+                <p><span class="highlight">Horizontal force component:</span> P<sub>a</sub>·cosδ</p>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 5</div>
+            <h2><i class="fas fa-balance-scale"></i> Check for Stability</h2>
+            
+            <div class="formula-box">
+                <div class="formula">
+                    Overturning Moment = M<sub>o</sub> = P<sub>a</sub>cosδ · 
+                    <div class="fraction">
+                        <span class="numerator">H'</span>
+                        <span class="denominator">3</span>
+                    </div>
+                </div>
+                <div class="formula">
+                    Distance of resultant vertical force from heel: x = 
+                    <div class="fraction">
+                        <span class="numerator">ΣM</span>
+                        <span class="denominator">ΣW</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> m
+                </div>
+                <div class="formula">
+                    Stabilizing moment about toe: M<sub>r</sub> = ΣW(B - x) = <span class="input-field" contenteditable="true"></span> kNm
+                </div>
+                <div class="formula">
+                    Factor of Safety: FOS<sub>overturning</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">0.9M<sub>r</sub></span>
+                        <span class="denominator">M<sub>o</sub></span>
+                    </div> > 1.4
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 6</div>
+            <h2><i class="fas fa-compress-arrows-alt"></i> Soil Pressure Below Footing</h2>
+            
+            <div class="formula-box">
+                <div class="formula">
+                    x₁ = 
+                    <div class="fraction">
+                        <span class="numerator">ΣM + M<sub>o</sub></span>
+                        <span class="denominator">ΣW</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> m
+                </div>
+                <div class="formula">
+                    e = x₁ - 
+                    <div class="fraction">
+                        <span class="numerator">B</span>
+                        <span class="denominator">2</span>
+                    </div> < 
+                    <div class="fraction">
+                        <span class="numerator">B</span>
+                        <span class="denominator">6</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> m
+                </div>
+                <p class="note">(Required: resultant must lie in middle third of base)</p>
+                <div class="formula">
+                    q<sub>max</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">ΣW</span>
+                        <span class="denominator">B</span>
+                    </div> 
+                    (1 + 
+                    <div class="fraction">
+                        <span class="numerator">6e</span>
+                        <span class="denominator">B</span>
+                    </div>) = <span class="input-field" contenteditable="true"></span> kN/mm²
+                </div>
+                <div class="formula">
+                    q<sub>min</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">ΣW</span>
+                        <span class="denominator">B</span>
+                    </div> 
+                    (1 - 
+                    <div class="fraction">
+                        <span class="numerator">6e</span>
+                        <span class="denominator">B</span>
+                    </div>) = <span class="input-field" contenteditable="true"></span> kN/mm²
+                </div>
+                <p class="note">q<sub>min</sub> > 0 ⇒ No tension in soil.</p>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 7</div>
+            <h2><i class="fas fa-sliders-h"></i> Check for Stability Against Sliding</h2>
+            
+            <p><span class="highlight">Sliding force =</span></p>
+            <ul>
+                <li>P<sub>a</sub>cosδ (inclined)</li>
+                <li>P<sub>a</sub> (flat)</li>
+            </ul>
+            
+            <p><span class="highlight">Resisting force:</span></p>
+            <div class="formula-box">
+                <div class="formula">
+                    F = μΣW = <span class="input-field" contenteditable="true"></span> kN
+                </div>
+                <div class="formula">
+                    FOS<sub>sliding</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">0.9F</span>
+                        <span class="denominator">P<sub>a</sub>cosδ</span>
+                    </div> > 1.4
+                </div>
+                <p class="note">(If < 1.4 → provide shear key)</p>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 8</div>
+            <h2><i class="fas fa-key"></i> Design of Shear Key</h2>
+            
+            <p>Width of key = 300 mm</p>
+            <p>Depth = <span class="input-field" contenteditable="true"></span> mm</p>
+            <p>Distance from toe = <span class="input-field" contenteditable="true"></span> m</p>
+            
+            <p>For computing the passive earth pressure below the toe, top overburden of <span class="input-field" contenteditable="true"></span> mm (width of key) neglected.</p>
+            
+            <div class="formula-box">
+                <div class="formula">
+                    η₁ = depth from top of road surface - a
+                </div>
+                <div class="formula">
+                    b = distance from toe × tanɸ
+                </div>
+                <div class="formula">
+                    P<sub>p</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">1</span>
+                        <span class="denominator">2</span>
+                    </div> γₛ K<sub>p</sub> (η₁ + a + b)² = <span class="input-field" contenteditable="true"></span> kN
+                </div>
+                <div class="formula">
+                    Factor of safety against sliding: FOS<sub>Sliding</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">0.9(P<sub>p</sub> + F)</span>
+                        <span class="denominator">P<sub>a</sub>cosδ</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> > 1.4
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 9</div>
+            <h2><i class="fas fa-th"></i> Design of Toe Slab</h2>
+            
+            <p>Pressure due to self-weight of toe slab: 25 × B = <span class="input-field" contenteditable="true"></span> kN/m²</p>
+            <p>Clear cover = <span class="input-field" contenteditable="true"></span> mm</p>
+            
+            <div class="formula-box">
+                <div class="formula">
+                    Effective depth: d = D - CC - 
+                    <div class="fraction">
+                        <span class="numerator">ɸ</span>
+                        <span class="denominator">2</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> N/mm²
+                </div>
+                <div class="formula">
+                    Design shear force: V<sub>u</sub> = 1.5 × 
+                    <div class="fraction">
+                        <span class="numerator">x</span>
+                        <span class="denominator">2(B + d)</span>
+                    </div> × (e - d) = <span class="input-field" contenteditable="true"></span> kN
+                </div>
+                <div class="formula">
+                    Bending moment: M<sub>u</sub> = 1.5(M<sub>rect</sub> + M<sub>tri</sub>) = <span class="input-field" contenteditable="true"></span> kNm
+                </div>
+                <div class="formula">
+                    Nominal shear stress: τ<sub>v</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">V<sub>u</sub></span>
+                        <span class="denominator">bd</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> N/mm²
+                </div>
+                <p>τ<sub>c</sub> = (τ<sub>c</sub> as per IS 456:2000 (Cl. 40.2 & Table 19))</p>
+                <p>τ<sub>v</sub> < τ<sub>c</sub></p>
+            </div>
+            
+            <h3>Calculation of steel:</h3>
+            <div class="formula-box">
+                <div class="formula">
+                    A<sub>st</sub> = 0.5f<sub>ck</sub>(1 - √(1 - 
+                    <div class="fraction">
+                        <span class="numerator">4.6M<sub>u</sub></span>
+                        <span class="denominator">f<sub>ck</sub>bd²</span>
+                    </div>)) × 
+                    <div class="fraction">
+                        <span class="numerator">b</span>
+                        <span class="denominator">f<sub>y</sub></span>
+                    </div> = <span class="input-field" contenteditable="true"></span> mm²
+                </div>
+                <div class="formula">
+                    Spacing = 
+                    <div class="fraction">
+                        <span class="numerator">A<sub>ɸ</sub> × 1000</span>
+                        <span class="denominator">A<sub>st</sub></span>
+                    </div> = <span class="input-field" contenteditable="true"></span> mm
+                </div>
+                <div class="formula">
+                    Distribution steel: A<sub>st, min</sub> = 0.12% bD = <span class="input-field" contenteditable="true"></span> mm²
+                </div>
+                <div class="formula">
+                    Development length: Ld = 47ɸ = <span class="input-field" contenteditable="true"></span> mm
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 10</div>
+            <h2><i class="fas fa-layer-group"></i> Design of Heel Slab</h2>
+            
+            <h3>Loads:</h3>
+            <p>Due to soil: γₛ(height of stem + 
+                <div class="fraction" style="display: inline-block; margin: 0 5px;">
+                    <span class="numerator">height of triangular soil</span>
+                    <span class="denominator">2</span>
+                </div>) = <span class="input-field" contenteditable="true"></span> kN/m²</p>
+            <p>Due to self-weight: 25 × thickness of base slab = <span class="input-field" contenteditable="true"></span> kN/m²</p>
+            
+            <div class="formula-box">
+                <div class="formula">
+                    Shear: V<sub>u</sub> = 1.5(
+                    <div class="fraction">
+                        <span class="numerator">bl</span>
+                        <span class="denominator">2(B + e)</span>
+                    </div> × e) = <span class="input-field" contenteditable="true"></span> kN/m²
+                </div>
+                <div class="formula">
+                    Moment: M<sub>u</sub> = 1.5(x + (W₂ - W₁) × b × 
+                    <div class="fraction">
+                        <span class="numerator">x²</span>
+                        <span class="denominator">2</span>
+                    </div>) = <span class="input-field" contenteditable="true"></span> kN/m²
+                </div>
+                <div class="formula">
+                    Shear stress: τ<sub>v</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">V<sub>u</sub></span>
+                        <span class="denominator">bd</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> N/mm²
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-section">
+            <div class="step-number">Step 11</div>
+            <h2><i class="fas fa-vector-square"></i> Design of Vertical Stem</h2>
+            
+            <p>Height of stem = <span class="input-field" contenteditable="true"></span> m</p>
+            <p>Clear cover = <span class="input-field" contenteditable="true"></span> mm</p>
+            <p>Bar dia = <span class="input-field" contenteditable="true"></span> mm</p>
+            
+            <div class="formula-box">
+                <div class="formula">
+                    Effective depth: d = thickness at base - CC - 
+                    <div class="fraction">
+                        <span class="numerator">ɸ</span>
+                        <span class="denominator">2</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> mm
+                </div>
+                <div class="formula">
+                    Earth pressure: P<sub>a</sub> = K<sub>a</sub>γₛ
+                    <div class="fraction">
+                        <span class="numerator">H²</span>
+                        <span class="denominator">2</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> kN
+                </div>
+                <div class="formula">
+                    Horizontal component: P<sub>h</sub> = P<sub>a</sub>cosδ = <span class="input-field" contenteditable="true"></span> kN
+                </div>
+                <div class="formula">
+                    Moment: M<sub>u</sub> = 1.5P<sub>h</sub>
+                    <div class="fraction">
+                        <span class="numerator">H'</span>
+                        <span class="denominator">2</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> kNm
+                </div>
+            </div>
+            
+            <h3>Steel:</h3>
+            <div class="formula-box">
+                <div class="formula">
+                    A<sub>st</sub> = 0.5
+                    <div class="fraction">
+                        <span class="numerator">f<sub>ck</sub></span>
+                        <span class="denominator">f<sub>y</sub></span>
+                    </div> 
+                    (1 - √(1 - 
+                    <div class="fraction">
+                        <span class="numerator">4.6M<sub>u</sub></span>
+                        <span class="denominator">f<sub>ck</sub>bd²</span>
+                    </div>))bd = <span class="input-field" contenteditable="true"></span> mm²
+                </div>
+                <div class="formula">
+                    Spacing = 
+                    <div class="fraction">
+                        <span class="numerator">A<sub>bar</sub> × 1000</span>
+                        <span class="denominator">A<sub>st</sub></span>
+                    </div> = <span class="input-field" contenteditable="true"></span> mm
+                </div>
+                <div class="formula">
+                    Anchorage: Ld = 47ɸ = <span class="input-field" contenteditable="true"></span> mm
+                </div>
+                <div class="formula">
+                    Shear stress: τ<sub>v</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">V<sub>u</sub></span>
+                        <span class="denominator">bd</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> N/mm²
+                </div>
+            </div>
+            
+            <h3>Curtailment:</h3>
+            <div class="formula-box">
+                <div class="formula">
+                    A<sub>st,y</sub> = 
+                    <div class="fraction">
+                        <span class="numerator">y³d</span>
+                        <span class="denominator">h³</span>
+                    </div> = <span class="input-field" contenteditable="true"></span> mm²
+                </div>
+            </div>
+            
+            <h3>Temperature steel:</h3>
+            <div class="formula-box">
+                <div class="formula">
+                    A<sub>st</sub> = 0.12% bD = <span class="input-field" contenteditable="true"></span> mm²
+                </div>
+                <div class="formula">
+                    Spacing = 
+                    <div class="fraction">
+                        <span class="numerator">A<sub>bar</sub> × 1000</span>
+                        <span class="denominator">A<sub>st</sub></span>
+                    </div> = <span class="input-field" contenteditable="true"></span> mm
+                </div>
+            </div>
+        </div>
+        
+</body>
+</html>
