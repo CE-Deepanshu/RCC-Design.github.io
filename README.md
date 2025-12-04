@@ -20,16 +20,10 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 ---
 
-<div align="center">
-  
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fce-deepanshu.github.io%2FRCC-Design.github.io%2F&label=VISITORS&labelColor=%23ADD8E6&countColor=%2337d67a&style=plastic&labelStyle=upper)
-
-<div align="center">
 
 [![LIKE](https://img.shields.io/badge/👍-LIKE-green?style=flat-square)](https://ce-deepanshu.github.io/RCC-Design.github.io/?v=like) 
 [![DISLIKE](https://img.shields.io/badge/👎-DISLIKE-red?style=flat-square)](https://ce-deepanshu.github.io/RCC-Design.github.io/?v=dislike)
 
 ![👍](https://img.shields.io/badge/👍-0-green) ![0](https://img.shields.io/badge/0-black) 
 ![👎](https://img.shields.io/badge/👎-0-red) ![0](https://img.shields.io/badge/0-black)
-
-</div>
