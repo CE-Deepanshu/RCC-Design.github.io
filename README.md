@@ -20,23 +20,31 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 ---
 
+<div align="center">
+
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fce-deepanshu.github.io%2FRCC-Design.github.io%2F&label=VISITORS&labelColor=%23ADD8E6&countColor=%2337d67a&style=plastic&labelStyle=upper)
+
+</div>
 
 <div align="center">
 
-<!-- LIKE / DISLIKE BUTTONS -->
-  
-[![Like](https://img.shields.io/badge/👍%20LIKE-green?style=for-the-badge&logoColor=white)](https://ce-deepanshu.github.io/RCC-Design.github.io/)
-[![Dislike](https://img.shields.io/badge/👎%20DISLIKE-red?style=for-the-badge&logoColor=white)](https://ce-deepanshu.github.io/RCC-Design.github.io/)
+<!-- Buttons (link to your site) -->
+<a href="https://ce-deepanshu.github.io/RCC-Design.github.io/" title="Open site">
+  <img alt="Like button" src="https://img.shields.io/badge/👍%20LIKE-green?style=for-the-badge&logoColor=white" />
+</a>
+&nbsp;&nbsp;
+<a href="https://ce-deepanshu.github.io/RCC-Design.github.io/" title="Open site">
+  <img alt="Dislike button" src="https://img.shields.io/badge/👎%20DISLIKE-red?style=for-the-badge&logoColor=white" />
+</a>
 
-<!-- COUNTERS -->
+<br><br>
 
-<!-- LIKE COUNTER -->
-<img src="https://img.shields.io/badge/👍_Likes-green?style=for-the-badge&logoColor=white"/>
-<img src="https://img.shields.io/badge/0-000000?style=for-the-badge&logoColor=white"/>
-
-<!-- DISLIKE COUNTER -->
-<img src="https://img.shields.io/badge/👎_Dislikes-red?style=for-the-badge&logoColor=white"/>
-<img src="https://img.shields.io/badge/0-000000?style=for-the-badge&logoColor=white"/>
+<!-- Counters: thumbs up (green) + black counter, thumbs down (red) + black counter -->
+<img alt="Likes label" src="https://img.shields.io/badge/👍_Likes-green?style=for-the-badge&logoColor=white" />
+<img alt="Likes count" src="https://img.shields.io/badge/0-000000?style=for-the-badge&logoColor=white" />
+&nbsp;&nbsp;
+<img alt="Dislikes label" src="https://img.shields.io/badge/👎_Dislikes-red?style=for-the-badge&logoColor=white" />
+<img alt="Dislikes count" src="https://img.shields.io/badge/0-000000?style=for-the-badge&logoColor=white" />
 
 </div>
+
