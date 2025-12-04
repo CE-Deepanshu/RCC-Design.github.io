@@ -19,3 +19,10 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 **Disclaimer:** All rights and credits reserved to the respective owner(s) of the uploaded content/images. The uploaded content is solely for educational purpose. If you are the main copyright owner, contact to claim credit or content removal.
 
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fce-deepanshu.github.io%2FRCC-Design.github.io%2F&label=VISITORS&labelColor=%23ADD8E6&countColor=%2337d67a&style=plastic&labelStyle=upper)
+
+### Rate this website
+
+[![Like](https://img.shields.io/badge/Like-%F0%9F%91%8D-blue?style=for-the-badge)](https://ce-deepanshu.github.io/RCC-Design.github.io/?rate=like)
+[![Dislike](https://img.shields.io/badge/Dislike-%F0%9F%91%8E-red?style=for-the-badge)](https://ce-deepanshu.github.io/RCC-Design.github.io/?rate=dislike)
+
+**Current Rating:** ![Rating](https://img.shields.io/badge/Rating-0%20%F0%9F%91%8D%200%20%F0%9F%91%8E-lightgrey?style=flat-square)
