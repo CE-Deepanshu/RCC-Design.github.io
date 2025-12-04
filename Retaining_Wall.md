@@ -10,6 +10,8 @@ Structural elements that restrain soil to maintain elevation differences. Provid
 - Manage drainage
 - Landscaping
 
+<img width="907" height="372" alt="image" src="https://github.com/user-attachments/assets/0b4e70dd-46a6-4574-b36f-fc6cf327b9e1" />
+
 ## 2. Wall Types
 
 | Type | Mechanism | Typical Height | Key Features |
