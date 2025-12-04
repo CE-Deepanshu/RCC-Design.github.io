@@ -18,4 +18,4 @@ This guide emphasizes **manual design steps** based on **IS code provisions**, h
 
 **Disclaimer:** All rights and credits reserved to the respective owner(s) of the uploaded content/images. The uploaded content is solely for educational purpose. If you are the main copyright owner, contact to claim credit or content removal.
 
-![Visitors](https://api.visitorbadge.io/api/daily?path=https%3A%2F%2Fce-deepanshu.github.io%2FRCC-Design.github.io%2F&label=VISITORS&labelColor=%23f47373&countColor=%2337d67a&style=plastic&labelStyle=upper)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fce-deepanshu.github.io%2FRCC-Design.github.io%2F&label=VISITORS&labelColor=%23ADD8E6&countColor=%2337d67a&style=plastic&labelStyle=upper)
